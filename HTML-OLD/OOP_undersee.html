@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OOP_undersee.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="code-reusability-and-inheritance">Code Reusability and Inheritance:</h3>
+<ul>
+<li>Reusing code often requires copying and modifying existing functions, leading to code duplication.</li>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">drawCircle</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> radius)</span> </span>{ <span class="hljs-comment">/*...*/</span> }
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">drawSquare</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> side)</span> </span>{ <span class="hljs-comment">/*...*/</span> }
+</div></code></pre>
+<h3 id="difficulty-in-managing-complexity">Difficulty in Managing Complexity:</h3>
+<ul>
+<li>
+<p>As programs grow in size, managing complexity becomes challenging since the relationships between data and functions become less clear.</p>
+</li>
+<li>
+<p>Example:</p>
+<ul>
+<li>A large procedural codebase may have many functions tightly integrated, making understanding and modifying it difficult.</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-oop-solved-these-problems">How OOP Solved These Problems</h2>
+<h3 id="encapsulation">Encapsulation:</h3>
+<ul>
+<li>
+<p>OOP packages data and methods that operate on the data into a single unit called a class, shielding the internal state from outside interference.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre class="hljs"><code><div>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span> {</span>
+    <span class="hljs-keyword">private</span>:
+        <span class="hljs-keyword">int</span> count;
+    <span class="hljs-keyword">public</span>:
+        Counter() : count(<span class="hljs-number">0</span>) {}
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span> </span>{ count++; }
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-keyword">return</span> count; }
+    };
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+        Counter c;
+        c.increment();
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, c.getCount()); <span class="hljs-comment">// Output: 1</span>
+    }
+</div></code></pre>
+</li>
+</ul>
+<h3 id="loose-coupling-via-inheritance-and-polymorphism">Loose Coupling via Inheritance and Polymorphism:</h3>
+<ul>
+<li>OOP allows you to create new classes that inherit properties and behavior from existing classes, promoting code reuse and reducing duplication.</li>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Shape</span> {</span>
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>; <span class="hljs-comment">// Pure virtual function</span>
+    };
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Circle</span> :</span> <span class="hljs-keyword">public</span> Shape {
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Drawing Circle\n"</span>);
+        }
+    };
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> :</span> <span class="hljs-keyword">public</span> Shape {
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Drawing Square\n"</span>);
+        }
+    };
+</div></code></pre>
+<h3 id="improved-code-reusability">Improved Code Reusability:</h3>
+<ul>
+<li>
+<p>OOP promotes creating libraries of classes that can be reused across various projects, enabling developers to build on existing code rather than duplicating efforts.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// Both Circle and Square classes can be reused wherever shapes are needed</span>
+    Shape *shapes[<span class="hljs-number">2</span>];
+    shapes[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Circle();
+    shapes[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Square();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>; i++) {
+        shapes[i]-&gt;draw();
+    }
+</div></code></pre>
+</li>
+</ul>
+<h3 id="managing-complexity-with-abstraction">Managing Complexity with Abstraction:</h3>
+<ul>
+<li>
+<p>OOP supports abstraction, allowing you to simplify complex systems by modeling real-world entities and their relationships, making the code easier to maintain.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre class="hljs"><code><div>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {</span>
+    <span class="hljs-keyword">private</span>:
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> name;
+
+    <span class="hljs-keyword">public</span>:
+        Employee(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> &amp;name) : name(name) {}
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">showDetails</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Employee Name: %s\n"</span>, name.c_str());
+        }
+    };
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-function">Employee <span class="hljs-title">emp</span><span class="hljs-params">(<span class="hljs-string">"Alice"</span>)</span></span>;
+        emp.showDetails(); <span class="hljs-comment">// Output: Employee Name: Alice</span>
+    }
+</div></code></pre>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>In summary, procedural programming struggles with issues such as global state management, tight coupling, code duplication, and complexity management. OOP addresses these problems with principles like encapsulation, inheritance, polymorphism, and abstraction, enabling more manageable, reusable, and scalable code. By organizing code effectively and promoting reuse, OOP helps developers create robust applications.</p>
+<p>Let me know if you need more information or examples!</p>
+<hr>
+        Page 2 
+<hr>
+<h2 id="problems-in-procedural-programming-pp-and-how-oop-solved-them">Problems in Procedural Programming (PP) and How OOP Solved Them</h2>
+<ul>
+<li>Procedural programming (like C-style programming)is based on functions and procedures operating on global or shared data.
+As software grew larger, several issues appeared.</li>
+</ul>
+<h3 id="main-problems-and-how-oop-object-oriented-programming-solved-each-one">main problems and how OOP (Object-Oriented Programming) solved each one.</h3>
+<h4 id="4%EF%B8%8F%E2%83%A3-problem-code-duplication">4️⃣ Problem: Code Duplication</h4>
+<h4 id="problem-code-duplication-%E2%86%92-oop-inheritance">Problem: Code Duplication → OOP Inheritance</h4>
+<h5 id="in-procedural-programming-reusing-code-is-hard">In procedural programming, reusing code is hard.</h5>
+<ul>
+<li>You often copy/paste functions and modify them.</li>
+<li>Two structs with duplicate fields:</li>
+<li>Functions duplicate logic.</li>
+<li>Example<pre class="hljs"><code><div>    struct Dog {
+        char name[20];
+    };
+
+    struct Cat {
+        char name[20];
+    };
+</div></code></pre>
+</li>
+</ul>
+<h5 id="%E2%9C%94-oop-solution-inheritance">✔ OOP Solution: Inheritance</h5>
+<ul>
+<li>A base class defines common functionality → subclasses extend it.</li>
+</ul>
+<pre class="hljs"><code><div>     Animal
+       ↑
+  +----+-----+
+  |          |
+ Dog        Cat
+</div></code></pre>
+<ul>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> {</span>
+<span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Eating..."</span>; }
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> :</span> <span class="hljs-keyword">public</span> Animal { };
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cat</span> :</span> <span class="hljs-keyword">public</span> Animal { };
+</div></code></pre>
+<ul>
+<li>We write eat() once → reused.</li>
+<li>🐶 and 🐱 inherit eat() → no duplication.</li>
+</ul>
+<h4 id="5%EF%B8%8F%E2%83%A3-problem-hard-to-extend-without-breaking-existing-code">5️⃣ Problem: Hard to Extend Without Breaking Existing Code</h4>
+<h4 id="hard-to-extend-code-safely-%E2%86%92-oop-polymorphism">Hard to Extend Code Safely → OOP Polymorphism</h4>
+<h5 id="procedural-programming-is-fragile">Procedural programming is fragile.</h5>
+<ul>
+<li>When you add new features, many functions break.</li>
+<li>If you add a new Shape type, you must modify ALL functions.</li>
+</ul>
+<pre class="hljs"><code><div>drawCircle()
+drawSquare()
+drawTriangle()  &lt;-- must be added everywhere
+</div></code></pre>
+<p><strong>C (manual switching)</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">drawCircle</span><span class="hljs-params">()</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">drawSquare</span><span class="hljs-params">()</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">(<span class="hljs-keyword">int</span> type)</span></span>{
+    <span class="hljs-keyword">if</span>(type == <span class="hljs-number">1</span>) drawCircle();
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(type == <span class="hljs-number">2</span>) drawSquare();
+}
+</div></code></pre>
+<h5 id="%E2%9C%94-oop-solution-polymorphism">✔ OOP Solution: Polymorphism</h5>
+<ul>
+<li>Allows adding new functionality without modifying existing code.</li>
+</ul>
+<pre class="hljs"><code><div>       Shape (abstract)
+          draw()
+      /      |       \
+ Circle   Square    Triangle
+ draw()   draw()     draw()
+</div></code></pre>
+<ul>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Shape</span> {</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Circle</span> :</span> <span class="hljs-keyword">public</span> Shape {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Circle"</span>; }
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Square</span> :</span> <span class="hljs-keyword">public</span> Shape {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">()</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Square"</span>; }
+};
+</div></code></pre>
+<ul>
+<li>A function can work with any shape:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">render</span><span class="hljs-params">(Shape* s)</span></span>{
+    s-&gt;draw(); <span class="hljs-comment">// Works for new shapes too</span>
+}
+</div></code></pre>
+<ul>
+<li>Now adding Triangle doesn’t break existing code.</li>
+<li>You can add Rectangle without touching old code.</li>
+</ul>
+<h4 id="6%EF%B8%8F%E2%83%A3-problem-no-abstraction">6️⃣ Problem: No Abstraction</h4>
+<h5 id="procedural-code-often-exposes-too-many-details">Procedural code often exposes too many details.</h5>
+<ul>
+<li>You expose all details.</li>
+<li>User needs to know low-level internals.</li>
+<li>Example:<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">startEngine</span><span class="hljs-params">(Car* c)</span></span>{
+        <span class="hljs-comment">// lots of low-level steps</span>
+        <span class="hljs-comment">// user must know engine internals</span>
+
+    }
+</div></code></pre>
+</li>
+<li>User must know internal structure.</li>
+</ul>
+<h5 id="%E2%9C%94-oop-solution-abstraction">✔ OOP Solution: Abstraction</h5>
+<ul>
+<li>OOP hides details behind clear interfaces.</li>
+<li>Hides complexity and exposes only essential features.</li>
+<li>Example<pre class="hljs"><code><div>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> {</span>
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">( <span class="hljs-comment">/* complex logic hidden */</span>)</span></span>;  <span class="hljs-comment">// hides complex behavior</span>
+    };
+</div></code></pre>
+<ul>
+<li>User calls:</li>
+</ul>
+<pre class="hljs"><code><div>    myCar.start();
+</div></code></pre>
+</li>
+<li>That’s abstraction.</li>
+</ul>
+<h3 id="%F0%9F%A7%BE-summary-table">🧾 Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Problem in Procedural Programming</th>
+<th>OOP Feature That Solved It</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data not protected</td>
+<td>Encapsulation</td>
+<td>Safety</td>
+</tr>
+<tr>
+<td>Hard to maintain</td>
+<td>Modularity</td>
+<td>Clean code</td>
+</tr>
+<tr>
+<td>Not mapping real world</td>
+<td>Objects</td>
+<td>Better design</td>
+</tr>
+<tr>
+<td>Code duplication</td>
+<td>Inheritance</td>
+<td>Reuse</td>
+</tr>
+<tr>
+<td>Hard to extend</td>
+<td>Polymorphism</td>
+<td>Flexibility</td>
+</tr>
+<tr>
+<td>Too detailed / complex</td>
+<td>Abstraction</td>
+<td>Simplicity</td>
+</tr>
+<tr>
+<td>Hard collaboration</td>
+<td>Classes and structure</td>
+<td>Team-friendly</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Procedural Programming (C)</th>
+<th>OOP (C++, Java, Python)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic unit</strong></td>
+<td>Function</td>
+<td>Object / Class</td>
+</tr>
+<tr>
+<td><strong>Data handling</strong></td>
+<td>Exposed (global or shared)</td>
+<td>Encapsulated (private)</td>
+</tr>
+<tr>
+<td><strong>Code structure</strong></td>
+<td>Linear / top-down</td>
+<td>Modular (classes)</td>
+</tr>
+<tr>
+<td><strong>Reusability</strong></td>
+<td>Low</td>
+<td>High (inheritance)</td>
+</tr>
+<tr>
+<td><strong>Extensibility</strong></td>
+<td>Hard</td>
+<td>Easy (polymorphism)</td>
+</tr>
+<tr>
+<td><strong>Mapping real world</strong></td>
+<td>Weak</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Weak (global vars)</td>
+<td>Strong (private data)</td>
+</tr>
+<tr>
+<td><strong>Maintenance</strong></td>
+<td>Hard (spaghetti code)</td>
+<td>Easy (modularity)</td>
+</tr>
+<tr>
+<td><strong>Team development</strong></td>
+<td>Conflicts likely</td>
+<td>Clear responsibilities</td>
+</tr>
+<tr>
+<td><strong>Abstraction</strong></td>
+<td>Limited</td>
+<td>Strong (interfaces, abstract classes)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="final-short-answer">Final Short Answer:-</h4>
+<ul>
+<li>OOP solved major problems in procedural programming by introducing:
+<ul>
+<li>Encapsulation → protecting data</li>
+<li>Abstraction → hiding complexity</li>
+<li>Inheritance → reducing duplication</li>
+<li>Polymorphism → extending code easily</li>
+<li>Modularity → making large codebases maintainable</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div> Procedural Programming              Object-Oriented Programming
+-----------------------------------------------------------------------
+ Data exposed globally           →   Encapsulation (private data)
+ Hard to scale                  →    Modularity (classes)
+ Code duplication               →    Inheritance
+ Hard to extend                →     Polymorphism
+ Hard to model real-world      →     Objects
+ Complex, low-level            →     Abstraction
+ Team conflicts                →     Clear ownership per class
+</div></code></pre>
+<br>
+🔥 OOP 4 Pillars Summary
+<table>
+<thead>
+<tr>
+<th>Pillar</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Encapsulation</strong></td>
+<td>Wrap data + methods</td>
+<td>BankAccount(balance)</td>
+</tr>
+<tr>
+<td><strong>Abstraction</strong></td>
+<td>Hide complexity</td>
+<td>Car.start()</td>
+</tr>
+<tr>
+<td><strong>Inheritance</strong></td>
+<td>Reuse code</td>
+<td>Dog → Animal</td>
+</tr>
+<tr>
+<td><strong>Polymorphism</strong></td>
+<td>Same interface, multiple behaviors</td>
+<td>Shape.draw()</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> {</span>
+    <span class="hljs-comment">// ...</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">Person <span class="hljs-title">function</span><span class="hljs-params">()</span>  </span>{ <span class="hljs-keyword">return</span> Person{ <span class="hljs-comment">/*...*/</span> }; } <span class="hljs-comment">// returns by value (copy)</span>
+};
+
+<span class="hljs-comment">// Caller receives a copy; change won’t affect Employee’s internal state</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> {</span>
+    <span class="hljs-comment">// ...</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {</span>
+<span class="hljs-keyword">private</span>: 
+    <span class="hljs-function">Person <span class="hljs-title">function</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> Person{ <span class="hljs-comment">/*...*/</span> }; }
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">function2</span><span class="hljs-params">()</span> </span>{
+        Person p = function();
+        <span class="hljs-comment">// ...</span>
+        <span class="hljs-keyword">return</span> p.age;
+    }
+};
+</div></code></pre>
+
+</body>
+</html>

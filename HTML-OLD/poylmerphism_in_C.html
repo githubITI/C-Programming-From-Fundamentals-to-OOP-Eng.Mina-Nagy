@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>poylmerphism_in_C.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="what-is-polymorphism-in-c-terms">What is polymorphism (in C terms)?</h3>
+<ul>
+<li>
+<p>Polymorphism means “same interface, different implementations.”
+In C, you typically implement it with:</p>
+<ul>
+<li>
+<p>Dynamic polymorphism → via function pointers and vtable-like structs (runtime dispatch).</p>
+</li>
+<li>
+<p>Static polymorphism → via macros or C11 _Generic (compile-time dispatch).</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-dynamic-polymorphism-with-function-pointers-vtable-pattern">1) Dynamic Polymorphism with Function Pointers (VTable Pattern)</h3>
+<p>You create a struct of function pointers (a “vtable”), and each “type” provides its own implementations.</p>
+<ul>
+<li>Example: Shapes with area() and draw()
+<ul>
+<li>
+<p>What’s happening?</p>
+<ul>
+<li>
+<p>Each concrete type (Circle/Rectangle) sets its vptr to its own function table.</p>
+</li>
+<li>
+<p>Calls like s-&gt;vptr-&gt;area(s) dynamically dispatch to the right implementation.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pros: Flexible, idiomatic in C projects (OS kernels, embedded).</p>
+</li>
+<li>
+<p>Cons: Manual boilerplate; no type safety across casts without care.</p>
+<pre class="hljs"><code><div>    <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span>
+    <span class="hljs-comment">/* Forward declarations */</span>
+    <span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shape</span> <span class="hljs-title">Shape</span>;</span>
+    <span class="hljs-comment">/* VTable type: the "interface" */</span>
+    <span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+        <span class="hljs-keyword">double</span> (*area)(<span class="hljs-keyword">const</span> Shape *self);
+        <span class="hljs-keyword">void</span>   (*draw)(<span class="hljs-keyword">const</span> Shape *self);
+    } ShapeVTable;
+    <span class="hljs-comment">/* Base Shape: holds a pointer to its vtable */</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Shape</span> {</span>
+        <span class="hljs-keyword">const</span> ShapeVTable *vptr;
+        <span class="hljs-comment">// Common data could go here</span>
+    };
+    <span class="hljs-comment">/* ---- Circle implementation ---- */</span>
+    <span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+        Shape base;   <span class="hljs-comment">// "inherits" Shape</span>
+        <span class="hljs-keyword">double</span> r;
+    } Circle;
+    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">circle_area</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Shape *self)</span> </span>{
+        <span class="hljs-keyword">const</span> Circle *c = (<span class="hljs-keyword">const</span> Circle *)self;
+        <span class="hljs-keyword">return</span> M_PI * c-&gt;r * c-&gt;r;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">circle_draw</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Shape *self)</span> </span>{
+        <span class="hljs-keyword">const</span> Circle *c = (<span class="hljs-keyword">const</span> Circle *)self;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Drawing Circle (r=%.2f)\n"</span>, c-&gt;r);
+    }
+    <span class="hljs-keyword">const</span> ShapeVTable Circle_vtbl = {
+        .area = circle_area,
+        .draw = circle_draw
+    };
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Circle_init</span><span class="hljs-params">(Circle *c, <span class="hljs-keyword">double</span> r)</span> </span>{
+        c-&gt;base.vptr = &amp;Circle_vtbl;
+        c-&gt;r = r;
+    }
+
+    <span class="hljs-comment">/* ---- Rectangle implementation ---- */</span>
+    <span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+        Shape base;
+        <span class="hljs-keyword">double</span> w, h;
+    } Rectangle;
+
+    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">rect_area</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Shape *self)</span> </span>{
+        <span class="hljs-keyword">const</span> Rectangle *r = (<span class="hljs-keyword">const</span> Rectangle *)self;
+        <span class="hljs-keyword">return</span> r-&gt;w * r-&gt;h;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rect_draw</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Shape *self)</span> </span>{
+        <span class="hljs-keyword">const</span> Rectangle *r = (<span class="hljs-keyword">const</span> Rectangle *)self;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Drawing Rectangle (%.2f x %.2f)\n"</span>, r-&gt;w, r-&gt;h);
+    }
+    <span class="hljs-keyword">const</span> ShapeVTable Rectangle_vtbl = {
+        .area = rect_area,
+        .draw = rect_draw
+    };
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Rectangle_init</span><span class="hljs-params">(Rectangle *r, <span class="hljs-keyword">double</span> w, <span class="hljs-keyword">double</span> h)</span> </span>{
+        r-&gt;base.vptr = &amp;Rectangle_vtbl;
+        r-&gt;w = w; r-&gt;h = h;
+    }
+
+    <span class="hljs-comment">/* ---- Client code: uses the common interface ---- */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">render_and_report</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Shape *s)</span> </span>{
+        s-&gt;vptr-&gt;draw(s);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Area = %.2f\n"</span>, s-&gt;vptr-&gt;area(s));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+        Circle c; Rectangle r;
+        Circle_init(&amp;c, <span class="hljs-number">3.0</span>);
+        Rectangle_init(&amp;r, <span class="hljs-number">4.0</span>, <span class="hljs-number">5.0</span>);
+
+        Shape *shapes[] = { (Shape*)&amp;c, (Shape*)&amp;r };
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>; ++i) {
+            render_and_report(shapes[i]); <span class="hljs-comment">// dynamic dispatch via vtable</span>
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-callbacks--function-pointers-common-in-c-apis">2) Callbacks &amp; Function Pointers (Common in C APIs)</h3>
+<ul>
+<li>Polymorphism can be as simple as passing a function pointer to a generic algorithm.</li>
+<li>Example: qsort-style comparator</li>
+<li>Same interface, different behavior: you swap in different comparators.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cmp_int</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *b)</span> </span>{
+    <span class="hljs-keyword">int</span> x = *(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>*)a, y = *(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>*)b;
+    <span class="hljs-keyword">return</span> (x &gt; y) - (x &lt; y);
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">cmp_desc</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *b)</span> </span>{
+    <span class="hljs-keyword">int</span> x = *(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>*)a, y = *(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>*)b;
+    <span class="hljs-keyword">return</span> (y &gt; x) - (y &lt; x);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> arr[] = {<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">1</span>};
+    <span class="hljs-keyword">size_t</span> n = <span class="hljs-keyword">sizeof</span> arr / <span class="hljs-keyword">sizeof</span> arr[<span class="hljs-number">0</span>];
+
+    qsort(arr, n, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>), cmp_int);   <span class="hljs-comment">// ascending</span>
+    <span class="hljs-comment">// qsort(arr, n, sizeof(int), cmp_desc); // descending</span>
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, arr[i]);
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">""</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</div></code></pre>
+<h3 id="3-static-polymorphism-with-c11-generic">3) Static Polymorphism with C11 _Generic</h3>
+<p>This is compile-time selection based on the expression’s type.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> to_string(x) _Generic((x), \
+    int:        to_string_int,     \
+    double:     to_string_double,  \
+    const char*: to_string_cstr,   \
+    default:    to_string_unknown  \
+)(x)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* <span class="hljs-title">to_string_int</span><span class="hljs-params">(<span class="hljs-keyword">int</span> v)</span> </span>{ <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">32</span>]; <span class="hljs-built_in">snprintf</span>(buf, <span class="hljs-keyword">sizeof</span> buf, <span class="hljs-string">"int=%d"</span>, v); <span class="hljs-keyword">return</span> buf; }
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* <span class="hljs-title">to_string_double</span><span class="hljs-params">(<span class="hljs-keyword">double</span> v)</span> </span>{ <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">32</span>]; <span class="hljs-built_in">snprintf</span>(buf, <span class="hljs-keyword">sizeof</span> buf, <span class="hljs-string">"double=%.2f"</span>, v); <span class="hljs-keyword">return</span> buf; }
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* <span class="hljs-title">to_string_cstr</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span> </span>{ <span class="hljs-keyword">return</span> s; }
+<span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* <span class="hljs-title">to_string_unknown</span><span class="hljs-params">(...)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">"unknown"</span>; }
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, to_string(<span class="hljs-number">42</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, to_string(<span class="hljs-number">3.14</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, to_string(<span class="hljs-string">"hello"</span>));
+}
+
+</div></code></pre>
+<p>Pros: Zero runtime overhead; type-safe selection.
+Cons: Limited; doesn’t do inheritance or runtime dispatch.</p>
+<h3 id="4-other-techniques">4) Other Techniques</h3>
+<ul>
+<li>Void pointers (void*) + size arguments: Generic containers or algorithms; be careful with casting.</li>
+<li>Unions: Hold multiple possible types; pair with an enum “tag” to know which is active.</li>
+<li>Macros: Generate type-specific code; powerful but harder to debug.</li>
+<li>Struct embedding: Simulate inheritance by placing a “base” struct at the start of a derived struct (as in the vtable example).</li>
+</ul>
+<h3 id="when-to-use-which">When to use which?</h3>
+<ul>
+<li>
+<p>Callbacks / function pointers: When you need flexible behavior injection (e.g., I/O handlers, strategies).</p>
+</li>
+<li>
+<p>Vtables: When modeling a family of types with common operations (drivers, GUI widgets, protocol layers).</p>
+</li>
+<li>
+<p>_Generic: When compile-time specialization is enough (type-based printing, math helpers).</p>
+</li>
+<li>
+<p>void* + size: When building generic containers (lists, vectors) or mimicking templates.</p>
+</li>
+</ul>
+<h3 id="pitfalls--tips">Pitfalls &amp; Tips</h3>
+<ul>
+<li>
+<p>Casting safety: Always cast carefully when up/down-casting between base and derived structs.</p>
+</li>
+<li>
+<p>Lifetime &amp; ownership: Clearly define who allocates/frees objects; consider init/destroy functions in the vtable.</p>
+</li>
+<li>
+<p>Const-correctness: Use const for functions that don’t mutate the object.</p>
+</li>
+<li>
+<p>Error handling: Include error-return conventions in the vtable (e.g., int (*open)(...) returning status codes).</p>
+</li>
+<li>
+<p>ABI stability: If you change vtable layout, recompile all users.</p>
+</li>
+</ul>
+
+</body>
+</html>

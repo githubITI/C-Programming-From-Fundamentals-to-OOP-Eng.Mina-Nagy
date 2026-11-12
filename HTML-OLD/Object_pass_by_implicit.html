@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Object_pass_by_implicit.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="1-what-is-the-implicit-object-parameter">1) What is the implicit object parameter?</h3>
+<ul>
+<li>For a non-static member function</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Car</span> {</span>    
+<span class="hljs-keyword">int</span> speed;    
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">()</span> </span>{ 
+    speed -= <span class="hljs-number">10</span>; 
+    }
+}
+</div></code></pre>
+<p>a call like:</p>
+<pre class="hljs"><code><div>Car c;
+c.moveBack();
+</div></code></pre>
+<p>is conceptually transformed by the compiler into something equivalent to:</p>
+<pre class="hljs"><code><div>Car* <span class="hljs-keyword">const</span> <span class="hljs-keyword">this</span> = &amp;c;   <span class="hljs-comment">// implicit object parameter</span>
+<span class="hljs-comment">// inside moveBack():</span>
+<span class="hljs-keyword">this</span>-&gt;speed -= <span class="hljs-number">10</span>;
+</div></code></pre>
+<ul>
+<li>
+<p>this is a pointer to the object you called the method on.</p>
+</li>
+<li>
+<p>It is implicit—you don’t write it in the parameter list, but you can use it inside the function as this.</p>
+</li>
+<li>
+<p>this is non-null for well-formed calls and const (you cannot reseat this to point elsewhere).</p>
+</li>
+<li>
+<p>Static member functions do not have an implicit object parameter; they behave like free functions scoped inside the class.</p>
+</li>
+</ul>
+<h3 id="2-how-cv-qualifiers-change-the-implicit-parameter-const-volatile">2) How cv-qualifiers change the implicit parameter (const, volatile)</h3>
+<ul>
+<li>
+<p>The type of the implicit parameter depends on the function’s qualifiers:
+struct S {
+void f();                    // S* const this
+void g() const;              // const S* const this
+void h() volatile;           // volatile S* const this
+void i() const volatile;     // const volatile S* const this
+};</p>
+</li>
+<li>
+<p>If a function is const, you cannot modify the object inside (only call other const functions).</p>
+</li>
+<li>
+<p>Attempting to change members in a const function will cause a compile error (unless the member is mutable).</p>
+</li>
+</ul>
+<h3 id="3-ref-qualifiers--and--on-member-functions">3) Ref-qualifiers (&amp; and &amp;&amp;) on member functions</h3>
+<ul>
+<li>From C++11+, you can qualify member functions with lvalue (&amp;) or rvalue (&amp;&amp;) ref-qualifiers. They constrain which objects can call them, and change the implicit parameter to:</li>
+</ul>
+<pre class="hljs"><code><div>S&amp; (<span class="hljs-keyword">for</span> &amp;) <span class="hljs-keyword">or</span>
+S&amp;&amp; (<span class="hljs-keyword">for</span> &amp;&amp;),
+</div></code></pre>
+<p>conceptually applied to *this.</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Box</span> {</span>
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> data;
+    <span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&amp;&amp; <span class="hljs-title">consume</span><span class="hljs-params">()</span> &amp;&amp; </span>{       <span class="hljs-comment">// callable only on rvalues</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(data);
+    }
+    <span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&amp; <span class="hljs-title">view</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> &amp; </span>{ <span class="hljs-comment">// callable only on lvalues</span>
+        <span class="hljs-keyword">return</span> data;
+    }
+};
+<span class="hljs-function">Box <span class="hljs-title">makeBox</span><span class="hljs-params">()</span></span>;
+Box b;
+makeBox().consume();  <span class="hljs-comment">// OK: rvalue Box</span>
+b.consume();          <span class="hljs-comment">// ERROR: requires rvalue (use std::move(b).consume())</span>
+b.view();             <span class="hljs-comment">// OK: lvalue object</span>
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(b).view();  <span class="hljs-comment">// ERROR: requires lvalue; view() is const &amp;</span>
+</div></code></pre>
+<p>This is crucial for designing APIs that move from temporaries but don’t accidentally move from named variables.</p>
+<h3 id="4-how-overload-resolution-uses-the-implicit-object-parameter">4) How overload resolution uses the implicit object parameter</h3>
+<p>When you write:</p>
+<pre class="hljs"><code><div>obj.method();
+</div></code></pre>
+<ul>
+<li>
+<p>the compiler picks an overload whose implicit object parameter type matches obj’s value category and qualifiers:</p>
+<ul>
+<li>const object → prefers const member functions.</li>
+<li>lvalue object → prefers &amp;-qualified functions.</li>
+<li>rvalue temporary → can select &amp;&amp;-qualified function.</li>
+</ul>
+</li>
+<li>
+<p>Example:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">T</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> &amp;        </span>{ <span class="hljs-comment">/* lvalue object */</span> }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> &amp;&amp;       </span>{ <span class="hljs-comment">/* rvalue object */</span> }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> &amp;  </span>{ <span class="hljs-comment">/* const lvalue object */</span> }
+};
+
+T t;
+t.foo();           <span class="hljs-comment">// calls foo() &amp;</span>
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(t).foo(); <span class="hljs-comment">// calls foo() &amp;&amp;</span>
+<span class="hljs-keyword">const</span> T ct;
+ct.foo();          <span class="hljs-comment">// calls foo() const &amp;</span>
+
+</div></code></pre>
+<h3 id="5-why-your-free-function-vs-member-function-calls-differ">5) Why your free-function vs member-function calls differ</h3>
+<ul>
+<li>Free functions that take an object parameter:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">(Car&amp; c)</span> </span>{ 
+    c.speed -= <span class="hljs-number">10</span>; 
+}
+moveBack(c);
+</div></code></pre>
+<p>Explicit parameter; you control passing by reference (Car&amp;) or value (Car).</p>
+<ul>
+<li>Member functions use the implicit this:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Car</span> {</span> <span class="hljs-keyword">int</span> speed; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">()</span> </span>{ speed -= <span class="hljs-number">10</span>; } };
+c.moveBack();  <span class="hljs-comment">// implicitly passes &amp;c to the function as 'thi</span>
+</div></code></pre>
+<ul>
+<li>If you declared void moveBack(Car c); as a free function, calling moveBack(c); would copy the car and modify the copy. Using Car&amp; (reference) avoids copying.</li>
+</ul>
+<ol start="6">
+<li>Calling syntax sugar and equivalence</li>
+</ol>
+<ul>
+<li>These are equivalent (conceptually):</li>
+</ul>
+<pre class="hljs"><code><div>c.moveBack();
+<span class="hljs-comment">// ~ roughly equivalent to:</span>
+Car::moveBack(&amp;c); <span class="hljs-comment">// pseudo-syntax; actual function has implicit 'this'</span>
+</div></code></pre>
+<p>For const objects:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> Car c{<span class="hljs-number">10</span>};
+<span class="hljs-comment">// c.moveBack(); // ERROR: moveBack() must be const to be callable on const object</span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Car</span> {</span>
+    <span class="hljs-keyword">int</span> speed;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-comment">/* cannot modify speed here */</span> }
+};
+</div></code></pre>
+<h3 id="7-returning-this-fluent-interfaces">7) Returning *this (fluent interfaces)</h3>
+<p>Because this is a pointer, *this is the object. You can return it (by reference) to chain calls:</p>
+<pre class="hljs"><code><div>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Accumulator</span> {</span>
+    <span class="hljs-keyword">int</span> v = <span class="hljs-number">0</span>;
+    <span class="hljs-function">Accumulator&amp; <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{ v += x; <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>; }
+    <span class="hljs-function">Accumulator&amp; <span class="hljs-title">sub</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{ v -= x; <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>; }
+};
+
+Accumulator a;
+a.add(<span class="hljs-number">10</span>).sub(<span class="hljs-number">3</span>).add(<span class="hljs-number">5</span>); <span class="hljs-comment">// chaining via returned reference</span>
+</div></code></pre>
+<ul>
+<li>Make sure the return type matches your intended value category (&amp;, const&amp;, or &amp;&amp; for builders returning temporaries).</li>
+</ul>
+<h3 id="8-explicit-control-with-static-and-free-functions">8) Explicit control with static and free functions</h3>
+<ul>
+<li>Static member functions have no implicit object parameter:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Util</span> {</span>    
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">log</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* msg)</span> </span>{
+         <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; msg &lt;&lt; <span class="hljs-string">"\n"</span>; 
+         }
+};
+Util::<span class="hljs-built_in">log</span>(<span class="hljs-string">"hello"</span>);  <span class="hljs-comment">// called without an objectShow more lines</span>
+</div></code></pre>
+<ul>
+<li>Free functions are great when behavior doesn’t conceptually belong to a single object or you want symmetric APIs:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">collide</span><span class="hljs-params">(Car&amp; a, Car&amp; b)</span> </span>{ <span class="hljs-comment">/* uses both */</span> }
+</div></code></pre>
+<hr>
+<h3 id="9-advanced-const-correctness-and-mutable">9) Advanced: const-correctness and <code>mutable</code></h3>
+<p>If you need to modify <em>logical</em> state in a <code>const</code> function (e.g., a cache), mark the member <code>mutable</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Cache</span> {</span>
+    <span class="hljs-keyword">mutable</span> <span class="hljs-keyword">bool</span> filled = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">mutable</span> <span class="hljs-keyword">int</span> value = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{
+        <span class="hljs-keyword">if</span> (!filled) { value = compute(); filled = <span class="hljs-literal">true</span>; }
+        <span class="hljs-keyword">return</span> value;
+    }
+};
+</div></code></pre>
+<p>This allows writes in const functions only to mutable members.</p>
+<h3 id="10-putting-it-all-together-mini-example">10) Putting it all together (mini example)</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;utility&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Car</span> {</span>
+    <span class="hljs-keyword">int</span> speed = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> name;
+
+    <span class="hljs-comment">// lvalue-qualified: only lvalues can call</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">()</span> &amp; </span>{ speed -= <span class="hljs-number">10</span>; }
+
+    <span class="hljs-comment">// rvalue-qualified: only temporaries or std::move can call</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveForward</span><span class="hljs-params">()</span> &amp;&amp; </span>{ speed += <span class="hljs-number">10</span>; }
+
+    <span class="hljs-comment">// const-qualified: callable on const objects, read-only</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="hljs-string">"@"</span> &lt;&lt; speed &lt;&lt; <span class="hljs-string">"\n"</span>; }
+
+    <span class="hljs-comment">// fluent API: return *this</span>
+    <span class="hljs-function">Car&amp; <span class="hljs-title">setName</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> n)</span> &amp; </span>{ name = <span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(n); <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>; }
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Car c;
+    c.setName(<span class="hljs-string">"mina"</span>).moveBack(); <span class="hljs-comment">// OK: lvalue object</span>
+
+    Car temp;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(temp).moveForward(); <span class="hljs-comment">// OK: rvalue-qualified member</span>
+
+    <span class="hljs-keyword">const</span> Car cc{<span class="hljs-number">20</span>, <span class="hljs-string">"constCar"</span>};
+    cc.<span class="hljs-built_in">print</span>();                    <span class="hljs-comment">// OK: const member function</span>
+
+    <span class="hljs-comment">// Free function comparison:</span>
+    <span class="hljs-keyword">auto</span> moveBackFree = Car&amp; car { car.speed -= <span class="hljs-number">10</span>; };
+    moveBackFree(c);               <span class="hljs-comment">// modifies via explicit ref</span>
+}
+</div></code></pre>
+<h3 id="tldr">TL;DR</h3>
+<ul>
+<li>
+<p>The implicit object parameter is the hidden this pointer passed to non-static member functions.</p>
+</li>
+<li>
+<p>Its type changes with function qualifiers:</p>
+<ul>
+<li>void f() → S* const this</li>
+<li>void f() const → const S* const this</li>
+<li>void f() &amp; → lvalue-qualified (S&amp;)</li>
+<li>void f() &amp;&amp; → rvalue-qualified (S&amp;&amp;)</li>
+</ul>
+</li>
+<li>
+<p>Use qualifiers to control which objects can call a function and to enforce const-correctness and move behavior.</p>
+</li>
+<li>
+<p>For modifying external objects via free functions, pass by reference (T&amp;) rather than by value.</p>
+</li>
+</ul>
+<p>If you’re building a car API, I can help you design which methods should be lvalue-only, rvalue-only, or const, and show how to avoid accidental moves from named variables.</p>
+
+</body>
+</html>

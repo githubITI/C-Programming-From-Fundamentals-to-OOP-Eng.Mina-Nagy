@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>7-Functions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h4 id="parameter-vs-argument">Parameter vs Argument</h4>
+<ul>
+<li>Parameter = the variable name inside the function.</li>
+<li>Argument = the value you pass to the function.</li>
+</ul>
+<ol>
+<li><strong>Parameters</strong>
+<ul>
+<li>Parameters are variables listed in a function’s definition.</li>
+<li>They are placeholders for the values the function will receive.<pre class="hljs"><code><div>    <span class="hljs-function">def <span class="hljs-title">add</span><span class="hljs-params">(a, b)</span>:   <span class="hljs-meta"># a and b are PARAMETERS</span>
+        <span class="hljs-keyword">return</span> a + b
+</span></div></code></pre>
+</li>
+<li>Here, a and b are parameters.</li>
+</ul>
+</li>
+<li><strong>Arguments</strong>
+<ul>
+<li>Arguments are the actual values passed to the function when it is called.</li>
+<li>Example:<pre class="hljs"><code><div>    result = add(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)   # <span class="hljs-number">5</span> <span class="hljs-keyword">and</span> <span class="hljs-number">3</span> are ARGUMENTS
+</div></code></pre>
+</li>
+<li>Here, 5 and 3 are arguments.</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Argument</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variable in the function definition</td>
+<td>Actual value passed to the function</td>
+</tr>
+<tr>
+<td>Exists inside the function header</td>
+<td>Exists in the function call</td>
+</tr>
+<tr>
+<td>Example: <code>void f(int x):</code> → <code>x</code></td>
+<td>Example: <code>f(10)</code> → <code>10</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="early-return">Early Return</h4>
+<ul>
+<li>What is Early Return?
+<ul>
+<li>Instead of nesting multiple conditions, you exit the function as soon as you know you don’t need to continue.</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-input-validation">1. Input Validation</h5>
+<pre class="hljs"><code><div><span class="hljs-comment">//✔ Avoids unnecessary computation.</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">divide</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
+    <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; <span class="hljs-comment">// Early return for invalid input</span>
+    <span class="hljs-keyword">return</span> a / b;
+}
+
+</div></code></pre>
+<h5 id="2-error-handling">2. Error Handling</h5>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">processFile</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> &amp;path)</span> </span>{
+    <span class="hljs-keyword">if</span> (!fileExists(path)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// Early exit if file missing</span>
+    <span class="hljs-comment">// Continue processing...</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+</div></code></pre>
+<h5 id="3-guard-clauses">3. Guard Clauses</h5>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">processData</span><span class="hljs-params">(Data *data)</span> </span>{    
+  <span class="hljs-keyword">if</span> (data == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Guard clause   </span>
+   <span class="hljs-comment">// Safe to use data now</span>
+}
+</div></code></pre>
+<h5 id="4-avoid-deep-nesting">4. Avoid Deep Nesting</h5>
+<ul>
+<li>Without early return:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (condition1) {
+        <span class="hljs-keyword">if</span> (condition2) {
+            <span class="hljs-keyword">if</span> (condition3) {
+                <span class="hljs-comment">// Do work</span>
+            }
+        }
+    }
+}
+
+</div></code></pre>
+<ul>
+<li>With early return:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (!condition1) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (!condition2) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (!condition3) <span class="hljs-keyword">return</span>;
+    <span class="hljs-comment">// Do work</span>
+}
+</div></code></pre>
+<p>✔ Much cleaner and easier to read.</p>
+<h5 id="best-practices">Best Practices</h5>
+<ul>
+<li>Use early return for invalid states or quick exits.</li>
+<li>Do not overuse it in large functions—too many returns can reduce clarity.</li>
+<li>Combine with meaningful error codes or exceptions in C++</li>
+</ul>
+<h4 id="global-variables">Global Variables</h4>
+<h5 id="are-global-variables-good-or-bad-in-cc">Are Global Variables Good or Bad in C/C++?</h5>
+<ul>
+<li>❌ Generally: Global Variables are Considered BAD Practice</li>
+<li>Most C/C++ developers avoid global variables because:</li>
+<li>
+<ol>
+<li>Hard to debug</li>
+</ol>
+<ul>
+<li>Any function can change the global variable → you don’t know where the change happened.</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>Hidden dependencies</li>
+</ol>
+<ul>
+<li>A function looks simple, but secretly depends on a global variable.</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>Breaks modular programming</li>
+</ol>
+<ul>
+<li>Functions become less reusable because they rely on global data.</li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li>Naming conflicts</li>
+</ol>
+<ul>
+<li>Globals increase the chance of variable name collisions, especially in large programs.</li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li>Multi-thread issues</li>
+</ol>
+<ul>
+<li>If two threads access a global variable → race conditions and unpredictable behavior.</li>
+</ul>
+</li>
+</ul>
+<h5 id="golden-rule-in-cc">Golden Rule in C/C++</h5>
+<p>✔ Use local variables whenever possible
+✔ Use global variables only when truly necessary
+❌ Avoid modifying global variables inside many functions</p>
+<h5 id="%E2%AD%90-summary">⭐ Summary</h5>
+<table>
+<thead>
+<tr>
+<th>Global Variables</th>
+<th>Good or Bad?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modifiable globals</td>
+<td>❌ Bad</td>
+</tr>
+<tr>
+<td>Constants</td>
+<td>✔ Good</td>
+</tr>
+<tr>
+<td>Shared config</td>
+<td>✔ Sometimes OK</td>
+</tr>
+<tr>
+<td>Embedded programming</td>
+<td>✔ Often necessary</td>
+</tr>
+<tr>
+<td>Large programs</td>
+<td>❌ Avoid</td>
+</tr>
+</tbody>
+</table>
+<h5 id="do-you-have-to-use-a-global-variable-with-an-isr">Do You HAVE to Use a Global Variable with an ISR?</h5>
+<h6 id="why-do-we-usually-need-a-global-variable-with-an-isr"><strong>Why Do We Usually Need a Global Variable with an ISR?</strong></h6>
+<ol>
+<li>
+<p><strong>An ISR cannot receive arguments</strong></p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">void</span> __interrupt() ISR(<span class="hljs-keyword">void</span>)
+</div></code></pre>
+<ul>
+<li>
+<p>No parameters</p>
+</li>
+<li>
+<p>No way to pass data into the ISR</p>
+</li>
+<li>
+<p>So if the ISR needs to access or update some data → it must use a global variable.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>An ISR cannot return values</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ISR</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>; }   <span class="hljs-comment">// ❌ impossible</span>
+</div></code></pre>
+<ul>
+<li>So the only way for an ISR to &quot;send&quot; data to main() is:</li>
+</ul>
+</li>
+<li>
+<p><strong>Local variables in main() are NOT visible to the ISR</strong></p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;   <span class="hljs-comment">// local variable</span>
+    }
+
+    <span class="hljs-keyword">void</span> __interrupt() ISR() {
+        count++;         <span class="hljs-comment">// ❌ ISR cannot access this</span>
+    }
+</div></code></pre>
+<ul>
+<li>Local variables live only inside their function → ISR cannot see or modify them.</li>
+</ul>
+</li>
+</ol>
+<h5 id="%E2%AD%90-correct-communication-method">⭐ Correct Communication Method</h5>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;  <span class="hljs-comment">// global + volatile</span>
+    <span class="hljs-comment">/*
+        volatile is a type qualifier that tells the compiler:
+        👉 "Do NOT optimize this variable. Its value can change at any time."
+        Normally, the compiler may optimize code to make it faster.
+        But with volatile, you tell the compiler:
+        ❗ “Always read the variable from memory. Never trust a cached value.”
+    */</span>
+    <span class="hljs-keyword">void</span> __interrupt() ISR() {
+        flag = <span class="hljs-number">1</span>;           <span class="hljs-comment">// ISR updates it</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+            <span class="hljs-keyword">if</span> (flag) {
+                <span class="hljs-comment">// handle interrupt event</span>
+                flag = <span class="hljs-number">0</span>;
+            }
+        }
+    }
+</div></code></pre>
+<h5 id="are-there-alternatives-instead-of-global-variables">Are there alternatives instead of global variables ?</h5>
+<ul>
+<li>Yes, but they are rare and only work in special environments.</li>
+</ul>
+<h5 id="1static-inside-the-isr">1.static inside the ISR</h5>
+<ul>
+<li>You can store data only for the ISR itself:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">void</span> __interrupt() ISR() {
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> counter = <span class="hljs-number">0</span>;
+    counter++;
+}
+</div></code></pre>
+<ul>
+<li>But main() CANNOT access this → So this does NOT replace global variables.</li>
+</ul>
+<h5 id="2-using-an-rtos-eg-freertos">2. Using an RTOS (e.g., FreeRTOS)</h5>
+<ul>
+<li>
+<p>You can use:</p>
+<ul>
+<li>queues</li>
+<li>semaphores</li>
+<li>event flags</li>
+</ul>
+</li>
+<li>
+<p>But internally, these still use shared memory (similar to globals).</p>
+</li>
+<li>
+<p>So the concept is the same.</p>
+</li>
+</ul>
+<h5 id="3-hardware-registers">3. Hardware registers</h5>
+<ul>
+<li>Sometimes the ISR writes to a hardware memory address:
+<em>(volatile uint32_t</em>)0x40001000 = 1;</li>
+<li>But this is not useful for normal programs.</li>
+</ul>
+
+</body>
+</html>

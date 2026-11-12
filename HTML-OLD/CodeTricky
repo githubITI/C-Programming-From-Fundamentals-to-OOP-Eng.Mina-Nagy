@@ -1,0 +1,8 @@
+if(cond){
+  printf("hello");
+}
+else{
+  printf("world");
+}
+//Notes printf --> return No of Cahacter 
+//cond=!printf("hello")

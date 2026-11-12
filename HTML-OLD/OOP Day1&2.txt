@@ -1,0 +1,800 @@
+
+C Vs C++ 
+================
+1- Paradigm:
+C: 
+C is a procedural language. It focuses on functions and procedures that operate on data. 
+C programs are generally written as a series of function calls that manipulate data, often organized in a sequence.
+C++: 
+C++ is multi-paradigm, supporting both procedural and object-oriented programming (OOP). 
+This means it allows you to write code using objects, classes, inheritance, polymorphism, and other OOP principles. 
+This makes C++ a more versatile language in terms of design.
+                        =================================================
+1- Standard Output
+#include <iostream>
+//Out User 
+cout ==> is Not Function
+int x=3,y=3
+cout << "First="<<x<<"\nSecond="<<y;
+cout << "First="<<x<<endl<<"Second="<<y;
+
+//Input User 
+int x;
+cin>>z;
+Notes 
+=========
+C: 
+- The C standard library is more limited in scope, providing basic functionalities like I/O operations,
+   string manipulation, memory management, etc.
+- It doesn't offer containers, algorithms, or more complex data structures.
+C++: 
+- The C++ Standard Library is more feature-rich. 
+- It includes containers (like std::vector, std::list, std::map), algorithms, 
+  input/output stream handling, and utilities that facilitate modern development.
+
+                        =================================================
+2- Default Value 
+=====================
+return_type function_name(parameter1 = default_value1, parameter2 = default_value2, ...);
++ Default values are assigned in function declarations (or definitions) to make parameters optional.
+- They must be assigned from rightmost parameters to leftmost.
+int calculateNerSalary(int salary=5000){
+
+}
+calculateNerSalary();//Valid Salary=5000
+calculateNerSalary(6000);//Valid Salary=6000
+//MoreDefault
+int calculateNerSalary(int salary=5000,int age=30){
+
+}
+calculateNerSalary();//Valid Salary=5000,age=30
+calculateNerSalary(3000);//Valid Salary=3000,age=30
+calculateNerSalary(6000,40);//Valid Salary=6000,age=40
+
+//Mix Default
+
+Important Notes:
+================
+Order of Parameters: Default values must be assigned from right to left in a function. If you provide a default value for one parameter, all parameters to its right must also have default values.
+void func(int a, int b = 2, int c = 3);  // Correct
+void func(int a = 1, int b, int c = 3); // Incorrect // Default value is after non-default
+                            ========================================================
+//Function ==>Action ==> Need Different Input Parameters(Function Overload)
+//Function Overloading : allows multiple functions to have the same name but with different parameters (different type, number, or both).
+Convenience: You don’t need to create different names for similar operations with different arguments.
+drawOnBoard(colorPen);
+drawOnBoard(colorPen,Font);
+drawOnBoard(colorPen,Font,type);
+add(int x, int y);
+add(float x, float y);
+============================================================================================================================
+Memory Management:
+======================
+C: Manual memory management using functions like malloc(), calloc(), realloc(), and free(). This requires the programmer to explicitly allocate and deallocate memory.
+C++: Also allows manual memory management, but it has the added advantage of RAII (Resource Acquisition Is Initialization), 
+     where objects are automatically cleaned up when they go out of scope (via destructors). 
+     C++ supports new and delete for memory allocation/deallocation, and it also has smart pointers (introduced in C++11) to manage memory more safely.
+
+
+int * p =new int[NumberOfLocation]; 
+int * p =new int[10];//Array of Int from 10 Places 
+int * p =new int(10);//One Variable Int =10
+Employee * ptr =new Employee[NumberOfLocation]; 
+
+ int *ptr=new int[3];
+    Employee * ptr2=new Employee[3];
+    delete [] ptr;
+    delete [] ptr2;
+
+
+============================================================================================================================
+Call By Address & Call By Value & Call By Reference 
+====================================================
+A reference is an alias for an existing variable. It must be initialized when declared and cannot be re-assigned to refer to another variable.
+int a = 10;
+int &m = a; //Not Create New Place ==> Nick Name  // Valid: m is a reference to the variable 'a'
+m = 20;      // Now, 'a' is also 20 because 'm' refers to 'a'
+int &m=10; //NotValid
+A pointer is a variable that holds the memory address of another variable. A pointer can be re-assigned to point to different variables during its lifetime.
+
+
+Feature	                    Reference	                                     Pointer
+Syntax	          :  Type &ref = variable;	                      :  Type *ptr = &variable;
+Reassignability	  :  Cannot be reassigned after initialization	  :  Can be reassigned to different objects
+Nullability	      :  Cannot be null	                              :  Can be null (set to nullptr)
+Dereferencing	  :  No need for dereferencing	                  :  Needs * to dereference
+Memory Address	  :  It shares same address of original variable. :	 Pointers have their own memory address.
+Work	          :  It is referring to another variable.	      :  It is storing the address of the variable.
+Memory Management :	 Does not require explicit memory management  :	 Requires careful memory management
+Safety	          :  Safer and easier to use	                  :  Can be dangerous if not carefully managed (e.g., dereferencing null or invalid pointers)
+Use Case	      :  Suitable for simple references, 	          :  Suitable for dynamic memory allocation, 
+                     function arguments, and aliasing                linked data structures, and handling null values
+===============================================================================================================================================================
+Feature	                            C	                                                                  C++
+Pass by Value	    : Default behavior, creates a copy of the argument.	                : Same as C, creates a copy of the argument.
+Pass by Address	    : Achieved using pointers (pass address of a variable).	            : Same as C, but with added convenience of references.
+Pass by Reference	: Not supported (must use pointers to simulate reference behavior).	: Supported natively using reference variables (&).
+Syntax for Passing 	: Not available.	                                                : Uses & in the parameter definition (int &x).
+by Reference
+==================================================================================================================================================================='
+Can References Refer to Invalid Location in C++?
+======================================================
+- Reference Variables: create a second name for a variable in C++( can use to read or edit the original data contained in that variable)
+- In C++, Reference variables are safer than pointers because reference variables must be 
+  initialized and  they cannot be changed to refer to something else once they are initialized. 
+  But there are exceptions where we can have invalid references.
+1) Reference to Value at the Uninitialized Pointer
+    int *ptr;
+    int &ref = *ptr; // Reference to value at 
+                    // some random memory location
+2) Reference to a Local Variable is Returned
+    int& fun(){
+        int a = 10;
+        return a;
+    }
+=============================================================================================================================
+When do we pass arguments by pointer?
+============================================
+    1. To Modify Local Variables of the Function
+    2. For Passing Large-Sized Arguments
+    3. To Achieve Run Time Polymorphism in a Function
+    4. To Return Multiple Values
+    5. To Modify the Content of Dynamically Allocated Memory.
+https://www.geeksforgeeks.org/when-do-we-pass-arguments-by-reference-or-pointer/
+
+Applications of Reference in C++
+    1. Modify the passed parameters in a function
+    2. Avoiding a copy of large structures
+    3. In For Each Loop to modify all objects
+    4. For Each Loop to avoid the copy of objects
+https://www.geeksforgeeks.org/references-in-cpp/
+=========================================================================================================================================================================
+StandAlone Function  VS Member Function 
+===============================================
+Struct=Member Variables + Member Function.
+struct car{
+   int speed;
+    char brand[100];
+} 
+void MoveForward(struct car c1){
+    cout<<c1.speed;
+}
+======================================================
+struct car{
+    int speed;
+};
+
+
+void MoveForward(struct car c){
+
+    c.Speed;
+}
+void MoveBack(struct car c){
+
+    c.Speed;
+}
+======================================================
+struct car{
+    int speed;
+    void MoveForward(){
+
+    Speed;
+}
+void MoveBack(hamada){
+    Speed;//30
+}
+};
+
+
+car c;//Create Object from Car;
+car c2;
+c.speed=30;
+c2.speed=40;
+c.MoveBack();
+c2.MoveBack();
+
+=====================================
+class vs. structures
+===================
+in structures : all members are public by default.
+in classes : all members ar private by default.
+
+
+
+Default Arguments in Function call
+===================== 
+int sum(int x, int y, int z, int m){}
+sum(1,2,3,4); //Call 
+sum(1,2,3); //Compiler Error  
+sum(1,2,3); //Compiler Error
+
+int sum(int x, int y, int z, int m=0){}
+sum(1,2,3,4); //Call 
+sum(1,2,3); //Call 
+sum(1,2,3); //Compiler Error
+
+int sum(int x, int y, int z=0, int m=0){}
+sum(1,2,3,4); //Call 
+sum(1,2,3); //Call 
+sum(1,2,3); //Call
+sum(1,2,,3); //Compiler Error
+
+=====================================================
+Visibility in Class 
+=====================
+- ALL Member are Private By default.
+- Public  : it access is available from anywhere inside or outside the class. 
+- Private : the access availablitiy within the class only 
+==================================================================================
+Function Overloading 
+=========================
+- Many functions in one class with same name but with different function signatures.
+- Function Signature (Name,No.of Parameters ,oreder of Them,Type of Parameters).
+
+
+Notes 
+===========
+int add(int x, int y){}
+void add(int x, int y){} //Not Overloaded 
+
+int add(int x){}
+int add(int x, int y=0){} //Not Overloaded 
+
+===================================================================================
+Constructor 
+===========
+Type of Constructor 
+=========================
+- default Constuctor 
+- User Define Constuctor 
+	- No Parameter Consturctor
+	- Parameterize Consturctor 
+- Private Constructor 
+- #Copy Constructor ==> Waiting ...
+
+object Creation 
+1) Allocate the Memory 
+2) Call Constructor Method 
+
+Constructor Characteristics:
+============================
+-Purpose: Used to initialize objects. If no constructor is defined, the compiler provides a default constructor.
+- Has the Same name of Class 
+- No return type: Constructors don't have any return type, not even void.
+- User Can't Call it . [Automatic Call]
+- Call Only When Creating The Objects .[Automatic Call]
+- Can be Overloaded (Multiple constructors with different parameter lists can be defined.)
+
+Notes :- 
+==============			
+- Default constructor will be generated automatically if no constructor is defined.
+If there is No Constructor , a default one is made which take No Parameters and 
+has an empty body.
+			===========================
+
+-If you define a constructor as private, you are preventing other parts of the program from creating instances of the class directly. 
+Private constructors are often used in certain design patterns like the Singleton Pattern or when implementing static classes, where objects should not be instantiated directly.
+For example, a Singleton class ensures that only one instance of the class is created, and the constructor is kept private to prevent multiple instantiations.
+- If No Default Constructor made and There 
+are others contructor it 
+			===========================
+If no default constructor is explicitly defined, and only other parameterized constructors exist, the compiler will not generate a default constructor automatically. 
+			===========================
+How Objects Are Created:
+=============================
+Automatic (Local Objects):
+1. Objects can be created automatically when declared as local variables in functions.
+When a local object goes out of scope, its destructor is automatically called to clean up the memory.
+MyClass obj; 
+		       ===================================
+2. Dynamic Memory Allocation:
+Objects can be created on the heap (dynamic memory) using the new operator (in languages like C++, Java, and others). These objects remain in memory until they are explicitly destroyed using the delete operator or garbage collection (in some languages like Java and Python).
+ MyClass* obj = new MyClass(); 
+ 			===================================
+3.Using Factory Methods (in more complex designs):
+In some OOP designs, objects are created using factory methods or factory classes. These are specialized methods that abstract the process of creating objects. The programmer can call the factory method instead of directly using a constructor.
+class MyClass {
+public:
+    int x;
+    MyClass() { x = 30; }  // Constructor
+    static MyClass * createObject() {
+        return new MyClass();  // Factory method creating the object
+    }
+};
+
+int main() {
+    MyClass* obj = MyClass::createObject();  // Object created via factory method
+    std::cout << obj->x;  // Output: 30
+    delete obj;
+    return 0;
+}
+=======================================================================================
+Destructor (wish for something before I die)
+=================================================
+- it is aSpecial Function.called when object destroyed.
+- destructor is the same as the class name, but preceded by a tilde (~).
+- No Parameters
+- No Return any Value (not even void).
+- A class can only have one destructor.(Can't Overloaded).
+- Destructors are used to clean up resources when an object is destroyed.
+- They are automatically called when an object goes out of scope or is deleted.
+
+~ className(){
+}
+====================================================================================
+Purpose of a Destructor:
+=============================
+Resource Deallocation: Destructors are used to release resources (like memory, file handles, network connections) that were allocated by the object during its lifetime.
+Clean-Up: They ensure that the class does any necessary clean-up before the object is destroyed, preventing memory leaks or other resource-related issues.
+
+
+Destructor Rules:
+======================
+Can’t be overloaded: Unlike constructors, there can be only one destructor per class.
+Automatic invocation: It is automatically called when an object is deleted or goes out of scope.
+Order of calling: In case of inheritance, the destructor of the derived class is called first, followed by the destructor of the base class.
+
+
+
+Notes :-
+- The constructor dynamically allocates memory (new int) for ptr and initializes it with the value passed to the constructor.
+- The destructor frees the dynamically allocated memory (delete ptr) to avoid memory leaks.
+- When the object obj goes out of scope at the end of the main() function, the destructor is automatically invoked, cleaning up the memory.
+- Destructors are critical for preventing memory leaks and ensuring proper resource management in object-oriented programs.
+
+================================================================================================================================================================
+
+
+Static Members 
+1. shared attributes among all objects from this class.
+2. its lifetime is the application lifetime
+3. can be accessed from class name or any object [if it public]
+4. has constant value.
+5. must be initialized
+6. can be private or public.
+7. can be used in all class functions
+
+Static members are not part of the object, so they are not initialized by constructors.
+Shared among all instances of the class.
+Exists independently of any object of the class.
+Memory for the static attribute is allocated only once, during the lifetime of the program.
+
+Use Cases for Static Private Attributes
+    Global Counters: Keep track of the number of objects created or some other global statistic related to the class.
+    Shared Configuration:Store class-wide configuration values (e.g., a database connection or log level) accessible to all instances but private to the class.
+ 
+ 
+ 
+ 
+ 
+ 
+ Example :- 
+ ==============
+ 
+class Database {
+private:
+    // Static attributes for shared configuration
+    static string host;
+    static string user;
+    static string password;
+
+public:
+    // Static methods to set configuration
+    static void setConfig(const string& dbHost, const string& dbUser, const string& dbPassword) {
+        host = dbHost;
+        user = dbUser;
+        password = dbPassword;
+    }
+
+    // Static methods to get configuration
+    static void printConfig() {
+        cout << "Database Configuration:" << endl;
+        cout << "Host: " << host << endl;
+        cout << "User: " << user << endl;
+        cout << "Password: " << password << endl;
+    }
+
+    // Simulate a database connection
+    static void connect() {
+        cout << "Connecting to database at " << host << " with user " << user << endl;
+        // Here, you would add actual database connection logic
+    }
+};
+
+// Definition of static attributes
+string Database::host = "localhost";
+string Database::user = "root";
+string Database::password = "root";
+
+int main() {
+    // Default configuration
+    Database::printConfig();
+
+    // Update configuration
+    Database::setConfig("127.0.0.1", "admin", "admin123");
+
+    // Print updated configuration
+    Database::printConfig();
+
+    // Connect to the database
+    Database::connect();
+
+    return 0;
+}
+
+
+Advantages of Static Shared Configuration
+1. Consistency:
+     All instances share the same database configuration, reducing redundancy and ensuring consistency.
+2. Ease of Access:
+     No need to create an instance of the class to access or modify the configuration.
+3. Encapsulation:
+     The configuration is encapsulated within the class, providing a single point of control.
+4. Resource Efficiency:
+     A single shared resource (e.g., database connection) reduces memory usage and avoids multiple connections.
+
+Considerations and Enhancements
+1. Thread Safety:
+    If the application is multi-threaded, use synchronization mechanisms 
+    (e.g., std::mutex) to prevent race conditions when accessing or modifying 
+    static attributes.
+
+static std::mutex configMutex;
+static void setConfig(const string& dbHost, const string& dbUser, const string& dbPassword) {
+    std::lock_guard<std::mutex> lock(configMutex);
+    host = dbHost;
+    user = dbUser;
+    password = dbPassword;
+}
+
+2.Singleton Pattern:
+    Combine the shared configuration with a singleton pattern to manage a single database connection instance.
+
+3. Error Handling:
+    Validate the configuration and handle connection errors gracefully.
+4. Configuration Persistence:
+    Store the configuration in an external file (e.g., JSON, XML) and load it dynamically.
+        =====================================================================================
+Static Members - Functions
+– Static Functions[ class Functions]:
+1. deal only with static attributes.
+2. “this” is not send to it.
+3. call by the class name or any objec
+=======================================================================
+class x{
+static
+
+}
+static x x2;
+void function(){
+    static x x1;
+}
+==========================================================
+Day3 Friend 
+=============
+
+
+
+class Complex;
+class B{
+
+    void Acess(Complex & x);
+
+}
+class C{
+    void AcessA1(Complex & x){
+        cout<<x.a1_private;
+    }
+    void AcessA2(Complex & x){
+        cout<<x.a2_private;
+    } 
+
+}
+class Complex{
+    private:
+    int a1_private;
+    int a2_private;
+    public:
+    friend Complex addTo(float v,Complex c);//Friend Stand Alone Function 
+    friend void B::Acess(Complex & x);//Friend Member Function Only  Access its Private Section  But not other Member Functions
+    friend class C; //Friend Class : Access its Private Section 
+}
+
+Complex addTo(float v,Complex c){
+    Complex b; 
+    b.real=c.real+v;
+}
+
+1. is a stand alone function or another class member function.
+2. is a nonmember function that can deal with private and public
+members in the class.
+3. violate the encapsulation concept.
+4. its prototype should be declared inside the class.
+5. one function can be friend for many classes.
+6. Friend Class : Access its Private Section
+   B is A's Friend  inside B it Can Access its Private Section  
+
+
+
+=====================================================================================================s
+                                            Const Fucntion & Object 
+                                            ==============================
+Const & principle of leastPrivilege :  Minimum Privileges necessary to Perform its Function
+    
+1. Constant Methods                                           
+ReturnType MethodName(Arguments) const;
+- Constant methods can only call other constant methods within the class.
+- They cannot modify any member variables, except those marked as mutable 
+Purpose
+Ensures the method cannot modify any member variables of the object.
+Guarantees that the method is safe to call on constant objects
+                      ====================================================
+2. Constant Objects
+- A constant object is an instance of a class that cannot be modified after its initialization. 
+const object ==> Call only Const Function 
+const ClassName objectName(parameters);
+Behavior
+=========
+Only constant methods can be called on a constant object.
+Any attempt to call a non-constant method or modify a member variable results in a compile-time error.
+                       ====================================================
+Feature	    :           Constant Method	                                Constant Object
+Declaration	:    Add const after the method signature.	     : Use const before the object declaration.
+Restriction	:    Cannot modify member variables.	         : Only constant methods can be called on it.
+Access	    :    Can be called on const & non-const objects. : Restricted to calling constant methods only.
+Example	    :    void func() const;	                         : const ClassName obj;
+                        ====================================================
+
+When to Use Constant Methods and Objects
+====================================================
+Use constant methods to guarantee that a method will not alter the object's state.
+Use constant objects when you want to ensure immutability of an object.
+
+Notes:- 
+Constant Member Variables
+A constant member variable must be initialized at the time of object construction and cannot be modified afterward.
+        class Example {
+            private:
+                const int value; // Constant member variable
+            public:
+                // Constructor initializes the constant member
+                Example(int v) : value(v) {}
+                int getValue() const {
+                    return value;
+                }
+        };
+Mutable Variables in Constant Methods
+If a member variable is declared with the mutable keyword, it can be modified even in a constant method or constant object.
+    class Example {
+        private:
+            int value;
+            mutable int accessCount; // Mutable variable
+
+        public:
+            Example(int v) : value(v), accessCount(0) {}
+
+            int getValue() const {
+                accessCount++; // Allowed because accessCount is mutable
+                return value;
+            }
+    };
+
+    ======================================================================================
+Copy by Value 
+====================
+   Constructor                  destructor 
+   a//main                      b//myfunc
+   NoCall(BitwiseCopy)          a//main
+
+==============================================================
+Copy by Value (Dynamic Area Problems)
+   shared area betwwn two Objects.
+
+
+Stack s1(10);
+Stack s2(s1);
+viewContent(s1);
+Stack s3( getStack() ); //Stack s3(s) // s=getStack() 
+Best Practices to Avoid Dynamic Area Problems
+===================================================
+1. Implement the Rule of Three (or Five)
+    If your class manages dynamic memory, explicitly define the:
+        Destructor
+        Copy Constructor
+        Copy Assignment Operator
+    Optionally include:
+        Move Constructor
+        Move Assignment Operator (for efficiency).
+
+2. Avoid Unnecessary Copies
+Pass large objects by reference instead of value (const T&) when possible.
+
+=============================================================================
+Points 
+C1+C2 ---> Complex operator+(Complex &){}
+C1+10 ---> Complex operator+(Complex &){}
+10+C2 --->Stand Alone Function --->  Complex operator+(int x, Complex & c){}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Complex add(const Complex& c){
+     Complex res (real+c.real,image+c.image);
+     /*Complex res;
+     res.real=real+c.real;
+     res.image=image+c.image;*/
+     return res;
+}
+
+int main()
+{
+    Complex c1(1,5),c2(2,3),c3(3,4),c4(4,3),c5(5,9),c6;
+   // c6=c1.add(c2);
+   c6=((c1.add(c2)).add(c3)).add(c4);//c6=c1+c2+c3+c4
+   c6=c1.add((c2.add((c3.add(c4)))));//c6=c1+c2+c3+c4
+   c6.printComplex();
+   c6=c1+c2; //Error no match Operators
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+1- binary Operator 
+	1.a- Arithmetic Operator 
+		+ - * / 
+	1.b- Relational & Comparison Operator 
+		> < > <= == != 
+	1.c- Assigment Operator 	
+	+= -= *=
+
+unary opeator  (-- ++ ) 
+
+casting Operator () []
+-------------------------------------------------------------
+Can We Overload All Operators? 
+
+We can overload
+
+        Unary operators
+        Binary operators
+        Special operators ( [ ], (), etc)
+
+Almost all operators can be overloaded except a few. Following is the list of operators that cannot be overloaded. 
+
+sizeof
+typeid
+Scope resolution (::)
+Class member access operators (-> (arrow),.(dot), .* (pointer to member operator))
+Ternary or conditional (?:)
+-------------------------------------------------------------------
+c1+c2 
+callerObject(this)+ parameter
+
+Complex operator +(Complex c){
+	Complex res (real+c.real,image+c.image);
+	return res;
+}
+
+int main()
+{
+    Complex c1(1,5),c2(2,3),c3(3,4),c4(4,3),c5(5,9),c6;
+   // c6=c1.add(c2);
+   c6=c1.operator+(c2);
+   c6=c1+(c2);
+   c6=c1+c2+c3+c4;
+   c6.printComplex();
+}
+
+c6=c1+10; //Can't bind non-const Error Lvalue Reference of type 
+
+Complex operator +(int number){
+	Complex res (real+number,image);
+	return res;
+}
+
+c6=10+c1; //No match Operator 
+
+Complex operator+(int x, Complex & c){
+    Complex res (c.getReal()+x,c.getImage());
+    return res;
+}
+
+=============================================================================================================================================================
+Difference between Operator Functions and Normal Functions
+=================================================================
+Operator functions are the same as normal functions. 
+The only differences are, that the name of an operator function is always the operator keyword followed by the symbol of the operator,
+operator functions are called when the corresponding operator is used. 
+
+
+
+
+
+
+
+
+
+
+===================================================================================================================================================
+How can we restrict dynamic allocation of objects of a class using new?
+	
+By overloading new operator
+By making an empty private new operator.
+By making an empty private new and new[] operators	 (correct)
+By overloading new operator and new[] operators
+
+
+
+class Test {
+private:
+    void* operator new(size_t size) {}
+    void* operator new[](size_t size) {}
+};
+
+int main()
+{
+    Test *obj = new Test;
+    Test *arr = new Test[10];
+    return 0;
+}
+===================================================================================================================================================
+int operator == (Complex c){
+	if(real == c.real && img == c.img){
+		return 1;
+	}
+	else{
+		return 0; 
+	}
+}
+===================================================================================================================================================
+    operator float(){
+        return  real;
+    }
+ cout <<(float)c3 << endl;
+===================================================================================================================================================
+operator += (Complex c ){
+	real =real +c.real;
+	img=img+c.img;
+}
+c1+=c2;
+c1.print();
+				=================================
+Complex operator += (Complex c ){
+	real =real +c.real;
+	img=img+c.img;
+	return *this;
+}
+c3=c1+=c2;//Compoend Operator 
+===================================================================================================================================================
+Complex operator++ (){
+	real=real+1;
+	return *this;
+}
+c2=++c1;//Prefix //c2=c1 after increment
+
+
+Complex operator++ (int){//Postfix 
+	Complex Temp =* this;	
+	real=real+1;
+	return Temp;
+}
+c2=c1++;//Postfix //c2=c1 Before increment
+===================================================================================================================================================
+Stack operator=(const Stack & s){
+	tos=s.tos;
+	size=s.size;
+	delete[] arr;//delete 
+ 
+	arr=new int [size];//rellaction 
+
+	for(int i=0; i<=tos; i++){
+		arr[i]=s.arr[i];
+	}
+
+	return *this; 
+}	
+===================================================================================================================================================
+
+
+
+
+
+
+
+
+

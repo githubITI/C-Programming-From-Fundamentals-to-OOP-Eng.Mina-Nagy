@@ -1,0 +1,119 @@
+Q1. What is the output?
+if (printf("A")) {
+    printf("B");
+} else {
+    printf("C");
+}
+A) A
+B) AB
+C) AC
+D) C
+Correct Answer: B) AB
+===========================================================
+Q2. What will the following print?
+int x = 0;
+
+if (x = printf("Hello")) {
+    printf("%d", x);
+} else {
+    printf("World");
+}
+A) Hello
+B) HelloWorld
+C) Hello0
+D) Hello5
+Correct Answer: D) Hello5
+===========================================================
+Q3. What is the output?
+if (printf("")) {
+    printf("YES");
+} else {
+    printf("NO");
+}
+A) YES
+B) NO
+C) (blank output)
+D) Error
+Correct Answer: B) NO
+===========================================================
+Q4. Predict the output:
+if (printf("123") - 3) {
+    printf("X");
+} else {
+    printf("Y");
+}
+A) 123X
+B) 123Y
+C) X
+D) Y
+Correct Answer: B) 123Y
+===========================================================
+Q5. What does this print?
+if (!printf("hello")) {
+    printf("world");
+}
+A) hello
+B) helloworld
+C) world
+D) (nothing)
+Correct Answer: A) hello
+===========================================================
+Q6. What will this program output on screen?
+int main() {
+    return printf("Hi");
+}
+A) (nothing)
+B) Hi
+C) 2
+D) Hi2
+Correct Answer: B) Hi
+===========================================================
+Q7. What is the final output?
+int n = printf("%d", printf("Hi"));
+printf("%d", n);
+A) Hi23
+B) Hi21
+C) Hi12
+D) Hi11
+Correct Answer: B) Hi21
+===========================================================
+Q8. What is the final output?
+if (printf("%d", 0)) {
+    printf("A");
+} else {
+    printf("B");
+}
+A) 0A
+B) 0B
+C) A
+D) B
+
+Correct answer is: A) 0A
+(printf prints 0, returns 1? No — it prints the character '0', return value = 1 → true? Wrong! Because printing "0" is one character, return = 1, so IF is TRUE → "A". Wait? Let’s check.)
+
+Correction:
+printf("%d", 0) prints 0, returns 1, so IF is true → prints A, result is 0A.
+
+
+
+(This was a trick — printing 0 does not mean return = 0.)
+===================================================================================
+Q9. What is the final output?
+if (printf("%c", 'A') && printf("B")) {
+    printf("C");
+}
+A) BC
+B) AB
+C) ABC
+D) AC
+Correct answer is: A) AC
+printf("%c", 'A') executes first
+
+It prints A
+
+It returns 1 (true)
+
+Because the first part of the OR (||) is already true,
+the second printf("B") does NOT execute (short-circuit behavior).
+
+Since the condition is true, the if body runs and printf("C") prints C.

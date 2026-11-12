@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Notes2026-Day1.4-Overflow-in-Datatypes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="overflow-in-cc-data-types">Overflow in C/C++ Data Types</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#what-is-overflow">What is Overflow?</a></li>
+<li><a href="#types-of-overflow">Types of Overflow</a></li>
+<li><a href="#signed-integer-overflow">Signed Integer Overflow</a></li>
+<li><a href="#unsigned-integer-overflow">Unsigned Integer Overflow</a></li>
+<li><a href="#real-world-examples">Real-World Examples</a></li>
+<li><a href="#detection-and-prevention">Detection and Prevention</a></li>
+<li><a href="#common-pitfalls">Common Pitfalls</a></li>
+</ol>
+<hr>
+<h2 id="what-is-overflow">What is Overflow?</h2>
+<p><strong>Overflow</strong> occurs when an arithmetic operation produces a result that exceeds the maximum (or minimum) value that can be stored in a given data type.</p>
+<pre><code class="language-mermaid"><div class="mermaid">graph LR
+    A[Value within range] --> B{Operation}
+    B --> C{Result > MAX?}
+    C -->|Yes| D[Overflow!]
+    C -->|No| E[Valid Result]
+    B --> F{Result < MIN?}
+    F -->|Yes| G[Underflow!]
+    F -->|No| E
+</div></code></pre>
+<p>When a calculation exceeds these limits, the extra bits are lost, causing <strong>wraparound</strong>.</p>
+<hr>
+<h2 id="types-of-overflow">Types of Overflow</h2>
+<h3 id="1-signed-integer-overflow-undefined-behavior">1. <strong>Signed Integer Overflow</strong> (Undefined Behavior)</h3>
+<ul>
+<li>Occurs with signed types: <code>int</code>, <code>short</code>, <code>long</code>, <code>char</code></li>
+<li><strong>Undefined behavior</strong> in C/C++ standard</li>
+<li>Can cause unpredictable results</li>
+</ul>
+<h3 id="2-unsigned-integer-overflow-well-defined">2. <strong>Unsigned Integer Overflow</strong> (Well-Defined)</h3>
+<ul>
+<li>Occurs with unsigned types: <code>unsigned int</code>, <code>unsigned char</code>, etc.</li>
+<li><strong>Well-defined behavior</strong>: wraps around (modulo arithmetic)</li>
+<li>Result = value % (MAX + 1)</li>
+</ul>
+<hr>
+<h2 id="signed-integer-overflow">Signed Integer Overflow</h2>
+<h3 id="range-of-signed-types">Range of Signed Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>signed char</code></td>
+<td>1 byte</td>
+<td>-128 to 127</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>2 bytes</td>
+<td>-32,768 to 32,767</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>4 bytes</td>
+<td>-2,147,483,648 to 2,147,483,647</td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td>8 bytes</td>
+<td>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-1-signed-char-overflow">Example 1: Signed Char Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">signed</span> <span class="hljs-keyword">char</span> x = <span class="hljs-number">127</span>;  
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Before overflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    
+    x = x + <span class="hljs-number">1</span>;  <span class="hljs-comment">// Overflow!</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"After overflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: -128 (wraps to minimum value)</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li><code>signed char</code> range: -128 to 127</li>
+<li>127 + 1 = 128, but 128 &gt; 127 (MAX)</li>
+<li>Wraps around to -128 (minimum value)</li>
+</ul>
+<h3 id="example-2-integer-overflow">Example 2: Integer Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> max_int = INT_MAX;  <span class="hljs-comment">// 2,147,483,647</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"INT_MAX = "</span> &lt;&lt; max_int &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"INT_MAX + 1 = "</span> &lt;&lt; max_int + <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: -2,147,483,648 (wraps to INT_MIN)</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="unsigned-integer-overflow">Unsigned Integer Overflow</h2>
+<h3 id="range-of-unsigned-types">Range of Unsigned Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unsigned char</code></td>
+<td>1 byte</td>
+<td>0 to 255</td>
+</tr>
+<tr>
+<td><code>unsigned short</code></td>
+<td>2 bytes</td>
+<td>0 to 65,535</td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td>4 bytes</td>
+<td>0 to 4,294,967,295</td>
+</tr>
+<tr>
+<td><code>unsigned long long</code></td>
+<td>8 bytes</td>
+<td>0 to 18,446,744,073,709,551,615</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-3-unsigned-char-overflow">Example 3: Unsigned Char Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> x = <span class="hljs-number">255</span>;  <span class="hljs-comment">// Maximum value</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Before overflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    
+    x = x + <span class="hljs-number">1</span>;  <span class="hljs-comment">// Overflow (well-defined)</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"After overflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: 0 (wraps around)</span>
+    
+    x = <span class="hljs-number">0</span>;
+    x = x - <span class="hljs-number">1</span>;  <span class="hljs-comment">// Underflow</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"After underflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: 255 (wraps to maximum)</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>Unsigned overflow is <strong>well-defined</strong>: wraps around using modulo arithmetic</li>
+<li>255 + 1 = 256 % 256 = 0</li>
+<li>0 - 1 = -1 % 256 = 255</li>
+</ul>
+<h3 id="visual-representation-of-unsigned-overflow">Visual Representation of Unsigned Overflow</h3>
+<hr>
+<h2 id="real-world-examples">Real-World Examples</h2>
+<h3 id="example-4-multiplication-overflow">Example 4: Multiplication Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">100000</span>;
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">100000</span>;
+    
+    <span class="hljs-keyword">int</span> result = a * b;  <span class="hljs-comment">// Overflow!</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a * b = "</span> &lt;&lt; result &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Expected: 10,000,000,000</span>
+    <span class="hljs-comment">// Actual: 1,410,065,408 (overflow occurred)</span>
+    
+    <span class="hljs-comment">// Correct way: use larger type</span>
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> correct_result = (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)a * b;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Correct result: "</span> &lt;&lt; correct_result &lt;&lt; <span class="hljs-built_in">endl</span>;
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="example-5-loop-counter-overflow">Example 5: Loop Counter Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Dangerous: infinite loop!</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">255</span>; i++) {
+        <span class="hljs-comment">// This loop never ends!</span>
+        <span class="hljs-comment">// When i = 255, i++ wraps to 0</span>
+        <span class="hljs-comment">// Condition i &lt;= 255 is always true</span>
+    }
+    
+    <span class="hljs-comment">// Correct way:</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">255</span>; i++) {
+        <span class="hljs-comment">// Loop ends when i = 254</span>
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="example-6-array-index-overflow">Example 6: Array Index Overflow</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>];
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> index = <span class="hljs-number">250</span>;
+    
+    index = index + <span class="hljs-number">10</span>;  <span class="hljs-comment">// 250 + 10 = 260, wraps to 4</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Index after overflow: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)index &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: 4</span>
+    
+    <span class="hljs-comment">// Accessing arr[4] instead of intended arr[260]</span>
+    <span class="hljs-comment">// This can cause subtle bugs!</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="detection-and-prevention">Detection and Prevention</h2>
+<h3 id="1-use-compiler-warnings">1. Use Compiler Warnings</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Enable overflow warnings</span>
+g++ -Wall -Wextra -Woverflow program.cpp
+
+<span class="hljs-comment"># Enable runtime sanitizers (detects undefined behavior)</span>
+g++ -fsanitize=undefined program.cpp
+</div></code></pre>
+<h3 id="2-check-before-operations">2. Check Before Operations</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">safe_add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> &amp;result)</span> </span>{
+    <span class="hljs-comment">// Check for overflow before adding</span>
+    <span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">0</span> &amp;&amp; b &gt; INT_MAX - a) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <span class="hljs-comment">// Would overflow</span>
+    }
+    <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">0</span> &amp;&amp; b &lt; INT_MIN - a) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <span class="hljs-comment">// Would underflow</span>
+    }
+    result = a + b;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> result;
+    
+    <span class="hljs-keyword">if</span> (safe_add(INT_MAX, <span class="hljs-number">1</span>, result)) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Result: "</span> &lt;&lt; result &lt;&lt; <span class="hljs-built_in">endl</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Overflow detected!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="3-use-larger-data-types">3. Use Larger Data Types</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Problem: int overflow</span>
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">100000</span>;
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">100000</span>;
+    <span class="hljs-keyword">int</span> result1 = a * b;  <span class="hljs-comment">// Overflow!</span>
+    
+    <span class="hljs-comment">// Solution: use long long</span>
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> result2 = (<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span>)a * b;  <span class="hljs-comment">// No overflow</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"int result: "</span> &lt;&lt; result1 &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"long long result: "</span> &lt;&lt; result2 &lt;&lt; <span class="hljs-built_in">endl</span>;
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="4-use-standard-library-functions-c20">4. Use Standard Library Functions (C++20)</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;limits&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// C++20: std::cmp_* functions for safe comparisons</span>
+<span class="hljs-comment">// For older C++, implement manually:</span>
+
+<span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-keyword">bool</span> <span class="hljs-title">will_overflow_add</span><span class="hljs-params">(T a, T b)</span> </span>{
+    <span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">0</span> &amp;&amp; b &gt; numeric_limits&lt;T&gt;::<span class="hljs-built_in">max</span>() - a) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">0</span> &amp;&amp; b &lt; numeric_limits&lt;T&gt;::<span class="hljs-built_in">min</span>() - a) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> a = INT_MAX;
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+    
+    <span class="hljs-keyword">if</span> (will_overflow_add(a, b)) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Addition would overflow!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="pitfall-1-implicit-type-conversion">Pitfall 1: Implicit Type Conversion</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> a = <span class="hljs-number">200</span>;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> b = <span class="hljs-number">100</span>;
+    
+    <span class="hljs-comment">// Looks safe, but...</span>
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> sum = a + b;  <span class="hljs-comment">// 300, overflows to 44</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Sum: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)sum &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// Output: 44</span>
+    
+    <span class="hljs-comment">// Explanation: 300 % 256 = 44</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="pitfall-2-signedunsigned-mixing">Pitfall 2: Signed/Unsigned Mixing</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> signed_val = <span class="hljs-number">-1</span>;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> unsigned_val = <span class="hljs-number">1</span>;
+    
+    <span class="hljs-comment">// Dangerous comparison!</span>
+    <span class="hljs-keyword">if</span> (signed_val &lt; unsigned_val) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"This won't print!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"-1 is treated as large positive number!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    
+    <span class="hljs-comment">// -1 is converted to unsigned: 4,294,967,295</span>
+    <span class="hljs-comment">// So -1 &gt; 1 in this comparison!</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="pitfall-3-narrowing-conversions">Pitfall 3: Narrowing Conversions</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> large_value = <span class="hljs-number">300</span>;
+    
+    <span class="hljs-comment">// Implicit narrowing conversion</span>
+    <span class="hljs-keyword">char</span> small_value = large_value;  <span class="hljs-comment">// Overflow!</span>
+    
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Value: "</span> &lt;&lt; (<span class="hljs-keyword">int</span>)small_value &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-comment">// Output: 44 (300 % 256 = 44, then interpreted as signed)</span>
+    
+    <span class="hljs-comment">// For signed char: 44 is within range, but data is lost</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="summary-table">Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Signed Overflow</th>
+<th>Unsigned Overflow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Behavior</strong></td>
+<td>Undefined (unpredictable)</td>
+<td>Well-defined (wraps around)</td>
+</tr>
+<tr>
+<td><strong>Standard Compliance</strong></td>
+<td>Violates C/C++ standard</td>
+<td>Follows modulo arithmetic</td>
+</tr>
+<tr>
+<td><strong>Detection</strong></td>
+<td>Use sanitizers, warnings</td>
+<td>Intentional or check bounds</td>
+</tr>
+<tr>
+<td><strong>Prevention</strong></td>
+<td>Check before operations</td>
+<td>Use larger types if needed</td>
+</tr>
+<tr>
+<td><strong>Common Use</strong></td>
+<td>Avoid at all costs</td>
+<td>Sometimes intentional (e.g., hash functions)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li>
+<p>✅ <strong>Always initialize variables</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// Good</span>
+<span class="hljs-keyword">int</span> y;      <span class="hljs-comment">// Bad (garbage value)</span>
+</div></code></pre>
+</li>
+<li>
+<p>✅ <strong>Use appropriate data types</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// For large numbers</span>
+<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> big_num = <span class="hljs-number">10000000000L</span>L;
+
+<span class="hljs-comment">// For small positive values</span>
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> age = <span class="hljs-number">25</span>;
+</div></code></pre>
+</li>
+<li>
+<p>✅ <strong>Enable compiler warnings</strong></p>
+<pre class="hljs"><code><div>g++ -Wall -Wextra -Wconversion -Woverflow program.cpp
+</div></code></pre>
+</li>
+<li>
+<p>✅ <strong>Validate input ranges</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (value &gt; INT_MAX / <span class="hljs-number">2</span>) {
+    <span class="hljs-comment">// Handle potential overflow</span>
+}
+</div></code></pre>
+</li>
+<li>
+<p>✅ <strong>Use safe arithmetic functions</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Check before operation</span>
+<span class="hljs-keyword">if</span> (a &gt; INT_MAX - b) {
+    <span class="hljs-comment">// Handle overflow</span>
+} <span class="hljs-keyword">else</span> {
+    result = a + b;
+}
+</div></code></pre>
+</li>
+<li>
+<p>❌ <strong>Avoid mixing signed and unsigned</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">-1</span>;
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+<span class="hljs-comment">// Dangerous: a will be converted to unsigned</span>
+</div></code></pre>
+</li>
+</ol>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Signed overflow</strong> = Undefined behavior (dangerous!)</li>
+<li><strong>Unsigned overflow</strong> = Well-defined wraparound (predictable)</li>
+<li>Always validate operations that might overflow</li>
+<li>Use compiler warnings and sanitizers</li>
+<li>Choose appropriate data types for your use case</li>
+</ul>
+<p>Understanding overflow is crucial for writing <strong>safe, reliable, and bug-free</strong> C/C++ code!</p>
+
+</body>
+</html>

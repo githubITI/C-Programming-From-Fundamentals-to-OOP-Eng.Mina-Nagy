@@ -1,0 +1,292 @@
+
+#### Operator 
+x+=y x-=y x*=y x/=y x%=y x&=y x|=y x^=y  
+x=+y or x=-y Not Error 
+x=/y or x=*y x=%y x=&y x=|y x=^y Error 
+
+
+if(x=5) vs if(5=x)
+if(x==5)
+
+
+int a=5;
+int b=0;
+
+if(!a&&b){  
+cout << "IF"<<endl;
+}
+if(!(a&&b)){
+cout << "IF"<<endl;
+}
+
+
+
+float x=9.3f/3.0f; 
+if(x==3.1F){}
+All Capital Character 
+if ((ch>='A') && (ch <= 'Z') )
+
+
+
+
+### 
+```
+### 
+```
+``` c++ 
+float x=0.1 ;
+if(x == 0.1 )
+// if(x== (float)0.1 )
+// if(x== 0.1f )
+    cout<<"if"<<endl;
+else 
+    cout<<"else"<<endl;
+
+
+double x=0.1 ;
+if(x == 0.1 )
+    cout<<"if"<<endl;
+else 
+    cout<<"else"<<endl;
+
+```
+// == or != is unsafe with floating point 
+//(0.1)10 in float 0.10000000000149011611938476
+//(0.1)10 in double 0.100000000000000000005551111
+
+Ternary Operator
+grade >= 50 ? printf("passed") : printf("failed");
+
+
+
+FULL BEST-PRACTICE SUMMARY
+IF Statements
+
+Always use == for comparisons
+
+Don’t compare floats directly
+
+Use parentheses for clarity
+
+Never rely on implicit truthiness of assignments
+
+
+
+
+
+switch 
+    - default clause is optional 
+    - case constants must be simple constants (symbolic ok)
+    - case constant must be unique 
+        case 1:
+        case 1:  // ERROR
+    - switch statement only tests for equality 
+        No <, >, !=
+        If inequalities are needed → use if-else.
+    - the control expression can be type character since characters are internally treated as integers
+float i=1.8; 
+switch(i){}  // ERROR — switch expression must be integer or enum
+//-------------------------------------------------------------------
+
+
+
+
+Switch
+Expression must be integer/enum
+Case labels must be compile-time constants
+Use break to avoid fall-through (unless intended)
+Use default for safety
+Don’t switch on floats or strings (C-style)
+
+
+enum Color { RED, GREEN, BLUE };
+
+Color c = GREEN;
+
+switch(c) {
+    case RED: printf("Red\n"); break;
+    case GREEN: printf("Green\n"); break;
+    case BLUE: printf("Blue\n"); break;
+}
+
+switch(score) {
+    case 90: case 91: case 92: case 93: case 94: case 95:
+        printf("Excellent\n"); break;
+}
+
+case 1:
+    printf("Option 1\n");
+    // fall through
+case 2:
+    printf("Option 1 or 2\n");
+    break;
+
+// BAD
+switch(x + 1) { ... }
+
+| Rule              | Description                             |
+| ----------------- | --------------------------------------- |
+| Expression type   | Must be integer (`int`, `char`, `enum`) |
+| Case constants    | Must be **compile-time constants**      |
+| Case uniqueness   | Each case value must be unique          |
+| Default           | Optional, executed if no case matches   |
+| Switch comparison | Only equality (`==`), no `<`, `>` etc.  |
+
+
+
+| Mistake                       | Example                                     | Why it's wrong                                                          |
+| ----------------------------- | ------------------------------------------- | ----------------------------------------------------------------------- |
+| Using non-integer type        | `switch(3.1f)`                              | float/double not allowed                                                |
+| Non-constant case             | `const int x = 5; case x:` (C)              | In C, `const` not always compile-time constant; use `enum` or `#define` |
+| Missing `break`               | `case 1: ...` without break                 | Causes **fall-through**, may be unintended                              |
+| Duplicate case values         | `case 1:` repeated                          | Compiler error                                                          |
+| Misusing `default`            | `default:` in middle of cases without break | Works, but confusing—best at the end                                    |
+| Large switch without grouping | Many cases with identical code              | Better to **group cases** or use `enum` mapping                         |
+
+#===================================================================
+
+//Counter-Controlled repetition 
+Used when number of iterations is known.
+for (int i = 0; i < 10; i++) {
+    printf("%d\n", i);
+}
+//Sentinel-Controlled repetition 
+Used when number of iterations is unknown — loop until a special sentinel value appears.
+int x;
+printf("Enter numbers (-1 to exit): ");
+scanf("%d", &x);
+
+while (x != -1) {
+    // process
+    scanf("%d", &x);
+}
+
+Loops
+
+Choose the right loop type (for/while/do-while)
+
+Avoid infinite loops; ensure counters update
+
+Validate input in sentinel loops
+
+Avoid goto
+
+General
+
+Enable compiler warnings
+
+Use meaningful variable names
+
+Avoid magic numbers → use constants or enum
+
+Case Constants Must Be Simple Constant Expressions
+
+
+
+#### Types of Variables :- 
+
+##### 1.Local Variables
+
+  - Declared inside a function or block
+
+  - Accessible only within that block
+
+  - Not automatically initialized (contains garbage value)
+  ```c++
+  void func() {
+      int a;  // local variable
+  }
+  ```
+#### 2.Global Variables
+- Declared outside all functions
+- Accessible from any function in the same file
+- Automatically initialized to 0
+``` c++ 
+int g=10; 
+void main(){
+
+}
+```
+#### 3.Static Variables
+
+- Value is preserved between function calls
+
+- Default value = 0
+
+- Can be inside a function or globally
+``` c++ 
+void test() {
+    static int count = 0;
+    count++;
+}
+```
+#### 4. Extern Variables
+
+- Declares a variable that is defined in another file
+
+- No memory allocation (just a declaration)
+``` c++
+extern int x; // defined elsewhere
+```
+#### 5. Register Variables
+
+Suggests storing the variable in CPU register for speed
+
+Compiler may ignore it
+
+Cannot take its address (&)
+
+register int speed;
+
+6️⃣ Mutable Variables (C++ only)
+
+Used inside const classes
+
+Allows modification even when the object is const
+
+class Test {
+public:
+    mutable int x;
+};
+
+7️⃣ Reference Variables (C++ only)
+
+Another name for an existing variable
+
+int a = 10;
+int &ref = a;
+
+8️⃣ Constant Variables
+
+Value cannot change after initialization
+
+const int MAX = 100;
+
+9️⃣ Volatile Variables
+
+Tells the compiler that the variable can change unexpectedly
+(used in hardware / multi-threading)
+
+volatile int flag;
+
+``` c++ 
+int a;          // global → value = 0
+void fun() {
+    int b;      // local → garbage
+    static int c; // static → 0
+}
+```
+
+
+
+
+| Variable Type | Scope                 | Lifetime              | Example             |
+| ------------- | --------------------- | --------------------- | ------------------- |
+| Local         | Block                 | During block          | `int x;`            |
+| Global        | Entire program        | Entire program        | `int g;`            |
+| Static        | Block or global       | Entire program        | `static int count;` |
+| Extern        | Depends on definition | Depends on definition | `extern int x;`     |
+| Register      | Block                 | Block                 | `register int r;`   |
+| Constant      | Depends               | Depends               | `const int N;`      |
+| Reference     | Block                 | Block                 | `int &ref = a;`     |
+| Mutable       | Class object          | Object’s life         | `mutable int x;`    |

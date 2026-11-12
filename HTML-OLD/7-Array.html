@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>7-Array.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#array">Array</a>
+<ul>
+<li><a href="#what-is-an-array">What is an Array?</a>
+<ul>
+<li><a href="#classic-c-style-array">classic C-style array</a></li>
+<li><a href="#c-style">C++ Style</a></li>
+<li><a href="#rules-of-arrays-in-cc">Rules of Arrays in C/C++</a>
+<ul>
+<li><a href="#1-fixed-size"><strong>1. Fixed Size</strong></a></li>
+<li><a href="#2-contiguous-memory"><strong>2. Contiguous Memory</strong></a></li>
+<li><a href="#3-homogeneous-elements"><strong>3. Homogeneous Elements</strong></a></li>
+<li><a href="#4-size-must-be-known"><strong>4. Size Must Be Known</strong></a></li>
+<li><a href="#5-initialization-rules"><strong>5. Initialization Rules</strong></a></li>
+<li><a href="#6-implicit-size"><strong>6. Implicit Size</strong></a></li>
+<li><a href="#7-modern-c-alternatives"><strong>7. Modern C++ Alternatives</strong></a></li>
+<li><a href="#8-no-bounds-checking"><strong>8. No Bounds Checking</strong></a></li>
+<li><a href="#9multidimensional-arrays">9.Multidimensional Arrays</a></li>
+<li><a href="#10-arrays-decay-to-pointers">10. Arrays Decay to Pointers</a></li>
+</ul>
+</li>
+<li><a href="#array-and-pointer">Array and Pointer</a>
+<ul>
+<li><a href="#when-arrays-decay">When Arrays Decay</a></li>
+<li><a href="#negative-index">Negative Index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="array">Array</h2>
+<h3 id="what-is-an-array">What is an Array?</h3>
+<p>An array is a contiguous block of memory containing multiple elements of the same type, accessible using an index.</p>
+<h4 id="classic-c-style-array">classic C-style array</h4>
+<pre class="hljs"><code><div><span class="hljs-comment">//This allocates space for 5 integers.</span>
+<span class="hljs-keyword">int</span> numbers[<span class="hljs-number">5</span>];<span class="hljs-comment">// Allocates space for 5 integers (uninitialized)</span>
+<span class="hljs-comment">// Memory for 5 integers is reserved.</span>
+<span class="hljs-comment">// Values are garbage until explicitly initialized.</span>
+
+
+<span class="hljs-comment">//Full initialization</span>
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};<span class="hljs-comment">//All elements initialized explicitly.</span>
+
+<span class="hljs-comment">//Partial initialization:</span>
+<span class="hljs-keyword">int</span> a[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>}; <span class="hljs-comment">// remaining values become 0</span>
+<span class="hljs-comment">// First two elements are 1 and 2.</span>
+<span class="hljs-comment">// Remaining elements are zero-initialized.</span>
+
+<span class="hljs-comment">// Implicit size:</span>
+<span class="hljs-keyword">int</span> a[] = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>};<span class="hljs-comment">//Compiler infers size as 3.</span>
+
+
+</div></code></pre>
+<h4 id="c-style">C++ Style</h4>
+<include array>
+std::array<int, 5> arr = {1, 2, 3, 4, 5};
+<h4 id="rules-of-arrays-in-cc">Rules of Arrays in C/C++</h4>
+<h5 id="1-fixed-size"><strong>1. Fixed Size</strong></h5>
+<ul>
+<li>Arrays in C/C++ have a fixed size determined at compile time.</li>
+<li>You cannot resize an array after declaration.</li>
+<li>Arrays in C/C++ have fixed size (cannot grow dynamically).</li>
+<li>Forgetting that arrays cannot change size after declaration.</li>
+<li>int arr[5]; // Size = 5, cannot change later</li>
+</ul>
+<h5 id="2-contiguous-memory"><strong>2. Contiguous Memory</strong></h5>
+<ul>
+<li>Elements are stored in contiguous memory locations.</li>
+<li>Indexing is zero-based: first element is arr[0].</li>
+</ul>
+<h5 id="3-homogeneous-elements"><strong>3. Homogeneous Elements</strong></h5>
+<ul>
+<li>All elements must be of the same type.</li>
+<li>int arr[5]; // All integers</li>
+</ul>
+<h5 id="4-size-must-be-known"><strong>4. Size Must Be Known</strong></h5>
+<ul>
+<li>Size must be a constant expression in C.</li>
+<li>In C++, size can be a constexpr or compile-time constant.<pre class="hljs"><code><div>    <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SIZE 10</span>
+    <span class="hljs-keyword">int</span> arr[SIZE];
+</div></code></pre>
+</li>
+</ul>
+<h5 id="5-initialization-rules"><strong>5. Initialization Rules</strong></h5>
+<ul>
+<li>Uninitialized local arrays → contain garbage values.</li>
+<li>Global/static arrays → zero-initialized by default.</li>
+<li>Partial initialization → remaining elements set to zero.
+<ul>
+<li>int arr[5] = {1, 2}; // arr = {1, 2, 0, 0, 0}</li>
+</ul>
+</li>
+</ul>
+<h5 id="6-implicit-size"><strong>6. Implicit Size</strong></h5>
+<ul>
+<li>Allowed only when initializing at declaration.</li>
+<li>Implicit size works only when initializing at declaration.<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> arr[] = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>}; <span class="hljs-comment">// Size = 3</span>
+    <span class="hljs-keyword">char</span> str[] = <span class="hljs-string">"Hello"</span>; <span class="hljs-comment">// Size = 6 (includes '\0')</span>
+    <span class="hljs-keyword">char</span> s[<span class="hljs-number">5</span>] = <span class="hljs-string">"hello"</span>;   <span class="hljs-comment">// ❌ needs 6 bytes ("hello\0")</span>
+</div></code></pre>
+</li>
+</ul>
+<h5 id="7-modern-c-alternatives"><strong>7. Modern C++ Alternatives</strong></h5>
+<ul>
+<li>Use std::array for fixed-size arrays.</li>
+<li>Use std::vector for dynamic arrays.<pre class="hljs"><code><div>  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, 5&gt; arr = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; vec = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>};
+</div></code></pre>
+</li>
+</ul>
+<h5 id="8-no-bounds-checking"><strong>8. No Bounds Checking</strong></h5>
+<ul>
+<li>Accessing out-of-range indices is undefined behavior.</li>
+<li>C/C++ does not perform bounds checking</li>
+<li>Accessing outside the array can overwrite other variables or cause segmentation faults.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>];
+arr[<span class="hljs-number">10</span>] = <span class="hljs-number">100</span>; <span class="hljs-comment">// ❌ Dangerous</span>
+
+
+<span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>];
+arr[<span class="hljs-number">0</span>] = <span class="hljs-number">10</span>; <span class="hljs-comment">// First element</span>
+arr[<span class="hljs-number">4</span>] = <span class="hljs-number">20</span>; <span class="hljs-comment">// Last element</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, arr[<span class="hljs-number">5</span>]);/ ❌/arr[<span class="hljs-number">5</span>] is out of bounds because valid indices <span class="hljs-keyword">for</span> arr[<span class="hljs-number">5</span>] are <span class="hljs-number">0</span> to <span class="hljs-number">4.</span>
+
+</div></code></pre>
+<ul>
+<li>Accessing arr[5] leads to undefined behavior in C/C++
+<ul>
+<li>It might read garbage data.</li>
+<li>It might crash your program.</li>
+<li>It might corrupt memory.</li>
+</ul>
+</li>
+<li>Best Practices
+<ul>
+<li>Always ensure index is within 0 to size-1.</li>
+<li>Use constants or sizeof for safe loops:<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">sizeof</span>(arr)/<span class="hljs-keyword">sizeof</span>(arr[<span class="hljs-number">0</span>]); i++) {
+    arr[i] = i;
+}
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>In C++, prefer std::array or std::vector for safer access:<pre class="hljs"><code><div>  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, 5&gt; arr = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+  arr.at(<span class="hljs-number">4</span>); <span class="hljs-comment">// Safe access with bounds checking</span>
+</div></code></pre>
+</li>
+</ul>
+<h5 id="9multidimensional-arrays">9.Multidimensional Arrays</h5>
+<pre class="hljs"><code><div><span class="hljs-comment">//Stored in row-major order.</span>
+<span class="hljs-keyword">int</span> matrix[<span class="hljs-number">2</span>][<span class="hljs-number">3</span>] = {{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>},{<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>}};
+
+<span class="hljs-comment">//Modern C++ // std::array for Fixed Size</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;array&gt;</span></span>
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">array</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">int</span>, 4&gt;, 3&gt; matrix = {{
+    {{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}},
+    {{<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>}},
+    {{<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>}}
+}};
+
+<span class="hljs-comment">//std::vector for Dynamic Size</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; matrix = {
+    {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>},
+    {<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>},
+    {<span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>}
+};
+
+<span class="hljs-comment">//Prefer range-based for loops:</span>
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;row : matrix) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;val : row) {
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; val &lt;&lt; <span class="hljs-string">" "</span>;
+    }
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+
+
+
+</div></code></pre>
+<h5 id="10-arrays-decay-to-pointers">10. Arrays Decay to Pointers</h5>
+<ul>
+<li>When passed to functions, arrays decay to pointers.</li>
+<li>Size information is lost.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//wrong </span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[])</span> </span>{
+    <span class="hljs-comment">// Here arr is actually int* (pointer), not a real array</span>
+    <span class="hljs-comment">//You cannot get the size of the original array inside the function using sizeof(arr) because:</span>
+    <span class="hljs-comment">// sizeof(arr) // gives size of pointer, NOT array</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span> = <span class="hljs-keyword">sizeof</span>(arr)/<span class="hljs-keyword">sizeof</span>(arr[<span class="hljs-number">0</span>]); <span class="hljs-comment">// ❌ Wrong! arr is pointer</span>
+}
+<span class="hljs-comment">//Correct</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> <span class="hljs-built_in">size</span>)</span> </span>{
+    <span class="hljs-comment">// Use size passed by caller</span>
+}
+
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> numbers[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+    printArray(numbers); <span class="hljs-comment">// Array decays to pointer</span>
+}
+
+
+
+
+</div></code></pre>
+<h4 id="array-and-pointer">Array and Pointer</h4>
+<ul>
+<li>No, an array is not a pointer.</li>
+<li>An array is a block of contiguous memory that holds elements of the same type.</li>
+<li>A pointer is a variable that stores an address.</li>
+<li>You cannot change arr to point somewhere else like a normal pointer.</li>
+<li>Array name behaves like a pointer in many contexts but cannot be incremented.</li>
+<li>It is a constant expression that represents the address of the first element (&amp;arr[0]) in most contexts.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, &amp;arr);          <span class="hljs-comment">// Address of the entire array</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, arr);           <span class="hljs-comment">// Address of first element</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, &amp;arr[<span class="hljs-number">0</span>]);       <span class="hljs-comment">// Address of first element</span>
+<span class="hljs-comment">// arr == &amp;arr[0] same address because arr decays to a pointer to its first element.</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, arr + <span class="hljs-number">1</span>);       <span class="hljs-comment">// Address of second element</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, (&amp;arr[<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>)); <span class="hljs-comment">// Same as above (Address of second element)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%p\n"</span>, (&amp;arr + <span class="hljs-number">1</span>));    <span class="hljs-comment">// Address after the entire array block</span>
+
+arr=arr+<span class="hljs-number">1</span>;                     <span class="hljs-comment">// ❌ ERROR</span>
+arr++;                         <span class="hljs-comment">// ❌ ERROR</span>
+<span class="hljs-comment">//Error : arr is not a pointer variable, it’s an array name (a constant).</span>
+</div></code></pre>
+<ul>
+<li>
+<p>Why the Confusion?</p>
+<ul>
+<li>In most expressions, arrays decay to pointers to their first element.</li>
+<li>Example:<pre class="hljs"><code><div>        <span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>]{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};;
+        <span class="hljs-keyword">int</span> *p = arr; <span class="hljs-comment">// arr decays to &amp;arr[0]Show more lines</span>
+        <span class="hljs-comment">// p points to first element</span>
+        p++;          <span class="hljs-comment">// Now p points to second element</span>
+
+</div></code></pre>
+<ul>
+<li>arr is an array.</li>
+<li>p is a pointer to the first element of arr.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Feature</th>
+<th style="text-align:center">Array</th>
+<th style="text-align:center">Pointer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Memory allocation</td>
+<td style="text-align:center">Fixed size at compile time</td>
+<td style="text-align:center">Can point anywhere</td>
+</tr>
+<tr>
+<td style="text-align:center">Size info</td>
+<td style="text-align:center">Known at compile time</td>
+<td style="text-align:center">Lost after decay</td>
+</tr>
+<tr>
+<td style="text-align:center">sizeof result</td>
+<td style="text-align:center">Size of entire array</td>
+<td style="text-align:center">Size of pointer (usually 4/8 bytes)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Feature</th>
+<th style="text-align:center">Array Name</th>
+<th style="text-align:center">Pointer Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Can reassign?</td>
+<td style="text-align:center">❌ No</td>
+<td style="text-align:center">✅ Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Holds size info?</td>
+<td style="text-align:center">✅ At compile time</td>
+<td style="text-align:center">❌ No</td>
+</tr>
+<tr>
+<td style="text-align:center">sizeof result</td>
+<td style="text-align:center">Size of array</td>
+<td style="text-align:center">Size of pointer</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%zu\n"</span>, <span class="hljs-keyword">sizeof</span>(arr)); <span class="hljs-comment">// 20 (if int = 4 bytes)</span>
+    <span class="hljs-keyword">int</span> *p = arr;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%zu\n"</span>, <span class="hljs-keyword">sizeof</span>(p));   <span class="hljs-comment">// 8 (on 64-bit system)</span>
+
+</div></code></pre>
+<h5 id="when-arrays-decay">When Arrays Decay</h5>
+<ul>
+<li>
+<p>When passed to functions:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[])</span> </span>{ <span class="hljs-comment">/* arr is int* here */</span> }
+</div></code></pre>
+</li>
+<li>
+<p>When assigned to a pointer:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> *p = arr;
+</div></code></pre>
+</li>
+</ul>
+<h5 id="negative-index">Negative Index</h5>
+<p>array[-1] in C/C++ is undefined behavior. Here’s why:</p>
+<ul>
+<li>Arrays in C/C++ are indexed from 0 to size-1.</li>
+<li>Negative indices are not allowed.</li>
+<li>arr[-1] means you are accessing memory before the start of the array, which:
+<ul>
+<li>Might read garbage data.</li>
+<li>Might corrupt memory.</li>
+<li>Could crash your program.</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> arr[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, arr[<span class="hljs-number">-1</span>]); <span class="hljs-comment">// ❌ Undefined behavior</span>
+</div></code></pre>
+<ul>
+<li>
+<p>What actually happens?</p>
+<ul>
+<li>arr[-1] is equivalent to *(arr + (-1)).</li>
+<li>This points to memory before arr[0].</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

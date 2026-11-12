@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1.3-What is C++? - Toolchaing-MakeFile-Cmake .md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h4 id="chapter-0--c">Chapter 0 — C++</h4>
+<h5 id="what-is-c">What is C++?</h5>
+<p>C++ is a compiled, statically-typed, multi-paradigm programming language created by Bjarne Stroustrup (1979, Bell Labs) as &quot;C with Classes.&quot;</p>
+<p><strong>It gives you:</strong></p>
+<ul>
+<li>Low-level control (memory, hardware) like C</li>
+<li>High-level abstractions (classes, templates, RAII) like modern languages</li>
+<li>Zero-cost abstractions — you don't pay for what you don't use</li>
+</ul>
+<h5 id="why-does-it-exist">Why does it exist?</h5>
+<table>
+<thead>
+<tr>
+<th>Problem before C++</th>
+<th>What C++ added</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C is fast but has no OOP</td>
+<td>Classes, inheritance, polymorphism</td>
+</tr>
+<tr>
+<td>Manual memory everywhere</td>
+<td>Constructors/destructors (RAII)</td>
+</tr>
+<tr>
+<td>Code reuse is painful</td>
+<td>Templates, STL</td>
+</tr>
+<tr>
+<td>Large projects get unmaintainable</td>
+<td>Namespaces, strong typing</td>
+</tr>
+</tbody>
+</table>
+<h5 id="where-is-c-used">Where is C++ used?</h5>
+<pre class="hljs"><code><div>┌─────────────────────────────────────────────┐
+│  Games (Unreal, Unity internals)            │
+│  Operating systems (Windows, parts of Linux)│
+│  Browsers (Chrome, Firefox)                 │
+│  Embedded / IoT / Automotive                │
+│  High-frequency trading                     │
+│  Databases (MySQL, MongoDB)                 │
+│  Compilers (LLVM, GCC)                      │
+│  AI/ML backends (PyTorch, TensorFlow)       │
+└─────────────────────────────────────────────┘
+</div></code></pre>
+<h4 id="chapter-1--the-compilation-pipeline">Chapter 1 — The Compilation Pipeline</h4>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[hello.cpp] -->|Preprocessor| B[hello.i]
+    B -->|Compiler| C[hello.s]
+    C -->|Assembler| D[hello.o]
+    D -->|Linker + libs| E[hello executable]
+    E -->|Loader| F[Running process]
+</div></code></pre>
+<pre class="hljs"><code><div>hello.cpp
+    │  g++ -E        ← Preprocessor
+    ▼
+ hello.i   (expanded source: includes, macros)
+    │  g++ -S        ← Compiler
+    ▼
+ hello.s   (assembly)
+    │  g++ -c        ← Assembler
+    ▼
+ hello.o   (object file — machine code + symbols)
+    │  g++ (link)    ← Linker (+ libstdc++, libc)
+    ▼
+ hello     (executable)
+    │  ./hello
+    ▼
+ process in RAM
+</div></code></pre>
+<h5 id="install-tools-on-linux">Install Tools on Linux</h5>
+<pre class="hljs"><code><div><span class="hljs-comment"># Install essential tools</span>
+sudo apt update
+sudo apt install -y build-essential gdb cmake
+
+<span class="hljs-comment"># Install optional tools</span>
+sudo apt install -y valgrind cppcheck doxygen graphviz
+
+clear
+<span class="hljs-built_in">echo</span> <span class="hljs-string">""</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"======================================="</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Development environment ready!"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Tools installed:"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- GCC/G++: <span class="hljs-variable">$(g++ --version | head -1)</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- GDB: <span class="hljs-variable">$(gdb --version | head -1)</span>"</span> 
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- CMake: <span class="hljs-variable">$(cmake --version | head -1)</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"======================================="</span>
+
+<span class="hljs-comment">#==================Redhat========================#</span>
+<span class="hljs-comment"># Update system packages</span>
+sudo dnf upgrade -y
+
+<span class="hljs-comment"># Install the Development Tools group (equivalent to build-essential)</span>
+sudo dnf groupinstall -y <span class="hljs-string">"Development Tools"</span>
+
+<span class="hljs-comment"># Install CMake and GDB</span>
+sudo dnf install -y cmake gdb
+
+<span class="hljs-comment"># Install optional tools</span>
+<span class="hljs-comment"># Note: If cppcheck or other packages are not found, make sure EPEL repository is enabled:</span>
+<span class="hljs-comment"># sudo dnf install -y epel-release</span>
+sudo dnf install -y valgrind cppcheck doxygen graphviz
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Development environment ready!"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Tools installed:"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- GCC/G++: <span class="hljs-variable">$(g++ --version | head -1)</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- GDB: <span class="hljs-variable">$(gdb --version | head -1)</span>"</span> 
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"- CMake: <span class="hljs-variable">$(cmake --version | head -1)</span>"</span>
+</div></code></pre>
+<h5 id="stage-1--preprocessor">Stage 1 — Preprocessor</h5>
+<p>The preprocessor is a text replacer. It does NOT understand C++.</p>
+<p>Directives it handles:</p>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#include</td>
+<td>Paste file contents here</td>
+</tr>
+<tr>
+<td>#define</td>
+<td>Textual macro substitution</td>
+</tr>
+<tr>
+<td>#ifdef #ifndef #endif</td>
+<td>Conditional compilation</td>
+</tr>
+<tr>
+<td>#pragma</td>
+<td>Compiler-specific hints</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PI 3.14159</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SQUARE(x) ((x)*(x))</span>
+</div></code></pre>
+<pre class="hljs"><code><div>g++ -E hello.cpp -o hello.i
+head -50 hello.i   <span class="hljs-comment"># see the giant expansion from &lt;iostream&gt;</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">//⚠️ Warning: Macros are dangerous — no type checking, weird side effects.</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SQUARE(x) x*x</span>
+SQUARE(<span class="hljs-number">2</span>+<span class="hljs-number">3</span>)   <span class="hljs-comment">// → 2+3*2+3 = 11, not 25!</span>
+
+<span class="hljs-comment">//Always parenthesize: #define SQUARE(x) ((x)*(x)) — but prefer inline functions / constexpr</span>
+
+</div></code></pre>
+<h5 id="stage-2--compiler">Stage 2 — Compiler</h5>
+<ul>
+<li>
+<p>Translates preprocessed C++ into assembly for the target CPU.</p>
+<pre class="hljs"><code><div>    g++ -S hello.cpp -o hello.s
+</div></code></pre>
+</li>
+<li>
+<p><strong>What the compiler does:</strong></p>
+<ul>
+<li>Lexing → tokens</li>
+<li>Parsing → AST</li>
+<li>Semantic analysis → type checking</li>
+<li>Optimization → -O0, -O2, -O3</li>
+<li>Code generation → assembly</li>
+</ul>
+</li>
+<li>
+<p><strong>🎯 Interview Point: &quot;Why is C++ compiled?&quot;</strong></p>
+<ul>
+<li>Because the compiler translates the whole program to machine code ahead of time (AOT), giving predictable performance and no runtime interpreter overhead.</li>
+</ul>
+</li>
+</ul>
+<h5 id="stage-3--assembler">Stage 3 — Assembler</h5>
+<p>Turns .s into .o — machine code, but with unresolved references.</p>
+<pre class="hljs"><code><div>g++ -c hello.cpp -o hello.o
+</div></code></pre>
+<p><strong>An object file contains:</strong></p>
+<ul>
+<li>Code section (.text)</li>
+<li>Data section (.data, .bss)</li>
+<li>Symbol table (names of functions/variables — some defined, some referenced)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">#Check symbols:</span>
+nm hello.o
+<span class="hljs-comment"># U std::cout      ← U = undefined (imported)</span>
+<span class="hljs-comment"># T main           ← T = defined in .text</span>
+</div></code></pre>
+<h5 id="stage-4--linker-%F0%9F%94%A5">Stage 4 — Linker 🔥</h5>
+<p>The linker joins object files + libraries into one executable and resolves symbols.</p>
+<p>Two kinds of linking:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>When</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static (.a)</td>
+<td>Link time</td>
+<td>Library code copied into binary — bigger but self-contained</td>
+</tr>
+<tr>
+<td>Dynamic (.so/.dll)</td>
+<td>Runtime</td>
+<td>Binary references library; loader loads it at startup</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-comment"># static</span>
+g++ main.o -static -o app
+<span class="hljs-comment"># dynamic (default)</span>
+g++ main.o -o app
+</div></code></pre>
+<p><strong>Common linker errors</strong></p>
+<pre class="hljs"><code><div>undefined reference to 'foo()'
+Meaning: you declared foo but never defined it, or you forgot to link the .o / library.
+</div></code></pre>
+<p><strong>🔥 Senior Insight:</strong> The ODR (One Definition Rule) lives here. If two .cpp files define the same non-inline function with different bodies, you can get a silent link-time mismatch — no error, wrong function used at runtime. Keep definitions in .cpp, declarations in .h.</p>
+<h5 id="try-it-live">Try it live</h5>
+<pre class="hljs"><code><div><span class="hljs-comment"># all stages in one command</span>
+g++ -Wall -Wextra hello.cpp -o hello
+
+<span class="hljs-comment"># see every stage</span>
+g++ -save-temps hello.cpp -o hello
+ls hello.*   <span class="hljs-comment"># hello.i hello.s hello.o hello.cpp</span>
+</div></code></pre>
+<h4 id="build-systems-make-makefile-cmake-bash">Build Systems: make, Makefile, CMake, Bash</h4>
+<h5 id="evolution-of-build-tooling">Evolution of build tooling</h5>
+<pre class="hljs"><code><div>Manual g++ command
+       ↓
+Shell script of g++ commands
+       ↓
+Makefile (dependency graph)
+       ↓
+CMake (generates Makefiles / Ninja / VS projects)
+       ↓
+Modern: Bazel, Meson, Conan (+ vcpkg for deps)
+</div></code></pre>
+<h5 id="make-and-makefile">make and Makefile</h5>
+<ul>
+<li>make reads a Makefile and builds targets based on dependencies.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Makefile</span>
+CXX      = g++
+CXXFLAGS = -Wall -Wextra -std=c++17 -g
+<span class="hljs-comment">#-Wall → Enable common warnings</span>
+<span class="hljs-comment">#-Wextra → Enable additional warnings</span>
+<span class="hljs-comment">#-g → Generate debugging information (gdb ./app)</span>
+<span class="hljs-comment">#-Wall -Wextra = help me find problems, -std=c++17 = use C++17, -g = make the program debuggable.</span>
+<span class="hljs-section">hello:</span>
+    @echo <span class="hljs-string">"Hello"</span>
+<span class="hljs-section">app: main.o math.o</span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> main.o math.o -o app
+
+<span class="hljs-section">main.o: main.cpp math.h</span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c main.cpp
+
+<span class="hljs-section">math.o: math.cpp math.h</span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c math.cpp
+
+<span class="hljs-section">clean:</span>
+	rm -f *.o app
+</div></code></pre>
+<p><strong>How Run To External Terminal</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># Open Terminal </span>
+g++ file1.cpp file2.cpp -o app
+konsole --hold -e ./app
+<span class="hljs-comment"># xterm -hold -e "./app"</span>
+<span class="hljs-comment">#gnome-terminal -- bash -c "./app" #exec bash</span>
+
+run:$(TARGET)
+	@<span class="hljs-built_in">command</span> -v gnome-terminal &gt;/dev/null 2&gt;&amp;1 || { \
+		<span class="hljs-built_in">echo</span> <span class="hljs-string">"gnome-terminal not found — running in this terminal:"</span>; \
+		./$(TARGET); <span class="hljs-built_in">exit</span> 0; \
+	}
+	gnome-terminal --title=<span class="hljs-string">"Debugging <span class="hljs-variable">$(TARGET)</span>"</span> -- bash -c <span class="hljs-string">"./<span class="hljs-variable">$(TARGET)</span>; echo; read -p 'Press Enter to close...' _"</span>
+</div></code></pre>
+<pre class="hljs"><code><div>CXX=g++ 
+CXXFLAGS= -Wall <span class="hljs-comment">#Options to Compile = warnings + debugging information.</span>
+<span class="hljs-section">run:app</span>
+	./app
+<span class="hljs-section">app: hello.o line.o</span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> hello.o line.o -o app
+<span class="hljs-section">hello.o: hello.cpp </span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c hello.cpp
+<span class="hljs-section">line.o: line.cpp </span>
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c line.cpp
+<span class="hljs-section">clean:</span>
+	rm -f *.o app
+
+
+<span class="hljs-comment">#==================================================================#</span>
+TARGET = my_program
+
+<span class="hljs-section">run: <span class="hljs-variable">$(TARGET)</span></span>
+	gnome-terminal --title=<span class="hljs-string">"Debugging <span class="hljs-variable">$(TARGET)</span>"</span> -- bash -c <span class="hljs-string">"./<span class="hljs-variable">$(TARGET)</span>; echo ''; read -p 'Press Enter to close...' var"</span>
+
+<span class="hljs-variable">$(TARGET)</span>:
+	g++ -std=c++17 *.cpp -o <span class="hljs-variable">$(TARGET)</span>
+
+<span class="hljs-section">clean:</span>
+	rm -f <span class="hljs-variable">$(TARGET)</span> *.o
+<span class="hljs-comment">#==================================================================#</span>
+<span class="hljs-comment"># Variables</span>
+CXX = g++ <span class="hljs-comment">#Compiler</span>
+CXXFLAGS = -Wall -g <span class="hljs-comment">#Options to Compile = warnings + debugging information.</span>
+TARGET = my_program <span class="hljs-comment">#executable File</span>
+
+<span class="hljs-comment"># Automatically find all source files</span>
+SRCS = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.cpp)</span>
+<span class="hljs-comment"># Target build rules</span>
+<span class="hljs-section">all: <span class="hljs-variable">$(TARGET)</span></span>
+
+<span class="hljs-variable">$(TARGET)</span>: <span class="hljs-variable">$(SRCS)</span>
+    <span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -o <span class="hljs-variable">$(TARGET)</span> <span class="hljs-variable">$(SRCS)</span>
+<span class="hljs-comment"># NEW RUN TARGET: Spawns a dedicated Gnome Terminal window</span>
+<span class="hljs-section">run: <span class="hljs-variable">$(TARGET)</span></span>
+    gnome-terminal --title=<span class="hljs-string">"Debugging <span class="hljs-variable">$(TARGET)</span>"</span> -- bash -c <span class="hljs-string">"./<span class="hljs-variable">$(TARGET)</span>; echo ''; read -p 'Press Enter to close...' var"</span>
+
+<span class="hljs-section">clean:</span>
+    rm -f <span class="hljs-variable">$(TARGET)</span>
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Compiler &amp; Flags</span>
+<span class="hljs-comment"># ============================================================</span>
+
+CXX      := g++
+CXXFLAGS := -Wall -Wextra -g -std=c++17
+
+TARGET := my_program
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Files</span>
+<span class="hljs-comment"># ============================================================</span>
+
+SRCS := <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.cpp)</span>
+
+OBJECTS      := $(SRCS:.cpp=.o)
+PREPROCESSED := $(SRCS:.cpp=.i)
+ASSEMBLY     := $(SRCS:.cpp=.s)
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Main Build</span>
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment">#.PHONY: tells it "Don't ask about a file—just execute this target."</span>
+<span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: all preprocess compile assemble link run clean</span>
+
+<span class="hljs-section">all: preprocess compile assemble link</span>
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"   BUILD COMPLETED SUCCESSFULLY"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 1. PREPROCESSOR</span>
+<span class="hljs-comment"># .cpp → .i</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">preprocess:</span>
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"1. PREPROCESSOR"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+<span class="hljs-comment"># $(foreach variable,list,text)</span>
+<span class="hljs-comment"># $(SRCS) = main.cpp student.cpp calculator.cpp</span>
+<span class="hljs-comment"># $(PREPROCESSED) = main.i student.i calculator.i</span>
+<span class="hljs-comment"># $(foreach src,$(SRCS),COMMAND)</span>
+<span class="hljs-comment"># src = main.cpp ==&gt; $(CXX) $(CXXFLAGS) -E main.cpp  -o main.i</span>
+<span class="hljs-comment"># src = student.cpp</span>
+<span class="hljs-comment"># src = calculator.cpp</span>
+<span class="hljs-comment"># COMMAND= $(CXX) $(CXXFLAGS) -E $(src) -o $(src:.cpp=.i)</span>
+	<span class="hljs-variable">$(<span class="hljs-built_in">foreach</span> src,<span class="hljs-variable">$(SRCS)</span>,<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -E <span class="hljs-variable">$(src)</span> -o $(src:.cpp=.i)</span>;)
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 2. COMPILER</span>
+<span class="hljs-comment"># .i → .s</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">compile: preprocess</span>
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"2. COMPILER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+	<span class="hljs-variable">$(<span class="hljs-built_in">foreach</span> src,<span class="hljs-variable">$(PREPROCESSED)</span>,<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -S <span class="hljs-variable">$(src)</span> -o $(src:.i=.s)</span>;)
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 3. ASSEMBLER</span>
+<span class="hljs-comment"># .s → .o</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">assemble: compile</span>
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"3. ASSEMBLER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	<span class="hljs-variable">$(<span class="hljs-built_in">foreach</span> src,<span class="hljs-variable">$(ASSEMBLY)</span>,<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c <span class="hljs-variable">$(src)</span> -o $(src:.s=.o)</span>;)
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 4. LINKER</span>
+<span class="hljs-comment"># .o → executable</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">link: assemble</span>
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"4. LINKER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(OBJECTS)</span> -o <span class="hljs-variable">$(TARGET)</span>
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Run</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">run: all</span>
+	@echo <span class="hljs-string">"Running <span class="hljs-variable">$(TARGET)</span>..."</span>
+<span class="hljs-comment">#	./$(TARGET)</span>
+	@gnome-terminal --title=<span class="hljs-string">"Debugging <span class="hljs-variable">$(TARGET)</span>"</span> -- bash -c <span class="hljs-string">"./<span class="hljs-variable">$(TARGET)</span>; echo ''; read -p 'Press Enter to close...' var"</span>
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Clean</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">clean:</span>
+	@echo <span class="hljs-string">"Cleaning..."</span>
+	rm -f <span class="hljs-variable">$(TARGET)</span> <span class="hljs-variable">$(OBJECTS)</span> <span class="hljs-variable">$(PREPROCESSED)</span> <span class="hljs-variable">$(ASSEMBLY)</span>
+</div></code></pre>
+<div dir=rtl>
+<p><strong>1. علامة = (التقييم الكسول / المتأخر - Deferred)</strong><br>
+الفكرة: بتحفظ &quot;النص&quot; زي ما هو ومش بتفكر في قيمته غير لحظة الاستخدام الفعلي للمتغير.<br>
+المشكلة: لو المتغير بيعتمد على دوال بحث (زي wildcard)، الـ Makefile هيفضل يبحث في الملفات ويعيد الحساب كل مرة بتنادي فيها على المتغير، وده بيبطئ الأداء في المشاريع الكبيرة.<br></p>
+<p><strong>2. علامة := (التقييم الفوري - Simply Expanded)</strong><br>
+الفكرة: بتحسب القيمة وبتخزنها مرة واحدة فقط أول ما الـ Makefile يقرا الملف، ومش بتتغير بعد كده.<br>
+المميزات: أسرع بكتير، وأكثر أماناً واستقراراً، وعشان كده دي الطريقة المفضلة والاحترافية (Best Practice) في أغلب المتغيرات.<br></p>
+<p>استعمل := للمتغيرات العادية والملفات والـ Flags (لأنها أسرع وأضمن).<br>
+استعمل = نادراً لو محتاج المتغير يتأخر في تقييم قيمته لحد آخر لحظة لأسباب معينة.<br></p>
+</div>
+<p><strong>recursive project structure.</strong></p>
+<pre class="hljs"><code><div>project/
+│
+├── Makefile
+│
+├── include/
+│   ├── myprint.h
+│   └── calculator.h
+│
+├── src/
+│   ├── main.cpp
+│   ├── myprint.cpp
+│   │
+│   ├── utils/
+│   │   └── calculator.cpp
+│   │
+│   └── database/
+│       └── db.cpp
+│
+└── build/
+    ├── preprocessed/
+    │   ├── main.i
+    │   ├── myprint.i
+    │   └── ...
+    │
+    ├── assembly/
+    │   ├── main.s
+    │   └── ...
+    │
+    ├── objects/
+    │   ├── main.o
+    │   ├── myprint.o
+    │   └── ...
+    │
+    └── my_program
+src/**/*.cpp
+      │
+      ▼
+ Preprocessor
+      │
+      ▼
+build/preprocessed/**/*.i
+      │
+      ▼
+ Compiler
+      │
+      ▼
+build/assembly/**/*.s
+      │
+      ▼
+ Assembler
+      │
+      ▼
+build/objects/**/*.o
+      │
+      ▼
+ Linker
+      │
+      ▼
+build/my_program
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Compiler &amp; Flags</span>
+<span class="hljs-comment"># ============================================================</span>
+
+CXX      := g++
+CXXFLAGS := -Wall -Wextra -g -std=c++17
+
+TARGET := my_program
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Directories</span>
+<span class="hljs-comment"># ============================================================</span>
+
+SRC_DIR   := src
+INC_DIR   := <span class="hljs-keyword">include</span>
+BUILD_DIR := build
+
+PREPROCESS_DIR := <span class="hljs-variable">$(BUILD_DIR)</span>/preprocessed
+ASSEMBLY_DIR   := <span class="hljs-variable">$(BUILD_DIR)</span>/assembly
+OBJECT_DIR     := <span class="hljs-variable">$(BUILD_DIR)</span>/objects
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Find ALL .cpp files recursively</span>
+<span class="hljs-comment"># ============================================================</span>
+
+SRCS := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find <span class="hljs-variable">$(SRC_DIR)</span> -type f -name "*.cpp")</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Generate output file names</span>
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment">#patsubst : Pattern Substitution(Find files matching a pattern and replace them with another pattern.)</span>
+<span class="hljs-comment"># patsubst = Pattern + Replacement + List</span>
+<span class="hljs-comment"># patsubst</span>
+<span class="hljs-comment">#    │</span>
+<span class="hljs-comment">#    ├── Pattern       → الشكل القديم</span>
+<span class="hljs-comment">#    ├── Replacement   → الشكل الجديد</span>
+<span class="hljs-comment">#    └── Text          → الملفات اللي هنطبق عليها</span>
+PREPROCESSED := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(SRC_DIR)</span>/%.cpp,<span class="hljs-variable">$(PREPROCESS_DIR)</span>/%.i,<span class="hljs-variable">$(SRCS)</span>)</span>
+
+ASSEMBLY := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(SRC_DIR)</span>/%.cpp,<span class="hljs-variable">$(ASSEMBLY_DIR)</span>/%.s,<span class="hljs-variable">$(SRCS)</span>)</span>
+
+OBJECTS := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(SRC_DIR)</span>/%.cpp,<span class="hljs-variable">$(OBJECT_DIR)</span>/%.o,<span class="hljs-variable">$(SRCS)</span>)</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Include directory</span>
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment">#C/C++ Preprocessor Flags</span>
+<span class="hljs-comment"># -I ---&gt; Include Directory ---&gt; Where should I look for headers?</span>
+CPPFLAGS := -I<span class="hljs-variable">$(INC_DIR)</span> <span class="hljs-comment">#Tell the preprocessor where to find the header files.</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Main Build</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>: all preprocess compile assemble link run clean</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Run</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">run: all</span>
+
+	@echo <span class="hljs-string">"Running <span class="hljs-variable">$(BUILD_DIR)</span>/<span class="hljs-variable">$(TARGET)</span>..."</span>
+	@gnome-terminal --title=<span class="hljs-string">"Debugging <span class="hljs-variable">$(BUILD_DIR)</span>/<span class="hljs-variable">$(TARGET)</span>"</span> -- bash -c <span class="hljs-string">"./<span class="hljs-variable">$(BUILD_DIR)</span>/<span class="hljs-variable">$(TARGET)</span>; echo ''; read -p 'Press Enter to close...' var"</span>
+
+<span class="hljs-section">all: preprocess compile assemble link</span>
+
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"   BUILD COMPLETED SUCCESSFULLY"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 1. PREPROCESSOR</span>
+<span class="hljs-comment"># .cpp → .i</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">preprocess: <span class="hljs-variable">$(PREPROCESSED)</span></span>
+
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"1. PREPROCESSOR"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+<span class="hljs-comment">#</span>
+<span class="hljs-variable">$(PREPROCESS_DIR)</span>/%.i: <span class="hljs-variable">$(SRC_DIR)</span>/%.cpp
+<span class="hljs-comment">#$@ = OUTPUT ===&gt; Target File main.i , help.i</span>
+<span class="hljs-comment">#$&lt; = INPUT  ===&gt; Source File main.cpp , help.cpp [The first dependency / input file]</span>
+
+	@mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span>
+
+	@echo <span class="hljs-string">"Preprocessing: <span class="hljs-variable">$&lt;</span>"</span>
+
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CPPFLAGS)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -E <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 2. COMPILER</span>
+<span class="hljs-comment"># .i → .s</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">compile: <span class="hljs-variable">$(ASSEMBLY)</span></span>
+
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"2. COMPILER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+
+<span class="hljs-variable">$(ASSEMBLY_DIR)</span>/%.s: <span class="hljs-variable">$(PREPROCESS_DIR)</span>/%.i
+
+	@mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span>
+
+	@echo <span class="hljs-string">"Compiling: <span class="hljs-variable">$&lt;</span>"</span>
+
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -S <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 3. ASSEMBLER</span>
+<span class="hljs-comment"># .s → .o</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">assemble: <span class="hljs-variable">$(OBJECTS)</span></span>
+
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"3. ASSEMBLER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+
+<span class="hljs-variable">$(OBJECT_DIR)</span>/%.o: <span class="hljs-variable">$(ASSEMBLY_DIR)</span>/%.s
+
+	@mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span>
+
+	@echo <span class="hljs-string">"Assembling: <span class="hljs-variable">$&lt;</span>"</span>
+
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(CXXFLAGS)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># 4. LINKER</span>
+<span class="hljs-comment"># .o → executable</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">link: assemble</span>
+
+	@echo <span class="hljs-string">""</span>
+	@echo <span class="hljs-string">"======================================"</span>
+	@echo <span class="hljs-string">"4. LINKER"</span>
+	@echo <span class="hljs-string">"======================================"</span>
+
+	<span class="hljs-variable">$(CXX)</span> <span class="hljs-variable">$(OBJECTS)</span> -o <span class="hljs-variable">$(BUILD_DIR)</span>/<span class="hljs-variable">$(TARGET)</span>
+
+
+
+
+
+<span class="hljs-comment"># ============================================================</span>
+<span class="hljs-comment"># Clean</span>
+<span class="hljs-comment"># ============================================================</span>
+
+<span class="hljs-section">clean:</span>
+
+	@echo <span class="hljs-string">"Cleaning build directory..."</span>
+	rm -rf <span class="hljs-variable">$(BUILD_DIR)</span>
+</div></code></pre>
+<p><strong>Why Makefiles aren't enough for big projects</strong></p>
+<ul>
+<li>Hard to express &quot;compile all .cpp in this folder&quot;</li>
+<li>Platform-specific</li>
+<li>You write the whole dependency graph by hand<pre class="hljs"><code><div>    main.o: main.cpp engine.hpp network.hpp
+    engine.o: engine.cpp engine.hpp math.hpp config.hpp
+    network.o: network.cpp network.hpp socket.hpp
+</div></code></pre>
+</li>
+<li>No built-in package management (Build the project Not Manage the project's dependencies.)</li>
+</ul>
+<h5 id="cmake--the-modern-standard">CMake — the modern standard</h5>
+<p>CMake is a meta-build system: it reads CMakeLists.txt and generates Makefiles (or Ninja, or Xcode, or VS).</p>
+<pre class="hljs"><code><div>Project Structure
+
+my_project/
+├── CMakeLists.txt        ← Main CMake configuration file
+├── include/              ← Header files
+│   └── helper.hpp
+├── src/                  ← Source files
+│   ├── main.cpp
+│   └── helper.cpp
+└── build/                ← Build directory(make it Automatically)
+</div></code></pre>
+<div dir="rtl">
+<p>الـ CMake مش هو اللي بي compile الكود بنفسه، ده هو &quot;المهندس&quot; اللي بينظم المشروع وبيطلعلك الـ Makefile (أو ملفات Visual Studio لو على Windows) بشكل اووماتيكي ونظيف جداً.<br>
+<strong>ليه الطريقة دي ممتازة ومفضلة عالمياً؟</strong><br>
+مش مرتبط بنظام تشغيل: نفس ملف CMakeLists.txt يقدر يطلعلك مشروع لـ Linux (Makefiles) أو Windows (Visual Studio) أو macOS (Xcode) من غير ما تغير فيه حاجة.<br></p>
+<p>فصل ملفات البناء: كل ملفات الـ Object والزبالة بتنزل جوه مجلد build، فبيفضل الكود بتاعك نظيف ومناسب للـ Git.<br>
+التحديث التلقائي (CONFIGURE_DEPENDS): أي ملف .cpp أو .hpp جديد هتضيفه جوه مجلد src أو include، الـ CMake هيحسه أوتوماتيك ومش هتضطر تعدل الملف الإعدادات كل شوية.<br></p>
+</div>
+<pre class="hljs"><code><div>mkdir build &amp;&amp; <span class="hljs-built_in">cd</span> build
+cmake ..        <span class="hljs-comment"># generates build files</span>
+cmake --build . <span class="hljs-comment"># or: make / ninja</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">#CMakeLists.txt</span>
+
+<span class="hljs-comment">#Minimum CMake version required(The project requires at least CMake version 3.12.)</span>
+cmake_minimum_required(VERSION 3.12)
+
+<span class="hljs-comment">#It defines Project Information:</span>
+<span class="hljs-comment">#- Project name → test</span>
+<span class="hljs-comment">#- Project version → 1.0</span>
+<span class="hljs-comment">#- Programming language → CXX = C++</span>
+project(test VERSION 1.0 LANGUAGES CXX)
+<span class="hljs-comment">#Compile the project using the C++17 standard.</span>
+set(CMAKE_CXX_STANDARD 17)
+<span class="hljs-comment">#C++17 is required. Do not silently fall back to an older C++ standard.</span>
+<span class="hljs-comment">#C++17 Not optional it is requirement.</span>
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+<span class="hljs-comment">#"1. Define header file locations"</span>
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/<span class="hljs-keyword">include</span>)
+
+<span class="hljs-comment">#2. "GLOB_RECURSE searches recursively for files matching a pattern."</span>
+<span class="hljs-comment">#2. "Find all .cpp files inside src and all of its subdirectories."</span>
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS <span class="hljs-string">"src/*.cpp"</span>)
+
+<span class="hljs-comment"># 3. "Building the Executable File"</span>
+add_executable(${PROJECT_NAME} ${SOURCES})
+</div></code></pre>
+
+</body>
+</html>

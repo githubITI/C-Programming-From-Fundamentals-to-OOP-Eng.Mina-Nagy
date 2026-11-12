@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>2.2-Notes2026-Operators.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#operators">Operators</a>
+<ul>
+<li><a href="#1-arithmetic-operators">1. Arithmetic operators</a>
+<ul>
+<li><a href="#1-1-binary-operators-work-using-two-operands">1-1 Binary operators work using two operands:</a>
+<ul>
+<li><a href="#misunderstanding-integer-division">Misunderstanding integer division</a></li>
+<li><a href="#confusing--with-">Confusing = with ==</a></li>
+<li><a href="#remainder">Remainder</a></li>
+<li><a href="#use-cases-for-">Use Cases for %</a></li>
+</ul>
+</li>
+<li><a href="#1-2-unary-operators-only-take-one-operand">1-2 Unary operators only take one operand:</a></li>
+</ul>
+</li>
+<li><a href="#2-compound-assignment-operators">2. Compound Assignment Operators</a>
+<ul>
+<li><a href="#confusing-unary--or---with-compound-assignments">Confusing unary + or - with compound assignments</a></li>
+</ul>
+</li>
+<li><a href="#3comparison-operators">3.Comparison Operators</a></li>
+<li><a href="#4-logical-operators">4. Logical Operators</a>
+<ul>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
+</ul>
+</li>
+<li><a href="#5-bitwise-operators">5. Bitwise Operators</a>
+<ul>
+<li><a href="#bitwise-vs-logical-example">Bitwise vs Logical Example</a></li>
+</ul>
+</li>
+<li><a href="#6-miscellaneous-operators">6. Miscellaneous operators</a></li>
+<li><a href="#operator-precedence--associativity">Operator Precedence &amp; Associativity</a>
+<ul>
+<li><a href="#operator-precedence">Operator Precedence</a></li>
+<li><a href="#operator-associativity">Operator Associativity</a></li>
+<li><a href="#example-common-mistakes-fixed">Example: Common Mistakes Fixed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="operators">Operators</h3>
+<pre><code class="language-Mermaid"><div class="mermaid">graph 
+    A["C++ Operators"] --> B["Arithmetic (+ - * / %)"]
+    A --> C["Assignment (= += -=)"]
+    A --> D["Comparison (== != > < >= <=)"]
+    A --> E["Logical (&& || !)"]
+    A --> F["Bitwise (& | ^ ~ << >>)"]
+    A --> G["Ternary (?:)"]
+    A --> H["Pointer (& * -> [])"]
+    A --> I["Type Cast (static_cast, etc.)"]
+    A --> J["Sizeof, Scope (::), Comma (,),dot(.)"]
+</div></code></pre>
+<h4 id="1-arithmetic-operators">1. Arithmetic operators</h4>
+<h5 id="1-1-binary-operators-work-using-two-operands">1-1 Binary operators work using two operands:</h5>
+<pre><code>	= 	Assignment 	a = b
+	+ 	Addition 	a + b
+	- 	Subtraction 	a - b
+	* 	Multiplication 	a * b
+	/ 	Division 	a / b
+	% 	Modulo 	a % b
+</code></pre>
+<h6 id="misunderstanding-integer-division">Misunderstanding integer division</h6>
+<pre class="hljs"><code><div><span class="hljs-number">5</span> / <span class="hljs-number">2</span> = <span class="hljs-number">2</span>     <span class="hljs-comment">// not 2.5</span>
+
+<span class="hljs-number">5</span> / <span class="hljs-number">2.0</span>   <span class="hljs-comment">// 2.5</span>
+(<span class="hljs-keyword">float</span>)<span class="hljs-number">5</span> / <span class="hljs-number">2</span>
+</div></code></pre>
+<h6 id="confusing--with">Confusing = with ==</h6>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a=<span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b=<span class="hljs-number">6</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,a=b);<span class="hljs-comment">//6</span>
+<span class="hljs-keyword">int</span> a=<span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b=<span class="hljs-number">6</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,a==b);<span class="hljs-comment">//0</span>
+
+<span class="hljs-keyword">if</span> (a = b)   <span class="hljs-comment">// assignment! </span>
+<span class="hljs-keyword">if</span> (a == b)  <span class="hljs-comment">// comparison</span>
+
+
+</div></code></pre>
+<h6 id="remainder">Remainder</h6>
+<ul>
+<li>remainder = a % b;</li>
+<li>Only works with integer types (int, long, etc.).</li>
+<li>Does not work with floats in standard C/C++ (though fmod() in <cmath> can be used for floats).</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//remainder can be computed using subtraction:</span>
+<span class="hljs-number">17</span> % <span class="hljs-number">5</span>
+Repeated subtraction:
+<span class="hljs-number">17</span> - <span class="hljs-number">5</span> = <span class="hljs-number">12</span>  
+<span class="hljs-number">12</span> - <span class="hljs-number">5</span> = <span class="hljs-number">7</span>  
+<span class="hljs-number">7</span>  - <span class="hljs-number">5</span> = <span class="hljs-number">2</span>   → <span class="hljs-built_in">stop</span> (<span class="hljs-number">2</span> &lt; <span class="hljs-number">5</span>)
+<span class="hljs-comment">//code </span>
+x%y
+<span class="hljs-keyword">while</span> (x &gt;= y) {
+    x = x - y;
+}
+<span class="hljs-keyword">return</span> x;   <span class="hljs-comment">// this is remainder</span>
+
+</div></code></pre>
+<pre class="hljs"><code><div> <span class="hljs-number">5</span>  %  <span class="hljs-number">2</span> =  <span class="hljs-number">1</span>
+ <span class="hljs-number">5</span>  % <span class="hljs-number">-2</span> =  <span class="hljs-number">1</span>
+<span class="hljs-number">-5</span>  %  <span class="hljs-number">2</span> = <span class="hljs-number">-1</span>
+<span class="hljs-number">-5</span>  % <span class="hljs-number">-2</span> = <span class="hljs-number">-1</span>
+
+<span class="hljs-number">5.5</span> % <span class="hljs-number">2.0</span>   <span class="hljs-comment">// ❌ not allowed Using % with floats [Modulo only works on integers]</span>
+</div></code></pre>
+<h6 id="use-cases-for">Use Cases for %</h6>
+<p><strong>a) Check if a number is even or odd</strong></p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (n % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d is even\n"</span>, n);
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d is odd\n"</span>, n);
+</div></code></pre>
+<ul>
+<li>Logic: Even numbers are divisible by 2 → remainder 0.</li>
+</ul>
+<p><strong>b) Circular counting (wrap-around)</strong></p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> days = <span class="hljs-number">7</span>;
+    <span class="hljs-keyword">int</span> today = <span class="hljs-number">5</span>; <span class="hljs-comment">// Friday</span>
+    <span class="hljs-keyword">int</span> after3days = (today + <span class="hljs-number">3</span>) % days; <span class="hljs-comment">// 1 → Monday</span>
+</div></code></pre>
+<ul>
+<li>Useful in calendars, clocks, circular buffers.</li>
+</ul>
+<p><strong>c) Limit a number within a range</strong></p>
+<pre class="hljs"><code><div>        <span class="hljs-keyword">int</span> n = <span class="hljs-number">23</span>;
+        <span class="hljs-keyword">int</span> limit = <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">int</span> result = n % limit; <span class="hljs-comment">// 3 → value stays within 0-9</span>
+</div></code></pre>
+<ul>
+<li>Keeps values within a fixed range.</li>
+</ul>
+<p><strong>d) Detect multiples of a number</strong></p>
+<pre class="hljs"><code><div>        <span class="hljs-keyword">if</span> (n % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>)
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d is a multiple of 5\n"</span>, n);
+</div></code></pre>
+<p><strong>e) Hashing / Distribution</strong></p>
+<ul>
+<li>% is used to distribute values in hash tables.</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TABLE_SIZE 10</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hashFunction</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>{
+        <span class="hljs-keyword">return</span> key % TABLE_SIZE;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> key = <span class="hljs-number">27</span>;
+        <span class="hljs-keyword">int</span> index = hashFunction(key); <span class="hljs-comment">// 27 % 10 = 7</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Store key %d at index %d\n"</span>, key, index); 
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+</div></code></pre>
+<h5 id="1-2-unary-operators-only-take-one-operand">1-2 Unary operators only take one operand:</h5>
+<pre><code>	+ 	Unary plus 	+a
+	- 	Unary minus 	-a
+	++ 	Increment 	a++ or ++a
+	-- 	Decrement 	a-- or --a
+</code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = +a;   <span class="hljs-comment">// b = 5</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = -a;  <span class="hljs-comment">// b = -5</span>
+<span class="hljs-comment">//Increment Operator (++)</span>
+<span class="hljs-comment">// (a) Post-increment: a++ [Uses the value first, then increments].</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = a++;   <span class="hljs-comment">// b = 5, then a becomes 6</span>
+<span class="hljs-comment">//(b) Pre-increment: ++a [Increments first, then uses the value]</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = ++a;   <span class="hljs-comment">// a becomes 6, then b = 6</span>
+<span class="hljs-comment">//Decrement Operator (--)</span>
+<span class="hljs-comment">// (a) Post-decrement: a-- [Uses the value first, then decreases it].</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = a--;   <span class="hljs-comment">// b = 5, then a = 4</span>
+<span class="hljs-comment">// (b) Pre-decrement: --a [Decreases value first, then uses it].</span>
+
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> b = --a;   <span class="hljs-comment">// a = 4, b = 4</span>
+</div></code></pre>
+<h4 id="2-compound-assignment-operators">2. Compound Assignment Operators</h4>
+<p>Compound assignment operators combine an arithmetic operation with assignment.</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Equivalent To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+=</code></td>
+<td>Addition assignment</td>
+<td><code>a += b;</code></td>
+<td><code>a = a + b;</code></td>
+</tr>
+<tr>
+<td><code>-=</code></td>
+<td>Subtraction assignment</td>
+<td><code>a -= b;</code></td>
+<td><code>a = a - b;</code></td>
+</tr>
+<tr>
+<td><code>*=</code></td>
+<td>Multiplication assignment</td>
+<td><code>a *= b;</code></td>
+<td><code>a = a * b;</code></td>
+</tr>
+<tr>
+<td><code>/=</code></td>
+<td>Division assignment</td>
+<td><code>a /= b;</code></td>
+<td><code>a = a / b;</code></td>
+</tr>
+<tr>
+<td><code>%=</code></td>
+<td>Modulo assignment</td>
+<td><code>a %= b;</code></td>
+<td><code>a = a % b;</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>, b = <span class="hljs-number">3</span>;
+    a += b;  <span class="hljs-comment">// a = 13</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a += b: "</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;
+    a -= b;  <span class="hljs-comment">// a = 10</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a -= b: "</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;
+    a *= b;  <span class="hljs-comment">// a = 30</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a *= b: "</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;
+    a /= b;  <span class="hljs-comment">// a = 10</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a /= b: "</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;
+    a %= b;  <span class="hljs-comment">// a = 1</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"a %= b: "</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>;
+</div></code></pre>
+<h5 id="confusing-unary--or---with-compound-assignments">Confusing unary + or - with compound assignments</h5>
+<pre class="hljs"><code><div><span class="hljs-comment">//valid :: compound assignments</span>
+a += b;   <span class="hljs-comment">// a = a + b;</span>
+a -= b;   <span class="hljs-comment">// a = a - b;</span>
+<span class="hljs-comment">//valid :: Unary operations:</span>
+a = +b;   <span class="hljs-comment">// a = +3</span>
+a = -b;   <span class="hljs-comment">// a = -3</span>
+❌ INVALID:
+a =* b;   <span class="hljs-comment">// error</span>
+a =/ b;   <span class="hljs-comment">// error</span>
+a =% b;   <span class="hljs-comment">// error</span>
+
+<span class="hljs-comment">// =* is NOT the same as *=</span>
+<span class="hljs-comment">//Compiler thinks *b means “dereference b” → illegal if b is not a pointer.</span>
+</div></code></pre>
+<ul>
+<li>Unary plus (+) → just returns the positive value of b</li>
+<li>Unary minus (-) → returns the negative value of b</li>
+<li>=+ or =- valid</li>
+</ul>
+<pre class="hljs"><code><div>    a = <span class="hljs-number">5</span>; 
+    b =<span class="hljs-number">3</span> ;
+    a += b;  <span class="hljs-comment">// a = a+b </span>
+    <span class="hljs-comment">//-------------------</span>
+    a = <span class="hljs-number">5</span>; 
+    b = <span class="hljs-number">3</span> ;
+    a = -b;  <span class="hljs-comment">// a = -3  </span>
+</div></code></pre>
+<ul>
+<li>Compound Assignment Operators += and -=
+<ul>
+<li>+= → add and assign (a += b is a = a + b)</li>
+<li>-= → subtract and assign (a -= b is a = a - b)<pre class="hljs"><code><div>    a += b;  <span class="hljs-comment">// a = a+b </span>
+    a -= b;  <span class="hljs-comment">// a = a-b  </span>
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>*, /, % cannot be directly combined with = in this form</li>
+<li>Only valid compound assignments exist:
+a <em>= b   // multiply and assign
+a /= b   // divide and assign
+a %= b   // modulo and assign
+a =</em> b   // ERROR
+a =/ b   // ERROR
+a =% b   // ERROR</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Valid?</th>
+<th>Meaning / Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a = +b</code></td>
+<td>✔</td>
+<td>Assign positive value of <code>b</code> to <code>a</code></td>
+</tr>
+<tr>
+<td><code>a = -b</code></td>
+<td>✔</td>
+<td>Assign negative value of <code>b</code> to <code>a</code></td>
+</tr>
+<tr>
+<td><code>a += b</code></td>
+<td>✔</td>
+<td>Add <code>b</code> to <code>a</code> and store in <code>a</code></td>
+</tr>
+<tr>
+<td><code>a -= b</code></td>
+<td>✔</td>
+<td>Subtract <code>b</code> from <code>a</code> and store in <code>a</code></td>
+</tr>
+<tr>
+<td><code>a =* b</code></td>
+<td>❌</td>
+<td>ERROR (not compound operator)</td>
+</tr>
+<tr>
+<td><code>a =/ b</code></td>
+<td>❌</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td><code>a =% b</code></td>
+<td>❌</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td><code>a *= b</code></td>
+<td>✔</td>
+<td>Multiply <code>a</code> by <code>b</code></td>
+</tr>
+<tr>
+<td><code>a /= b</code></td>
+<td>✔</td>
+<td>Divide <code>a</code> by <code>b</code></td>
+</tr>
+<tr>
+<td><code>a %= b</code></td>
+<td>✔</td>
+<td>Modulo <code>a</code> by <code>b</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="3comparison-operators">3.Comparison Operators</h4>
+<ul>
+<li>Comparison operators compare two values and return true (1) or false (0).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>Equal to</td>
+<td><code>a == b</code></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Not equal</td>
+<td><code>a != b</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+<td><code>a &gt; b</code></td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+<td><code>a &lt; b</code></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+<td><code>a &gt;= b</code></td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+<td><code>a &lt;= b</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>, b = <span class="hljs-number">10</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a == b) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 0</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a != b) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 1</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a &gt; b) &lt;&lt; <span class="hljs-built_in">endl</span>;   <span class="hljs-comment">// 0</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a &lt; b) &lt;&lt; <span class="hljs-built_in">endl</span>;   <span class="hljs-comment">// 1</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a &gt;= b) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 0</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; (a &lt;= b) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 1</span>
+</div></code></pre>
+<h4 id="4-logical-operators">4. Logical Operators</h4>
+<ul>
+<li>Logical operators are used to combine or negate boolean expressions.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Name</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!</code></td>
+<td>NOT</td>
+<td><code>!a</code></td>
+<td>Reverses boolean value (<code>true</code> → <code>false</code>, <code>false</code> → <code>true</code>)</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>AND</td>
+<td><code>a &amp;&amp; b</code></td>
+<td>True if <strong>both a and b are true</strong></td>
+</tr>
+<tr>
+<td><code>\|\|</code></td>
+<td>OR</td>
+<td><code>a \|\| b</code></td>
+<td>True if <strong>a or b are true</strong></td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;  <span class="hljs-comment">// true</span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>;  <span class="hljs-comment">// false</span>
+
+<span class="hljs-built_in">cout</span> &lt;&lt; (!a) &lt;&lt; <span class="hljs-built_in">endl</span>;   <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; (a &amp;&amp; b) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; (a || b) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 1</span>
+</div></code></pre>
+<h5 id="common-mistakes">Common Mistakes</h5>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> a=<span class="hljs-number">5</span>;
+    <span class="hljs-keyword">int</span> b=<span class="hljs-number">0</span>;
+    <span class="hljs-comment">// !A&amp;&amp;B  !=  !(A&amp;&amp;B)</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, !a&amp;&amp;b);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,!(a&amp;&amp;b));
+    <span class="hljs-comment">// cond1 || cond2 &amp;&amp; cond3 == cond1 || (cond2 &amp;&amp; cond3) != (cond1 || cond2) &amp;&amp; cond3</span>
+    <span class="hljs-keyword">int</span> a=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> b=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> c=<span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,a || b &amp;&amp; c );<span class="hljs-comment">//1</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,a || (b &amp;&amp; c) );<span class="hljs-comment">//1</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,(a || b) &amp;&amp; c );<span class="hljs-comment">//0</span>
+</div></code></pre>
+<h4 id="5-bitwise-operators">5. Bitwise Operators</h4>
+<ul>
+<li>Bitwise operators work on individual bits of integer values.</li>
+<li>work only on integers, not floats.</li>
+<li>But there is a twist:Signed integers use Two’s Complement representation.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Name</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code></td>
+<td>AND</td>
+<td><code>2 &amp; 5</code></td>
+<td>0 → <code>0010 &amp; 0101 = 0000</code></td>
+</tr>
+<tr>
+<td><code>\|</code></td>
+<td>OR</td>
+<td><code>2\|5</code></td>
+<td>7 → <code>0010                 | 0101 = 0111</code></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>NOT</td>
+<td><code>~2</code></td>
+<td>-3 → flips all bits</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>XOR</td>
+<td><code>2 ^ 5</code></td>
+<td>7 → <code>0010 ^ 0101 = 0111</code></td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>Left shift</td>
+<td><code>2 &lt;&lt; 1</code></td>
+<td>4 → shift bits left by 1</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>Right shift</td>
+<td><code>4 &gt;&gt; 1</code></td>
+<td>2 → shift bits right by 1</td>
+</tr>
+</tbody>
+</table>
+<h5 id="bitwise-vs-logical-example">Bitwise vs Logical Example</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>, b = <span class="hljs-number">5</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; (a &amp; b) &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; (a &amp;&amp; b) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 1</span>
+</div></code></pre>
+<h4 id="6-miscellaneous-operators">6. Miscellaneous operators</h4>
+<ul>
+<li>sizeof</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> age = <span class="hljs-number">37</span>;
+  	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, <span class="hljs-keyword">sizeof</span>(age));
+ 	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));
+</div></code></pre>
+<ul>
+<li>
+<p>The ternary operator
+<code>&lt;condition&gt; ? &lt;expression&gt; : &lt;expression&gt;</code></p>
+</li>
+<li>
+<p>Examples of Each Operator Type</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//Arithmetic</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">7</span>, b = <span class="hljs-number">3</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; a + b; <span class="hljs-comment">// 10</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; a % b; <span class="hljs-comment">// 1 (remainder)</span>
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Increment/Decrement</span>
+<span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; ++x; <span class="hljs-comment">// 6 (pre-increment)</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; x--; <span class="hljs-comment">// 6 (post-decrement, then x=5)</span>
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Logical</span>
+<span class="hljs-keyword">bool</span> result = (a &gt; <span class="hljs-number">0</span> &amp;&amp; b &gt; <span class="hljs-number">0</span>); <span class="hljs-comment">// true only if both positive</span>
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Bitwise</span>
+<span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>, b = <span class="hljs-number">3</span>;
+<span class="hljs-comment">// a = 0101, b = 0011</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; (a &amp; b); <span class="hljs-comment">// 1 (0001)</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; (a | b); <span class="hljs-comment">// 7 (0111)</span>
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Assignment</span>
+x += <span class="hljs-number">10</span>; <span class="hljs-comment">// same as x = x + 10;</span>
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Conditional (Ternary)</span>
+<span class="hljs-keyword">int</span> <span class="hljs-built_in">max</span> = (a &gt; b) ? a : b;
+<span class="hljs-comment">//--------------------------------------------------------</span>
+<span class="hljs-comment">//Sizeof</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">double</span>); <span class="hljs-comment">// 8 on most systems</span>
+</div></code></pre>
+<h4 id="operator-precedence--associativity">Operator Precedence &amp; Associativity</h4>
+<p><strong>C/C++ Operator Precedence Table (from highest to lowest)</strong></p>
+<ul>
+<li>Operator precedence decides which operation is done first.</li>
+<li>Operator associativity decides evaluation direction when precedence is equal.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Precedence Level</th>
+<th style="text-align:center">Operator</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1 (Highest)</td>
+<td style="text-align:center">Scope resolution (:😃</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">Postfix: () [] . -&gt; ++ -- type() type{}</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Unary: ++ -- + - ! ~ * &amp; sizeof new delete<br>Type cast: (type)</td>
+<td style="text-align:center">Right-to-left</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Pointer-to-member: .* -&gt;*</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Multiplicative: * / %</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">Additive: + -</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">Bitwise shift: &lt;&lt; &gt;&gt;</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">Relational: &lt; &lt;= &gt; &gt;=</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">Equality: == !=</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">Bitwise AND: &amp;</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">Bitwise XOR: ^</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">Bitwise OR: |</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">Logical AND: &amp;&amp;</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">Logical OR: ||</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">Conditional (ternary): ?:</td>
+<td style="text-align:center">Right-to-left</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">Assignment: = += -= *= /= %= &amp;= ^=</td>
+<td style="text-align:center">= &lt;&lt;= &gt;&gt;=</td>
+</tr>
+<tr>
+<td style="text-align:center">17 (Lowest)</td>
+<td style="text-align:center">Comma: ,</td>
+<td style="text-align:center">Left-to-right</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Precedence</th>
+<th>Associativity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>()</code></td>
+<td>Highest</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>++ --</code> (prefix)</td>
+<td>High</td>
+<td>Right to Left</td>
+</tr>
+<tr>
+<td><code>* / %</code></td>
+<td>Medium</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>+ -</code></td>
+<td>Medium</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>&lt;&lt; &gt;&gt;</code></td>
+<td>Medium</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>&lt; &lt;= &gt; &gt;=</code></td>
+<td>Low</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>== !=</code></td>
+<td>Low</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>Lower</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>\|\|</code></td>
+<td>Lowest</td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>Assignment</td>
+<td>Right to Left</td>
+</tr>
+</tbody>
+</table>
+<h5 id="operator-precedence">Operator Precedence</h5>
+<ul>
+<li>Precedence determines which operator is evaluated first in an expression.</li>
+<li>Higher precedence operators are evaluated before lower precedence ones.</li>
+</ul>
+<pre class="hljs"><code><div>a + b * c - b / c % <span class="hljs-number">2</span>
+<span class="hljs-comment">// Initial Value b=3 , c=2 ,a=5</span>
+<span class="hljs-comment">/*    Steps
+        b * c → 3 * 2 = 6
+        b / c → 3 / 2 = 1  // integer division
+        1 % 2 → 1
+
+        a + 6 - 1
+        a + 6 → 5 + 6 = 11
+        11 - 1 → 10
+*/</span>
+cond1 || cond2 &amp;&amp; cond3
+<span class="hljs-comment">//&amp;&amp; has higher precedence than ||</span>
+cond1 || (cond2 &amp;&amp; cond3)
+</div></code></pre>
+<h5 id="operator-associativity">Operator Associativity</h5>
+<ul>
+<li>
+<p>Associativity decides the order of evaluation when two operators have the same precedence.</p>
+</li>
+<li>
+<p>Can be Left to Right or Right to Left.</p>
+</li>
+<li></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Associativity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+ - * / %</code></td>
+<td>Left to Right</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>Right to Left</td>
+</tr>
+<tr>
+<td><code>++ --</code> (prefix)</td>
+<td>Right to Left</td>
+</tr>
+<tr>
+<td><code>++ --</code> (postfix)</td>
+<td>Left to Right</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div><span class="hljs-comment">//========================================================================</span>
+x = y = z = <span class="hljs-number">5</span>;  <span class="hljs-comment">// '=' is right-to-left associative</span>
+<span class="hljs-comment">/*
+    z=5 
+    y=z
+    x=y
+*/</span>
+<span class="hljs-comment">//========================================================================</span>
+<span class="hljs-keyword">int</span> result = a - b + c; <span class="hljs-comment">// '-' and '+' same precedence, left-to-right</span>
+<span class="hljs-comment">// Initial Value b=2 , c=2 ,a=2</span>
+
+<span class="hljs-comment">//Evaluate ==&gt; a - b -&gt; 2-2 =0 </span>
+<span class="hljs-comment">//Then    ===&gt; 0 + c -&gt; 0+2=2</span>
+
+<span class="hljs-comment">//========================================================================</span>
+
+<span class="hljs-keyword">int</span> x = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">int</span> c = x++ + ++x;
+<span class="hljs-comment">//Step by step:</span>
+<span class="hljs-comment">//x++ → postfix, use 5, then increment → x = 6</span>
+<span class="hljs-comment">//++x → prefix, increment first → x = 7</span>
+
+
+
+<span class="hljs-keyword">int</span> result = a + b * c &gt; d &amp;&amp; --b % c == <span class="hljs-number">0</span> || a++ &lt; b;
+<span class="hljs-comment">//Initial values: a = 10, b = 20, c = 5, d = 2</span>
+
+
+
+
+
+</div></code></pre>
+<h5 id="example-common-mistakes-fixed">Example: Common Mistakes Fixed</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> a = <span class="hljs-number">5</span>, b = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">float</span> result;
+
+<span class="hljs-comment">// ❌ Wrong: integer division</span>
+result = a / b; <span class="hljs-comment">// result = 2</span>
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Wrong: "</span> &lt;&lt; result &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+<span class="hljs-comment">// ✅ Correct</span>
+result = (<span class="hljs-keyword">float</span>)a / b;
+<span class="hljs-comment">//or</span>
+result = <span class="hljs-keyword">static_cast</span>&lt;<span class="hljs-keyword">float</span>&gt;(a) / b;
+
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Correct: "</span> &lt;&lt; result &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+<span class="hljs-comment">// ❌ Wrong: assignment instead of comparison</span>
+<span class="hljs-keyword">if</span> (a = b) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Equal\n"</span>;   <span class="hljs-comment">// always true!</span>
+<span class="hljs-comment">// ✅ Correct</span>
+<span class="hljs-keyword">if</span> (a == b) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Equal\n"</span>;
+
+<span class="hljs-comment">// ❌ Wrong: using % with float</span>
+<span class="hljs-comment">// float x = 5.5 % 2; // ERROR</span>
+<span class="hljs-comment">// ✅ Correct</span>
+<span class="hljs-keyword">float</span> x = <span class="hljs-built_in">fmod</span>(<span class="hljs-number">5.5</span>, <span class="hljs-number">2.0</span>);
+<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"fmod result: "</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+
+<span class="hljs-comment">// ❌ !A &amp;&amp; B vs !(A &amp;&amp; B)</span>
+    <span class="hljs-keyword">int</span> a=<span class="hljs-number">5</span>;
+    <span class="hljs-keyword">int</span> b=<span class="hljs-number">0</span>;
+    <span class="hljs-comment">// !A&amp;&amp;B  !=  !(A&amp;&amp;B)</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, !a&amp;&amp;b);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,!(a&amp;&amp;b));
+<span class="hljs-comment">// ❌ Precedence of || and &amp;&amp;</span>
+    <span class="hljs-comment">// cond1 || cond2 &amp;&amp; cond3 == cond1 || (cond2 &amp;&amp; cond3) != (cond1 || cond2) &amp;&amp; cond3</span>
+    <span class="hljs-keyword">int</span> a=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> b=<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> c=<span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,a || b &amp;&amp; c );<span class="hljs-comment">//1</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,a || (b &amp;&amp; c) );<span class="hljs-comment">//1</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,(a || b) &amp;&amp; c );<span class="hljs-comment">//0</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>Error Type</strong></th>
+<th><strong>Example</strong></th>
+<th><strong>Cause / Fix</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Using <code>=</code> instead of <code>==</code></strong></td>
+<td><code>if (x = 5)</code></td>
+<td>Assigns instead of compares → always true → use <code>==</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Division by Zero</strong></td>
+<td><code>x / 0</code></td>
+<td>Runtime error → check denominator</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Integer Division Mistake</strong></td>
+<td><code>5 / 2 = 2</code></td>
+<td>Both operands int → result truncated → use <code>5.0 / 2</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Modulus on Float</strong></td>
+<td><code>5.5 % 2</code></td>
+<td>Invalid → <code>%</code> works only on integers → use <code>fmod()</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Increment confusion</strong></td>
+<td><code>x = y++;</code></td>
+<td>Post-increment → assign first, then increase</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Overflow / Underflow</strong></td>
+<td><code>int a = 2147483647 + 1;</code></td>
+<td>Exceeds range → undefined behavior</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Bitwise vs Logical mix-up</strong></td>
+<td><code>&amp;</code> vs <code>&amp;&amp;</code>, <code>\</code>vs <code>\|\|</code></td>
+<td>Bitwise operates on bits, Logical on conditions</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Uninitialized variables</strong></td>
+<td><code>int x; cout &lt;&lt; x;</code></td>
+<td>Garbage value → always initialize variables</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Pointer misuse</strong></td>
+<td><code>*ptr</code> when <code>ptr</code> is <code>nullptr</code></td>
+<td>Runtime crash</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Type casting errors</strong></td>
+<td><code>(int*)str</code> without care</td>
+<td>May cause memory access errors</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

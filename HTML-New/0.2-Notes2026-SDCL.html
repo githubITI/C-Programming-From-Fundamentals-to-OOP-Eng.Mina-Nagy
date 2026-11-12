@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0-Notes2026-SDCL.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li>[SDCL Software Development Life Cycle](#sdcl-software-d- <a href="#sdcl-software-development-life-cycle">SDCL Software Development Life Cycle</a>
+<ul>
+<li><a href="#1-planning--reuirement---anlaysis"><strong>1. Planning &amp; Reuirement  &amp; anlaysis</strong></a>
+<ul>
+<li><a href="#1a-planning">1.a Planning</a></li>
+<li><a href="#1b-feasibility-study">1.b Feasibility Study</a></li>
+<li><a href="#1c-phase-2--requirements-analysis">1.c Phase 2 — Requirements Analysis</a>
+<ul>
+<li><a href="#1c1-functional-requirements-fr">1.c.1 Functional Requirements (FR)</a></li>
+<li><a href="#1c2-non-functional-requirements-nfr">1.c.2 Non Functional Requirements (NFR)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-design"><strong>2. Design</strong></a>
+<ul>
+<li><a href="#a-architecture-design-"><strong>A. Architecture Design</strong> :</a></li>
+<li><a href="#b-database-design"><strong>B. Database Design</strong></a></li>
+<li><a href="#architecture-decisions"><strong>Architecture Decisions</strong></a></li>
+<li><a href="#c-ui--ux-design"><strong>C. UI / UX Design</strong></a>
+<ul>
+<li><a href="#c11---gui-graphical-user-interface"><strong>C.1.1 - GUI (Graphical user Interface):</strong></a></li>
+<li><a href="#c2---cli-command-line-interface"><strong>C.2 - CLI (Command Line Interface):</strong></a></li>
+</ul>
+</li>
+<li><a href="#c21--cli-execution-cycle">C.2.1- CLI Execution Cycle</a></li>
+<li><a href="#c22---how-run-script-on-terminal-">C.2.2 - How Run Script on Terminal :</a></li>
+<li><a href="#c3---api-application-programming-interface-">C.3 - API (Application Programming Interface):-</a>
+<ul>
+<li><a href="#c31-what-is-an-api-explanation"><strong>C.3.1. What Is an API? (Explanation)</strong></a></li>
+<li><a href="#c32-how-api-works-simple-explanation--diagram"><strong>C.3.2. How API Works (Simple Explanation + Diagram)</strong></a></li>
+<li><a href="#c33-api-request--response--structure"><strong>C.3.3. API Request &amp; Response  Structure</strong></a></li>
+<li><a href="#c34-api-style"><strong>C.3.4. API Style:</strong></a></li>
+<li><a href="#restful-api-representational-state-transfer"><strong>RESTFUL API (Representational State Transfer)</strong></a></li>
+<li><a href="#graphql-api"><strong>GraphQL API</strong></a></li>
+<li><a href="#soap-api-simple-object-access-protocol"><strong>SOAP API (Simple Object Access Protocol)</strong></a></li>
+<li><a href="#websocket"><strong>WebSocket</strong></a></li>
+<li><a href="#grpc"><strong>GRPC</strong></a></li>
+<li><a href="#mqtt-pubsub"><strong>MQTT Pub/SUB</strong></a></li>
+</ul>
+</li>
+<li><a href="#3implementation--write-code-language-"><strong>3.Implementation  Write Code (Language) :</strong></a>
+<ul>
+<li><a href="#write-code">Write Code</a></li>
+<li><a href="#software-configuration-management--version-control">Software Configuration Management / Version Control</a></li>
+<li><a href="#code-review">Code Review</a></li>
+</ul>
+</li>
+<li><a href="#4testing-"><strong>4.Testing :</strong></a></li>
+<li><a href="#5deployment-and-production--"><strong>5.Deployment and production  :</strong></a></li>
+<li><a href="#6maintance-"><strong>6.maintance :</strong></a>
+<ul>
+<li><a href="#corrective-maintenancefix-bug">Corrective Maintenance(Fix Bug)</a></li>
+<li><a href="#adaptive-maintenance">Adaptive Maintenance</a></li>
+<li><a href="#perfective-maintenance">Perfective Maintenance</a></li>
+<li><a href="#observability">Observability</a></li>
+<li><a href="#monitoring-vs-observability">Monitoring vs Observability</a></li>
+</ul>
+</li>
+<li><a href="#7documentation-"><strong>7.Documentation :</strong></a></li>
+<li><a href="#summary">SUMMARY</a></li>
+</ul>
+</li>
+<li><a href="#sdlc-software-development-life-cycle-models">SDLC (Software Development Life Cycle) Models</a>
+<ul>
+<li><a href="#waterfall">Waterfall</a></li>
+<li><a href="#v-model">V-Model</a></li>
+<li><a href="#agile">Agile</a>
+evelopment-life-cycle)</li>
+</ul>
+</li>
+<li><a href="#1-planning--reuirement---anlaysis"><strong>1. Planning &amp; Reuirement  &amp; anlaysis</strong></a>
+<ul>
+<li><a href="#1a-planning">1.a Planning</a></li>
+<li><a href="#1b-feasibility-study">1.b Feasibility Study</a></li>
+<li><a href="#1c-phase-2--requirements-analysis">1.c Phase 2 — Requirements Analysis</a>
+<ul>
+<li><a href="#1c1-functional-requirements-fr">1.c.1 Functional Requirements (FR)</a></li>
+<li><a href="#1c2-non-functional-requirements-nfr">1.c.2 Non Functional Requirements (NFR)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-design"><strong>2. Design</strong></a>
+<ul>
+<li><a href="#a-architecture-design-"><strong>A. Architecture Design</strong> :</a></li>
+<li><a href="#b-database-design"><strong>B. Database Design</strong></a></li>
+<li><a href="#architecture-decisions"><strong>Architecture Decisions</strong></a></li>
+<li><a href="#c-ui--ux-design"><strong>C. UI / UX Design</strong></a>
+<ul>
+<li><a href="#c11---gui-graphical-user-interface"><strong>C.1.1 - GUI (Graphical user Interface):</strong></a></li>
+<li><a href="#c2---cli-command-line-interface"><strong>C.2 - CLI (Command Line Interface):</strong></a></li>
+</ul>
+</li>
+<li><a href="#c21--cli-execution-cycle">C.2.1- CLI Execution Cycle</a></li>
+<li><a href="#c22---how-run-script-on-terminal-">C.2.2 - How Run Script on Terminal :</a></li>
+<li><a href="#c3---api-application-programming-interface-">C.3 - API (Application Programming Interface):-</a>
+<ul>
+<li><a href="#c31-what-is-an-api-explanation"><strong>C.3.1. What Is an API? (Explanation)</strong></a></li>
+<li><a href="#c32-how-api-works-simple-explanation--diagram"><strong>C.3.2. How API Works (Simple Explanation + Diagram)</strong></a></li>
+<li><a href="#c33-api-request--response--structure"><strong>C.3.3. API Request &amp; Response  Structure</strong></a></li>
+<li><a href="#c34-api-style"><strong>C.3.4. API Style:</strong></a></li>
+<li><a href="#restful-api-representational-state-transfer"><strong>RESTFUL API (Representational State Transfer)</strong></a></li>
+<li><a href="#graphql-api"><strong>GraphQL API</strong></a></li>
+<li><a href="#soap-api-simple-object-access-protocol"><strong>SOAP API (Simple Object Access Protocol)</strong></a></li>
+<li><a href="#websocket"><strong>WebSocket</strong></a></li>
+<li><a href="#grpc"><strong>GRPC</strong></a></li>
+<li><a href="#mqtt-pubsub"><strong>MQTT Pub/SUB</strong></a></li>
+</ul>
+</li>
+<li><a href="#3implementation--write-code-language-"><strong>3.Implementation  Write Code (Language) :</strong></a>
+<ul>
+<li><a href="#write-code">Write Code</a></li>
+<li><a href="#software-configuration-management--version-control">Software Configuration Management / Version Control</a></li>
+<li><a href="#code-review">Code Review</a></li>
+</ul>
+</li>
+<li><a href="#4testing-"><strong>4.Testing :</strong></a></li>
+<li><a href="#5deployment-and-production--"><strong>5.Deployment and production  :</strong></a></li>
+<li><a href="#6maintance-"><strong>6.maintance :</strong></a>
+<ul>
+<li><a href="#corrective-maintenancefix-bug">Corrective Maintenance(Fix Bug)</a></li>
+<li><a href="#adaptive-maintenance">Adaptive Maintenance</a></li>
+<li><a href="#perfective-maintenance">Perfective Maintenance</a></li>
+<li><a href="#observability">Observability</a></li>
+<li><a href="#monitoring-vs-observability">Monitoring vs Observability</a></li>
+</ul>
+</li>
+<li><a href="#7documentation-"><strong>7.Documentation :</strong></a></li>
+<li><a href="#summary">SUMMARY</a></li>
+</ul>
+</li>
+<li><a href="#sdlc-software-development-life-cycle-models">SDLC (Software Development Life Cycle) Models</a>
+<ul>
+<li><a href="#waterfall">Waterfall</a></li>
+<li><a href="#v-model">V-Model</a></li>
+<li><a href="#agile">Agile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="sdcl-software-development-life-cycle">SDCL Software Development Life Cycle</h2>
+<pre><code class="language-Mermaid"><div class="mermaid">flowchart LR
+    A[1. Planning & Requirement Analysis] --> B[2. Design]
+    B --> C[3. Implementation]
+    C --> D[4. Testing]
+    D --> E[5. Deployment]
+    E --> F[6. Maintenance]
+    F --> G[7. Documentation]
+
+</div></code></pre>
+<h3 id="1-planning--reuirement--anlaysis"><strong>1. Planning &amp; Reuirement  &amp; anlaysis</strong></h3>
+<ul>
+<li>Understand the client’s needs.</li>
+<li>Gather business, functional, and non-functional requirements.</li>
+<li>Perform system feasibility analysis (technical, financial, operational).</li>
+</ul>
+<h4 id="1a-planning">1.a Planning</h4>
+<pre class="hljs"><code><div>Why are we building this?
+What are we building?
+Who will use it?
+How much will it cost?
+How long will it take?
+Who will build it?
+What are the risks?
+Is it feasible?
+</div></code></pre>
+<h4 id="1b-feasibility-study">1.b Feasibility Study</h4>
+<ul>
+<li><strong>Technical Feasibility</strong>
+هل عندنا التكنولوجيا والخبرة المطلوبة؟</li>
+<li><strong>Economic Feasibility</strong>
+هل المشروع يستحق تكلفته؟
+Development Cost = 500K
+Expected Benefit = 50K</li>
+<li><strong>Operational Feasibility</strong>
+هل المستخدمين والمؤسسة هيقدروا يستخدموه فعلًا؟</li>
+<li><strong>Schedule Feasibility</strong>
+هل ممكن نسلمه في الوقت المطلوب؟
+<strong>Just because we can build it doesn't mean we should build it.</strong></li>
+</ul>
+<h4 id="1c-phase-2--requirements-analysis">1.c Phase 2 — Requirements Analysis</h4>
+<ul>
+<li>&quot;What should the system do?&quot; Not  &quot;How will we implement it?&quot;</li>
+<li>Requirements = WHAT , Design = HOW
+<strong>Requirements tell us WHAT to build. Design tells us HOW to build it.</strong></li>
+</ul>
+<h5 id="1c1-functional-requirements-fr">1.c.1 Functional Requirements (FR)</h5>
+<p>What can the system/user do?</p>
+<div dir="rtl">
+دي الأشياء اللي الـ System لازم يعملها.
+</div>
+<pre class="hljs"><code><div>E-Commerce Example:
+======================
+User can register.
+User can login.
+User can search products.
+User can add products to cart.
+User can place an order.
+User can pay online.
+Admin can add products.
+Admin can cancel orders.
+
+</div></code></pre>
+<h5 id="1c2-non-functional-requirements-nfr">1.c.2 Non Functional Requirements (NFR)</h5>
+<p>النظام يعمل المطلوب بأي مستوى جودة وقيود؟</p>
+<table>
+<thead>
+<tr>
+<th>FR</th>
+<th>NFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The user can login.</td>
+<td>95% of login requests.<br>must respond within 500 ms.</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>Performance Requirement
+Performance
+Security
+Scalability
+Availability
+Reliability
+Maintainability
+Usability
+Accessibility
+Observability
+Portability
+Compliance
+Disaster Recovery
+</div></code></pre>
+<p><strong>Functional Requirements define what the system does. Non-Functional Requirements define how well it does it.</strong></p>
+<table>
+<thead>
+<tr>
+<th>FR</th>
+<th>NFR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User can upload a video.</td>
+<td>Upload supports files up to 2 GB.</td>
+</tr>
+<tr>
+<td>User can login.</td>
+<td>Passwords must be securely hashed.</td>
+</tr>
+<tr>
+<td>User can search.</td>
+<td>95% of searches return within 1 second.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes :</strong><br>
+Agile ==&gt; Requirements ===&gt; UserStory + Acceptance Criteria <br>
+<strong>A requirement without acceptance criteria is open to interpretation.</strong></p>
+<table>
+<thead>
+<tr>
+<th>User Stories</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>As a &lt;user&gt; <br>I want &lt;goal&gt;<br>So that &lt;benefit&gt; <br></td>
+<td><strong>Given:</strong><br><strong>when:</strong><br><strong>then:</strong><br></td>
+</tr>
+<tr>
+<td>As a customer,<br>I want to track my order,<br>so that I know when it will arrive.</td>
+<td><strong>Given:</strong><br> The customer has an active order.<br><strong>When:</strong><br> The customer opens Order Tracking.<br><strong>Then:</strong><br>The current order status and estimated delivery time are displayed.</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>Building the wrong thing perfectly is still failure.
+Perfect Code + Wrong Product=Failure
+</div></code></pre>
+<h3 id="2-design"><strong>2. Design</strong></h3>
+<p>How will we implement it?</p>
+<pre class="hljs"><code><div>Client -&gt; Load Balancer  -&gt; Backend/API   -&gt; Database  -&gt; Cache
+</div></code></pre>
+<ul>
+<li>Architecture , Components , Database , APIs , Communication , Authentication , Caching , Queues , Storage , Deployment topology</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[Design Phase] --> B[Architecture Design]
+    A --> C[Database Design]
+    A --> D[UI / UX Design]
+   
+    B --> B1[Mobile]
+    B --> B2[Web]
+    B --> B3[Embedded]
+
+    C --> C1[SQL]
+    C --> C2[NoSQL<br>JSON = key:value]
+    
+    D --> D1[GUI]
+    D --> D2[CLI]
+    D --> D3[API]
+</div></code></pre>
+<h4 id="a-architecture-design"><strong>A. Architecture Design</strong> :</h4>
+<ul>
+<li>Based on platform: Mobile , Web , Embedded Systems</li>
+</ul>
+<h4 id="b-database-design"><strong>B. Database Design</strong></h4>
+<ul>
+<li>SQL Databases</li>
+<li>NoSQL Databases
+Example: JSON Format → {&quot;key&quot;: &quot;value&quot;}</li>
+</ul>
+<h4 id="architecture-decisions"><strong>Architecture Decisions</strong></h4>
+<ul>
+<li>Every engineering decision is a trade-off.</li>
+<li>What do we gain, and what do we pay?</li>
+</ul>
+<pre class="hljs"><code><div>Cache
++ improve Performance(High Speed) : Instant replies; skip the database trip
++ Reduced Load : &quot;Shielding your database from traffic spikes.&quot;
++ Better UX ➡️ Smooth
+
+- Complexity :  Overhead (The extra code burden).
+- Stale Data :  Expired (Old and inaccurate).
+- Cache Invalidation : Timing (The hardest part to synchronize).
+- Memory Cost : Expensive (Paying premium prices for RAM).
+
+Microservices:
+adv:
++ Independent deployment
++ Scalability
+dis adv: 
+- Network complexity (Latency - Not same Server)
+- Observability complexity (Blindness - Where Error?)
+- Distributed failures (Domino-Effect)
+- DevOps overhead (Babysitting for 20 Server)
+</div></code></pre>
+<h4 id="c-ui--ux-design"><strong>C. UI / UX Design</strong></h4>
+<ul>
+<li>
+<p>User interaction pathways:</p>
+<pre><code class="language-Mermaid"><div class="mermaid">flowchart LR
+    A0[Things] --> B0[Interface]
+    B0-->C0[Things ]
+           
+    A1[User] -->|Clicks/Touch<br>Visual Interaction| GUI[GUI<br>Graphical User Interface]
+    A1 -->|Typed Commands<br>Text Interaction| CLI[CLI<br>Command-Line Interface]
+
+    GUI --> APP
+    CLI --> APP
+    
+    A3[APP] <--> B3[API]
+    B3<-->C3[APP]
+    A[APP] -->|System Call| B[Operating System]
+
+    C[APP] -->|Requset Network| D[API]
+    D<-->F[Web Service]
+
+    D -->|Response JSON/XML|C 
+</div></code></pre>
+<br>
+<pre><code class="language-mermaid"><div class="mermaid">    graph TD
+        subgraph UI[User Interaction Layer]
+            GUI
+            CLI
+        end
+
+        subgraph Logic[Application Logic Layer]
+            APP[App / Program / Service]
+        end
+
+        subgraph Dev[Developer Interaction Layer]
+            API
+        end
+
+        GUI --> APP
+        CLI --> APP
+        API --> APP
+</div></code></pre>
+<br>
+<pre><code class="language-Mermaid"><div class="mermaid">    sequenceDiagram
+    participant User
+    participant GUI
+    participant CLI
+    participant API
+    participant App
+
+    User->>GUI: Click/Touch/Input
+    GUI->>App: Internal calls
+    
+    User->>CLI: Type Commands
+    CLI->>App: Instruction Execution
+    
+    API->>App: Structured Request (HTTP/JSON/etc)
+</div></code></pre>
+<pre class="hljs"><code><div>	Things ---&gt; Interfacing --&gt; Things 
+	
+    User -----&gt; GUI/CLI ----&gt; APP
+	User---&gt; GUI ---&gt;OS(APP)  #Graphical User Interface 
+	Developer / Scripts ---&gt; CLI ---&gt;OS(APP) #Command Line  Interface 
+	CLI [Command Line Interface], GUI [Graphic User Interface]
+	
+    APP -----&gt; API(Application Programming Interface) ---&gt; APP 
+</div></code></pre>
+</li>
+</ul>
+<h5 id="c11---gui-graphical-user-interface"><strong>C.1.1 - GUI (Graphical user Interface):</strong></h5>
+<ul>
+<li>Layers of a GUI based on a windowing system
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://cyberhoot.com/wp-content/uploads/2020/12/GUI-Examples.png"></td>
+<td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Schema_of_the_layers_of_the_graphical_user_interface.svg/1280px-Schema_of_the_layers_of_the_graphical_user_interface.svg.png" width="70%"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="c2---cli-command-line-interface"><strong>C.2 - CLI (Command Line Interface):</strong></h5>
+<ul>
+<li>Very Fast &amp; Powerful
+<code>bash            touch ~/Desktop/c/ali ~/Music/ali2           touch ~/Desktop/c/file{1..100}      </code></li>
+<li>Servers typically run CLI (TTY) instead of GUI (less resource usage)</li>
+<li>Remote connections via SSH</li>
+<li>(Support   ==&gt; Commands) Because OS Linux (Different GUI)
+CLI is consistent across Linux distributions (supports commands despite different GUIs)</li>
+<li>Falling in Love</li>
+</ul>
+<h4 id="c21--cli-execution-cycle">C.2.1- CLI Execution Cycle</h4>
+<pre class="hljs"><code><div>        Terminal --Commands--&gt; Shell [interpter] --&gt; kernel --&gt;HW  
+</div></code></pre>
+<pre class="hljs"><code><div>        <span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>  <span class="hljs-comment"># Current Shell </span>
+			/usr/bin/bash 
+</div></code></pre>
+<h4 id="c22---how-run-script-on-terminal">C.2.2 - How Run Script on Terminal :</h4>
+<pre class="hljs"><code><div>        <span class="hljs-comment">#1) Create file  </span>
+            vi ~/Music/script1
+                <span class="hljs-comment">#!/usr/bin/python3    #which python3</span>
+                <span class="hljs-built_in">print</span>(10)
+        <span class="hljs-comment">#2) Add Execute Permission file</span>
+            chmod +x ~/Music/script1
+        <span class="hljs-comment">#3) Run File using Path (Not Name )</span>
+            ~/Music/script1
+        <span class="hljs-comment">#4) Run Script using Name </span>
+            <span class="hljs-comment"># Add Path Folders of Commands in PATH Environment Variable  </span>
+            <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">"<span class="hljs-variable">$PATH</span>"</span>:~/Music/script1
+            <span class="hljs-comment"># Run Script using Name </span>
+            script1
+            <span class="hljs-built_in">which</span> script <span class="hljs-comment">#==&gt; /home/mina/Music/script1</span>
+        <span class="hljs-comment">#5) To make changes permanent</span>
+            <span class="hljs-comment">#you need to edit the file (bashrc) and then ensure the changes are loaded in new shell sessions.</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">'export PATH="$PATH":~/Music/script1'</span> &gt;&gt; ~/.bashrc 
+            <span class="hljs-comment">#close Terminal and Open Again </span>
+</div></code></pre>
+<h4 id="c3---api-application-programming-interface">C.3 - API (Application Programming Interface):-</h4>
+<h5 id="c31-what-is-an-api-explanation"><strong>C.3.1. What Is an API? (Explanation)</strong></h5>
+<ul>
+<li>An API (Application Programming Interface) allows two different software systems to communicate.</li>
+<li>Example:
+<ul>
+<li>Your mobile app sends a request → API receives it</li>
+<li>API returns data → App shows it to you</li>
+<li>API is like a waiter in a restaurant:
+<ul>
+<li>You (client) ask the waiter (API)</li>
+<li>The waiter brings your food from the kitchen (server)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>    APP  ------ API ---&gt; APP
+    APP  ------API(System Call)---&gt;  OS 
+    C Under Linux ---&gt; Systemcall Network ---&gt; Profile [Aman POS]
+    WebService=API+Internet
+    APP(Mobile) --------&gt; WebService [Weather.com]
+</div></code></pre>
+<h5 id="c32-how-api-works-simple-explanation--diagram"><strong>C.3.2. How API Works (Simple Explanation + Diagram)</strong></h5>
+<ul>
+<li>A client sends a request (browser, app, program).</li>
+<li>The API server receives the request.</li>
+<li>The server processes it.</li>
+<li>It sends back a response (data).</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">    flowchart LR
+    A[Client<br>App / Browser] -->|Request| B[API Server]
+    B -->|Response JSON/XML| A
+</div></code></pre>
+<h5 id="c33-api-request--response-structure"><strong>C.3.3. API Request &amp; Response  Structure</strong></h5>
+<table>
+<thead>
+<tr>
+<th>An API request usually contains:</th>
+<th>The response contains:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- URL / Endpoint → &quot;Where to go?&quot;<br>- Method → GET, POST, PUT, DELETE  <br>- Headers → Authentication, Format   <br>- Body → Data (only for POST/PUT)</td>
+<td>- Status Code → 200 OK, 404 Not Found<br>- Headers<br>- Body → usually JSON data</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Mermaid"><div class="mermaid">    flowchart TD
+        A[API Request]
+        A --> B[Endpoint / URL]
+        A --> C[HTTP Method]
+        A --> D[Headers]
+        A --> E[Body optional]
+
+        A1[API Response]
+        A1 --> B1[Status Code]
+        A1 --> C1[Headers]
+        A1 --> D1[Body JSON/XML]
+
+</div></code></pre>
+<h5 id="c34-api-style"><strong>C.3.4. API Style:</strong></h5>
+<table>
+<thead>
+<tr>
+<th>API Type</th>
+<th>Protocol</th>
+<th>Format</th>
+<th>Best For</th>
+<th>Style</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>REST</strong></td>
+<td>HTTP</td>
+<td>JSON</td>
+<td>Web/Mobile</td>
+<td>Request–Response</td>
+</tr>
+<tr>
+<td><strong>WebSocket</strong></td>
+<td>TCP</td>
+<td>Text/Binary</td>
+<td>Real-time apps</td>
+<td>Full-Duplex</td>
+</tr>
+<tr>
+<td><strong>GraphQL</strong></td>
+<td>HTTP</td>
+<td>JSON</td>
+<td>Flexible data fetching</td>
+<td>Query-based</td>
+</tr>
+<tr>
+<td><strong>SOAP</strong></td>
+<td>HTTP/SOAP</td>
+<td>XML</td>
+<td>Enterprise systems</td>
+<td>Contract-based</td>
+</tr>
+<tr>
+<td><strong>MQTT</strong></td>
+<td>TCP</td>
+<td>Binary</td>
+<td>IoT, sensors</td>
+<td>Pub/Sub</td>
+</tr>
+<tr>
+<td><strong>gRPC</strong></td>
+<td>HTTP/2</td>
+<td>ProtoBuf</td>
+<td>Microservices</td>
+<td>RPC</td>
+</tr>
+</tbody>
+</table>
+<h5 id="restful-api-representational-state-transfer"><strong>RESTFUL API (Representational State Transfer)</strong></h5>
+<ul>
+<li>Uses HTTP methods (GET, POST, PUT, DELETE).<pre><code class="language-mermaid"><div class="mermaid">graph TB
+    A[HTTP Methods]
+    A --> B[GET - Retrieve Data]
+    A --> C[POST - Create Data]
+    A --> D[PUT - Replace Data]
+    A --> E[PATCH - Update Part]
+    A --> F[DELETE - Delete Data]
+</div></code></pre>
+</li>
+<li>Returns JSON (mostly).</li>
+<li>Resource-based URLs: /users/1</li>
+<li>RESTFUL API [API+Internet+HTTP+DataFormat(JSON/XML)+Methods[GET,POST,PUT,DELETE]]</li>
+<li><strong>REST API Flow (Sequence)</strong>
+<ul>
+<li>Client sends GET request</li>
+<li>Server replies with JSON</li>
+<li>Client sends POST request</li>
+<li>Server creates data</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">    sequenceDiagram
+        participant Client
+        participant Server
+
+        Client->>Server: GET /users
+        Server-->>Client: 200 OK + JSON Data
+
+        Client->>Server: POST /users {data}
+        Server-->>Client: 201 Created
+
+</div></code></pre>
+</li>
+</ul>
+<h5 id="graphql-api"><strong>GraphQL API</strong></h5>
+<ul>
+<li>Client sends one query describing exactly what data it needs.</li>
+<li>Server returns only the requested fields.</li>
+<li>Single endpoint /graphql.</li>
+</ul>
+<pre><code class="language-Mermaid"><div class="mermaid">    sequenceDiagram
+    participant Client
+    participant GraphQL_Server
+
+    Client->>GraphQL_Server: Query { user { id name email } }
+    GraphQL_Server-->>Client: JSON { "user": { "id":1, "name":"John", "email":"john@mail.com" } }
+</div></code></pre>
+<h5 id="soap-api-simple-object-access-protocol"><strong>SOAP API (Simple Object Access Protocol)</strong></h5>
+<ul>
+<li>Uses XML format.</li>
+<li>Strongly typed, strict structure.</li>
+<li>Often used in banking &amp; enterprise systems.</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+participant Client
+participant SOAP_Server
+
+Client->>SOAP_Server: HTTP POST\nSOAP Request (XML Envelope)
+SOAP_Server-->>Client: HTTP 200 OK\nSOAP Response (XML Envelope)
+</div></code></pre>
+<h5 id="websocket"><strong>WebSocket</strong></h5>
+<pre><code class="language-mermaid"><div class="mermaid">
+    sequenceDiagram
+        participant Client
+        participant Server
+
+        Client->>Server: HTTP Request\n(WebSocket Upgrade)
+        Server-->>Client: 101 Switching Protocols\n(WebSocket Connection Established)
+
+        Note over Client,Server: 🔁 Full-duplex Communication Starts
+
+        Client-->>Server: Send Message (JSON/Text/Binary)
+        Server-->>Client: Response Message
+
+        Client-->>Server: Ping
+        Server-->>Client: Pong
+
+        Client-->>Server: Close Frame
+        Server-->>Client: Close Acknowledgement
+</div></code></pre>
+<h5 id="grpc"><strong>GRPC</strong></h5>
+<ul>
+<li>High-Speed RPC using Protocol Buffers</li>
+<li>Very fast</li>
+<li>Uses HTTP/2, binary binary format (Protocol Buffers)</li>
+<li>ideal for microservices.</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+participant Client
+participant Server
+
+Client->>Server: Unary Call (Proto Request)
+Server-->>Client: Proto Response
+</div></code></pre>
+<h5 id="mqtt-pubsub"><strong>MQTT Pub/SUB</strong></h5>
+<ul>
+<li>Lightweight protocol for IoT devices.</li>
+<li>Works with Publish/Subscribe model.</li>
+<li>Uses an MQTT broker (middle server).</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">    flowchart LR
+    Publisher -->|Publish| Broker((MQTT Broker))
+    Subscriber1 <-->|Subscribe Topic| Broker
+    Subscriber2 <-->|Subscribe Topic| Broker
+</div></code></pre>
+<br>
+<pre><code class="language-mermaid"><div class="mermaid">    sequenceDiagram
+        participant Publisher
+        participant Broker as MQTT Broker
+        participant Subscriber
+
+        Publisher->>Broker: CONNECT
+        Broker-->>Publisher: CONNACK
+
+        Subscriber->>Broker: CONNECT
+        Broker-->>Subscriber: CONNACK
+
+        Subscriber->>Broker: SUBSCRIBE (topic: sensor/temp)
+        Broker-->>Subscriber: SUBACK
+
+        Publisher->>Broker: PUBLISH (topic: sensor/temp, message: "25°C")
+        Broker-->>Subscriber: MESSAGE ("25°C")
+
+        Publisher->>Broker: PINGREQ
+        Broker-->>Publisher: PINGRESP
+
+        Publisher->>Broker: DISCONNECT
+        Subscriber->>Broker: DISCONNECT
+
+</div></code></pre>
+<pre class="hljs"><code><div>    Frontend APP 
+			     &lt;---JSON/XML--&gt; RESTFUL API---&gt; WebServer ---&gt; DB Server  
+	Mobile APP
+
+	ESP32(WebServer)
+	Laptop ---&gt; Apache SW ---&gt; (WebServer) 
+	Laptop ---&gt; Mongod or Mysqld ---&gt; (DBServer)
+	Protcol://ip(Domain):port/DBName(PageName)?conf=data&amp;conf2=data
+	mongodb://127.0.0.1:27017/?directConnection=true&amp;serverSelectionTimeoutMS=2000&amp;appName=mongosh+2.3.3
+
+	Control Services in Linux :- 
+	===============================
+		systemctl start mongod.service 
+		systemctl stop mongod.service 
+		systemctl status mongod.service 
+</div></code></pre>
+<br>
+<h4 id="3implementation-write-code-language"><strong>3.Implementation  Write Code (Language) :</strong></h4>
+<h5 id="write-code">Write Code</h5>
+<ul>
+<li>Writing actual code using the required programming languages.<br></li>
+<li></li>
+</ul>
+<div dir="rtl">
+هنا Developers يحولوا Design إلى Software.<br>
+</div>
+<br>
+<h5 id="software-configuration-management--version-control">Software Configuration Management / Version Control</h5>
+<pre class="hljs"><code><div>Git Repository
+main
+│
+├── develop
+│
+├── feature/login
+│
+├── feature/cart
+│
+└── bugfix/payment
+</div></code></pre>
+<h5 id="code-review">Code Review</h5>
+<p><strong>Code is written once, but read many times.</strong></p>
+<pre class="hljs"><code><div>Code
+ ↓
+Commit
+ ↓
+Push
+ ↓
+Pull Request
+ ↓
+Code Review
+ ↓
+Changes
+ ↓
+Approve
+ ↓
+Merge
+</div></code></pre>
+<h4 id="4testing"><strong>4.Testing :</strong></h4>
+<ul>
+<li>Ensuring the product is bug-free and meets requirements.</li>
+</ul>
+<pre class="hljs"><code><div>           /\
+          /  \       E2E
+         /----\
+        /      \     Integration
+       /--------\
+      /          \   Unit Tests
+     /____________\
+</div></code></pre>
+<ul>
+<li><strong>Unit Testing</strong>
+test small class/Function</li>
+<li><strong>Integration Testing</strong>
+test Components together
+API -&gt; Service -&gt; Database</li>
+<li><strong>System / E2E Testing</strong>
+Login -&gt;Add Product  -&gt; Checkout -&gt; Payment -&gt; Order Created</li>
+<li><strong>Testing Non Functional</strong>
+<strong>Working is not the same as production-ready.</strong><pre class="hljs"><code><div>Performance Testing
+Load Testing
+Stress Testing
+Security Testing
+Usability Testing
+Compatibility Testing
+Regression Testing
+Acceptance Testing
+</div></code></pre>
+</li>
+</ul>
+<h4 id="5deployment-and-production"><strong>5.Deployment and production  :</strong></h4>
+<ul>
+<li>Moving software to live environments where users access it.</li>
+<li>Deployment</li>
+<li>CD — Continuous Delivery / Deployment
+<ul>
+<li>Developers continuously merge their code.</li>
+<li>Fail fast, fix early.<pre class="hljs"><code><div>    Commit → Build → Test → Static Analysis → Artifact
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>CI — Continuous Integration
+<ul>
+<li>Works on my machine 😂</li>
+<li>If it only works on your machine, it doesn't work.</li>
+</ul>
+<pre class="hljs"><code><div>      Code → Build → Test → Package → Deploy Staging → Deploy Production
+</div></code></pre>
+<pre class="hljs"><code><div>  Development
+  Testing
+  Staging
+  Production
+</div></code></pre>
+</li>
+</ul>
+<h4 id="6maintance"><strong>6.maintance :</strong></h4>
+<ul>
+<li>Fixing bugs</li>
+<li>Updating features</li>
+<li>update code (improve code)</li>
+<li>Deployment is not the end. It is where reality begins.</li>
+</ul>
+<h5 id="corrective-maintenancefix-bug">Corrective Maintenance(Fix Bug)</h5>
+<pre class="hljs"><code><div>Payment sometimes fails → Fix
+</div></code></pre>
+<h5 id="adaptive-maintenanceeverything-outside-your-code-changed">Adaptive Maintenance(Everything outside your code changed)</h5>
+<ul>
+<li>The outside world changed, so the system must adapt.
+<ul>
+<li>API Changes: The external payment provider changed their API, so you must update your integration.</li>
+<li>OS / Platform Updates: Moving your application from an old version of Windows/Linux to a new one.</li>
+</ul>
+</li>
+</ul>
+<h5 id="perfective-maintenance-improvement-making-good-code-even-better">Perfective Maintenance (IMPROVEMENT (Making good code even better))</h5>
+<ul>
+<li>The system works fine, but you want to make it better and more perfect.
+<ul>
+<li>Performance: Making code run faster to improve system speed.</li>
+<li>UX / UI: Enhancing the user interface to make it easier to use.</li>
+</ul>
+</li>
+</ul>
+<h5 id="observability">Observability</h5>
+<ul>
+<li>What is happening inside my system? (Logs , Metrics , Traces)</li>
+<li>You cannot improve what you cannot observe.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User says:<br>&quot;Checkout is slow.&quot;</td>
+<td>Logs: Payment Service: Timeout connecting to Stripe API.<br>Metrics → latency increased<br>Trace:<br>API : 20ms<br>Order : 40ms<br>Payment : 3.8 sec  ← Problem<br>Database  : 30ms<br></td>
+</tr>
+</tbody>
+</table>
+<h5 id="monitoring-vs-observability">Monitoring vs Observability</h5>
+<ul>
+<li><strong>Monitoring: &quot;Is the system broken?&quot;</strong>
+<ul>
+<li>Monitoring is about the problems you already expect.</li>
+<li>Monitoring tells you when something goes wrong.</li>
+</ul>
+<pre class="hljs"><code><div>The Question: &quot;Is my server working normally?&quot;
+CPU &gt; 90%?
+Server Down?
+Disk Full?
+</div></code></pre>
+</li>
+<li><strong>Observability: &quot;Why is the system broken?&quot;</strong>
+<ul>
+<li>Observability is much broader. It helps you find problems you never expected.
+It gives you enough detailed data (logs, metrics, and traces) to understand the system's internal state, even during a brand-new type of failure.</li>
+<li>Observability gives you the data to understand why it went wrong.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7documentation"><strong>7.Documentation :</strong></h4>
+<ul>
+<li>Creating technical and user documentation.</li>
+</ul>
+<h4 id="summary">SUMMARY</h4>
+<pre class="hljs"><code><div>A Junior asks: “How do I code it?”
+A Senior asks: “Why are we building it, what can go wrong, and what will it cost to maintain?”
+
+Junior  →  &quot;How do I CODE it?&quot;
+                  ↓
+Mid     →  &quot;How do I DESIGN it?&quot;
+                  ↓
+Senior  →  &quot;WHY are we building it?&quot;
+           &quot;What are the TRADE-OFFS?&quot;
+           &quot;How will it SCALE?&quot;
+           &quot;What can FAIL?&quot;
+           &quot;How will we MAINTAIN it?&quot;
+</div></code></pre>
+<pre class="hljs"><code><div>Plan WHY → Define WHAT → Design HOW → CODE → TEST → DEPLOY → MONITOR → LEARN → REPEAT.
+</div></code></pre>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+
+    IDEA["💡 SOFTWARE IDEA<br/>Business Problem / Opportunity"]
+
+    PLAN["📋 1. PLANNING<br/>Why should we build it?<br/>Is it worth building?"]
+
+    REQ["📝 2. REQUIREMENTS<br/>WHAT should we build?<br/>Functional + Non-Functional"]
+
+    DESIGN["🏗️ 3. DESIGN<br/>HOW will we build it?<br/>HLD + LLD"]
+
+    CODE["💻 4. IMPLEMENTATION<br/>Code + Git + Code Review"]
+
+    TEST["🧪 5. TESTING<br/>Does it work correctly?<br/>Does it work well?"]
+
+    DEPLOY["🚀 6. DEPLOYMENT<br/>CI/CD + Production"]
+
+    MAINTAIN["🔧 7. MAINTENANCE<br/>Monitor + Fix + Improve"]
+
+    FEEDBACK["🔄 FEEDBACK<br/>Bugs + User Feedback<br/>New Requirements"]
+
+    IDEA --> PLAN
+    PLAN --> REQ
+    REQ --> DESIGN
+    DESIGN --> CODE
+    CODE --> TEST
+    TEST --> DEPLOY
+    DEPLOY --> MAINTAIN
+    MAINTAIN --> FEEDBACK
+
+    FEEDBACK --> PLAN
+    FEEDBACK --> REQ
+</div></code></pre>
+<hr>
+<h3 id="sdlc-software-development-life-cycle-models">SDLC (Software Development Life Cycle) Models</h3>
+<h4 id="waterfall">Waterfall</h4>
+<ul>
+<li>The Waterfall Model is a linear and sequential software development methodology
+where each phase must be completed before the next one begins.</li>
+<li>summary :-
+<ul>
+<li>Linear &amp; sequential steps.</li>
+<li>Each phase must be completed before starting the next.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[Requirement] --> B[Design] --> C[Implementation] --> D[Testing] --> E[Deployment] --> F[Maintenance]
+
+</div></code></pre>
+<h4 id="v-model">V-Model</h4>
+<ul>
+<li>
+<p>The V-Model is essentially an extension of the Waterfall model but with a focus on testing and validation.</p>
+</li>
+<li>
+<p>Each development phase has a corresponding testing phase, emphasizing the importance of verification (checking if the software is being built correctly) and validation (ensuring the software meets user needs).</p>
+<p>Low-Level Design -------&gt; Unit Testing
+High-Level Design ------&gt; Integration Testing
+System Design ----------&gt; System Testing
+Requirement Analysis ---&gt; Acceptance Testing</p>
+</li>
+<li>
+<p><strong>Summary :-</strong></p>
+<ul>
+<li>
+<p>Each development phase has a corresponding testing phase:</p>
+<table>
+<thead>
+<tr>
+<th>Development Phase</th>
+<th>Testing Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirement Analysis</td>
+<td>Acceptance Testing</td>
+</tr>
+<tr>
+<td>System Design</td>
+<td>System Testing</td>
+</tr>
+<tr>
+<td>High-Level Design</td>
+<td>Integration Testing</td>
+</tr>
+<tr>
+<td>Low-Level Design</td>
+<td>Unit Testing</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A1[Requirement Analysis] --- B1[Acceptance Testing]
+    A2[System Design] --- B2[System Testing]
+    A3[High-Level Design] --- B3[Integration Testing]
+    A4[Low-Level Design] --- B4[Unit Testing]
+
+</div></code></pre>
+<h4 id="agile">Agile</h4>
+<ul>
+<li>The Agile Model is an iterative and incremental approach to software development, where work is broken down into small, manageable units called sprints or iterations.</li>
+<li>Agile emphasizes flexibility,collaboration,and customer feedback,allowing for changes throughout the development process.</li>
+<li><strong>Summary:-</strong>
+<ul>
+<li>Iterative &amp; incremental</li>
+<li>Work done in sprints</li>
+<li>High flexibility</li>
+<li>Continuous customer feedback</li>
+<li>Collaboration between teams</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">
+flowchart LR
+    A[Product Backlog] --> B[Sprint Planning]
+    B --> C[Development Sprint]
+    C --> D[Testing]
+    D --> E[Review]
+    E --> F[Release]
+    F -->|Feedback| A
+
+</div></code></pre>
+
+</body>
+</html>

@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>C++Day1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#default-value">Default Value</a>
+<ul>
+<li><a href="#1-default-arguments-must-be-at-the-end-only">1. Default Arguments Must Be at the End Only</a></li>
+<li><a href="#default-arguments-work-only-in-function-declarations-not-in-calls">Default Arguments Work Only in Function Declarations, Not in Calls</a></li>
+<li><a href="#default-arguments-are-copied-into-every-call-site">Default Arguments Are “Copied” into Every Call Site</a></li>
+<li><a href="#cannot-use-default-arguments-before-they-are-declared">Cannot Use Default Arguments Before They Are Declared</a></li>
+<li><a href="#how-default-arguments-work-in-c-compile-time-binding-vs-run-time-evaluation">How Default Arguments Work in C++: Compile-Time Binding vs Run-Time Evaluation</a>
+<ul>
+<li><a href="#how-default-arguments-actually-work"><strong>How Default Arguments Actually Work</strong></a></li>
+<li><a href="#what-compile-time-actually-refers-to"><strong>What “compile-time” actually refers to</strong></a></li>
+<li><a href="#default-argument-evaluation-timing-python-vs-c">Default argument evaluation timing Python vs C++</a>
+<ul>
+<li><a href="#sidebyside-comparison-default-argument-evaluation-timing-python-vs-c"><strong>Side‑by‑side comparison Default argument evaluation timing Python vs C++</strong></a></li>
+<li><a href="#the-python-analogue">The Python analogue</a></li>
+<li><a href="#why-python-behaves-differently">Why Python behaves differently</a></li>
+<li><a href="#the-idiomatic-python-fix">The idiomatic Python fix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#default-arguments--function-pointers">Default Arguments + Function Pointers</a></li>
+<li><a href="#overloading-vs-default-arguments-ambiguity">Overloading vs Default Arguments Ambiguity</a></li>
+<li><a href="#virtual-functions-and-default-arguments">Virtual Functions and Default Arguments</a></li>
+</ul>
+</li>
+<li><a href="#references-vs-pointers">References VS Pointers</a>
+<ul>
+<li><a href="#pointers">Pointers</a>
+<ul>
+<li><a href="#characteristics">Characteristics:</a></li>
+<li><a href="#common-mistakes">Common Mistakes:</a>
+<ul>
+<li><a href="#dereferencing-null-pointers">Dereferencing Null Pointers:</a></li>
+<li><a href="#memory-leaks">Memory Leaks:</a></li>
+<li><a href="#dangling-pointers">Dangling Pointers:</a></li>
+<li><a href="#pointer-arithmetic">Pointer Arithmetic:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#references">References</a>
+<ul>
+<li><a href="#what-is-reference">What is Reference</a></li>
+<li><a href="#characteristics-1">Characteristics:</a></li>
+<li><a href="#use-case">use Case</a>
+<ul>
+<li><a href="#pass-by-reference-to-modify">Pass-by-reference to modify</a></li>
+<li><a href="#pass-by-const-reference-to-avoid-copies">Pass-by-const-reference to avoid copies</a></li>
+<li><a href="#returning-reference-from-functions">Returning Reference from Functions</a></li>
+<li><a href="#return-by-reference-be-careful-with-lifetimes">Return by reference (be careful with lifetimes!)</a></li>
+<li><a href="#modify-data-in-range-based-loops">Modify Data in Range Based Loops</a></li>
+</ul>
+</li>
+<li><a href="#common-mistakes-1">Common Mistakes:</a>
+<ul>
+<li><a href="#references-lvalue">References Lvalue</a></li>
+<li><a href="#uninitialized-references">Uninitialized References:</a></li>
+<li><a href="#lifetime-issues">Lifetime Issues:</a></li>
+<li><a href="#confusing-references-and-pointers">Confusing References and Pointers:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#overloading">Overloading</a></li>
+<li><a href="#paradigm-c-vs-c">Paradigm C Vs C++</a>
+<ul>
+<li><a href="#c-procedural">C (Procedural)</a></li>
+</ul>
+</li>
+<li><a href="#c-multiparadigm-procedural--oop--generic--raii">C++ (Multi‑paradigm: Procedural + OOP + Generic + RAII)</a></li>
+<li><a href="#encpsulation">Encpsulation</a>
+<ul>
+<li><a href="#free-functions-c-style-pass-by-reference-if-you-want-to-modify-the-car">Free functions (C-style), pass by reference if you want to modify the car</a></li>
+<li><a href="#member-functions-c-style-call-with-cmoveback">Member functions (C++-style), call with c.moveBack()</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="default-value">Default Value</h2>
+<h3 id="1-default-arguments-must-be-at-the-end-only">1. Default Arguments Must Be at the End Only</h3>
+<ul>
+<li>You cannot give a default value to a parameter on the left while a parameter to its right does not have a default.</li>
+<li>Once you start giving defaults, all parameters to the right must also have defaults.</li>
+<li>C++ cannot skip parameters in the middle. Default parameters must be right-aligned.</li>
+</ul>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+A[Start Using Default Arguments] --> B{Does a parameter<br>have a default?}
+
+B -->|No| C[Next parameter OK]
+B -->|Yes| D{Do ALL parameters<br>to the RIGHT also have defaults?}
+
+D -->|Yes| E[VALID ✔]
+D -->|No| F[INVALID ❌]
+
+style E fill:#c4f0c4,stroke:#3f8f3f,color:black
+style F fill:#ffcccc,stroke:#cc0000,color:black
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>, <span class="hljs-keyword">int</span> y)</span></span>;  <span class="hljs-comment">//❌Wrong</span>
+<span class="hljs-comment">//Because x(right parameter) does not have a default, but y does.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x , <span class="hljs-keyword">int</span> y= <span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">//✔Correct</span>
+<span class="hljs-comment">//Defaults start at y (right side).</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>,<span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z)</span></span>;  <span class="hljs-comment">//❌Wrong</span>
+<span class="hljs-comment">//x has default → but y,z (right) doesn't.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>,<span class="hljs-keyword">int</span> y=<span class="hljs-number">5</span>, <span class="hljs-keyword">int</span> z)</span></span>;  <span class="hljs-comment">//❌Wrong</span>
+<span class="hljs-comment">//z is on the right without a default.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>,<span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z=<span class="hljs-number">5</span>)</span></span>;  <span class="hljs-comment">//❌Wrong</span>
+<span class="hljs-comment">//y is between defaults → not allowed.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x , <span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> z=<span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">//✔Correct</span>
+<span class="hljs-comment">//Default starts at rightmost parameter only.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x , <span class="hljs-keyword">int</span> y= <span class="hljs-number">10</span>,<span class="hljs-keyword">int</span> z=<span class="hljs-number">10</span>)</span>)</span>; <span class="hljs-comment">//✔Correct.</span>
+<span class="hljs-comment">//Defaults start at y (middle) → z also has default.</span>
+<span class="hljs-comment">//Valid pattern: parameters right of first default also have defaults.</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">int</span> y= <span class="hljs-number">10</span>,<span class="hljs-keyword">int</span> z=<span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">//✔Correct</span>
+<span class="hljs-comment">//All parameters have defaults → valid.</span>
+</div></code></pre>
+<pre><code class="language-mermaid"><div class="mermaid">classDiagram
+    class Valid {
+        +fun(int a, int b=5, int c=10)
+        +fun(int a, int b, int c=10)
+        +fun(int a=1, int b=2, int c=3)
+    }
+
+    class Invalid {
+        +fun(int a=10, int b)
+        +fun(int a=10, int b, int c=20)
+        +fun(int a, int b=10, int c)
+    }
+</div></code></pre>
+<h3 id="default-arguments-work-only-in-function-declarations-not-in-calls">Default Arguments Work Only in Function Declarations, Not in Calls</h3>
+<ul>
+<li>fun(10, =20);  // ❌ invalid syntax</li>
+<li>Only function prototype provides defaults.</li>
+</ul>
+<h3 id="default-arguments-are-copied-into-every-call-site">Default Arguments Are “Copied” into Every Call Site</h3>
+<ul>
+<li>When a function is declared multiple times (header + source),
+default args must appear only once.</li>
+<li>Only write defaults in declaration</li>
+<li>Default Arguments Are Not Allowed in Both Declaration &amp; Definition (Repeated)</li>
+<li>Default arguments must appear only once.</li>
+<li>❌ Wrong (duplicated defaults)<pre class="hljs"><code><div>    <span class="hljs-comment">// header file</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>)</span></span>;
+
+    <span class="hljs-comment">// source file</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>)</span> </span>{   <span class="hljs-comment">// ❌ ERROR</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; a;
+    }
+</div></code></pre>
+</li>
+<li>✔ Correct<pre class="hljs"><code><div>    <span class="hljs-comment">// header file</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>)</span></span>;
+
+    <span class="hljs-comment">// source file</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>{
+        <span class="hljs-built_in">cout</span> &lt;&lt; a;
+    }
+</div></code></pre>
+</li>
+<li>✔ Correct<pre class="hljs"><code><div>    <span class="hljs-comment">// Declaration with default argument</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>)</span></span>;
+
+    <span class="hljs-comment">// Definition without default argument</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span>
+    </span>{
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Value: "</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+</div></code></pre>
+</li>
+<li>❌ Wrong Default Arguments Cannot Be Modified<pre class="hljs"><code><div>    <span class="hljs-comment">// Declaration</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>)</span></span>;
+
+    <span class="hljs-comment">// This definintion will throw and error</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">222</span>)</span>
+    </span>{
+        <span class="hljs-comment">// statements</span>
+    }
+</div></code></pre>
+</li>
+<li>Reason: C++ injects the default argument into the call, not the function.</li>
+</ul>
+<h3 id="cannot-use-default-arguments-before-they-are-declared">Cannot Use Default Arguments Before They Are Declared</h3>
+<p>❌ Wrong</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = value)</span></span>;  <span class="hljs-comment">// value not declared yet</span>
+<span class="hljs-keyword">int</span> value = <span class="hljs-number">10</span>;
+</div></code></pre>
+<p>✔ Correct</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> value = <span class="hljs-number">10</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = value)</span></span>;
+</div></code></pre>
+<h3 id="how-default-arguments-work-in-c-compile-time-binding-vs-run-time-evaluation">How Default Arguments Work in C++: Compile-Time Binding vs Run-Time Evaluation</h3>
+<ul>
+<li>Default argument selection is compile-time; evaluation of its expression is run-time.</li>
+<li>default argument is fixed at compile time,  if the expression is dynamic.
+<ul>
+<li>Compile-time: Which default argument applies is decided.</li>
+<li>Run-time: The actual expression (if any) is evaluated.</li>
+</ul>
+</li>
+</ul>
+<h4 id="how-default-arguments-actually-work"><strong>How Default Arguments Actually Work</strong></h4>
+<ul>
+<li>Binding (which default to use) happens at compile time: The compiler decides which default argument is associated with the function based on the declaration visible at the call site. This is a compile-time decision.</li>
+<li>Evaluation of the default argument expression happens at run time: If the default argument is an expression like getValue(), that expression is evaluated each time the function is called (at runtime), not “assigned once” at compile time.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getValue</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> rand() % <span class="hljs-number">10</span>; }
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = getValue())</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    show(); <span class="hljs-comment">// calls show(getValue()); -&gt; prints a random number</span>
+    show(); <span class="hljs-comment">// calls show(getValue()); -&gt; prints another random number</span>
+}
+</div></code></pre>
+<ul>
+<li>C++: You can use a function call in the default argument, but many teams prefer the sentinel pattern for clarity:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">-1</span>)</span> </span>{
+    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) x = getValue();
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    show(); <span class="hljs-comment">// calls show(getValue()); -&gt; prints a random number</span>
+    show(); <span class="hljs-comment">// calls show(getValue()); -&gt; prints another random number</span>
+}
+
+</div></code></pre>
+<ul>
+<li>Each show() call is effectively transformed by the compiler into show(getValue()); at the call site. Since getValue() calls rand(), which changes across calls, you correctly get different outputs (like 3 then 6).</li>
+</ul>
+<h4 id="what-compile-time-actually-refers-to"><strong>What “compile-time” actually refers to</strong></h4>
+<ul>
+<li>
+<p>Default arguments are not part of the function type. They’re more like syntactic sugar the compiler uses to fill in missing arguments at the call site.</p>
+</li>
+<li>
+<p>The choice of default argument is fixed at compile time based on what declaration the caller sees.</p>
+</li>
+<li>
+<p>The value of that default argument expression can be constant or dynamic. If it’s dynamic (e.g., rand(), reading a global, calling a function), it’s evaluated at run time.</p>
+</li>
+</ul>
+<h4 id="default-argument-evaluation-timing-python-vs-c">Default argument evaluation timing Python vs C++</h4>
+<ul>
+<li>Python: “Default args are like constants captured at definition time.”</li>
+<li>C++: “Default args are like syntactic sugar—compiler plugs them in at each call site, then they run.”</li>
+</ul>
+<h5 id="side%E2%80%91by%E2%80%91side-comparison-default-argument-evaluation-timing-python-vs-c"><strong>Side‑by‑side comparison Default argument evaluation timing Python vs C++</strong></h5>
+<ul>
+<li><strong>Python:</strong>
+<ul>
+<li>Default expressions are evaluated once at function definition.</li>
+<li>Any stateful call (like random, reading time, etc.) will happen only once, producing the same default value for all calls unless explicitly overridden.</li>
+</ul>
+</li>
+<li><strong>C++:</strong>
+<ul>
+<li>Default arguments are substituted at call sites during compilation, and the expression is evaluated at runtime for each call where the argument is omitted.</li>
+<li>A function call used as a default (e.g., getValue()) will run every time you call the function without that argument.</li>
+</ul>
+</li>
+</ul>
+<h5 id="the-python-analogue">The Python analogue</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> random
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_value</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">9</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span><span class="hljs-params">(x=get_value<span class="hljs-params">()</span>)</span>:</span>
+    print(x)
+show()  <span class="hljs-comment"># prints one number</span>
+show()  <span class="hljs-comment"># prints THE SAME number again</span>
+</div></code></pre>
+<h5 id="why-python-behaves-differently">Why Python behaves differently</h5>
+<ul>
+<li>In Python, default argument expressions are evaluated once—at function definition time, not at call time.</li>
+<li>So get_value() runs only once when show is defined; x’s default becomes that single value, which is reused for every call that omits x.</li>
+</ul>
+<h5 id="the-idiomatic-python-fix">The idiomatic Python fix</h5>
+<p>To get a fresh value each call, compute inside the function (use a sentinel default):</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> random
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_value</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">9</span>)
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span><span class="hljs-params">(x=None)</span>:</span>
+    <span class="hljs-keyword">if</span> x <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        x = get_value()   <span class="hljs-comment"># evaluated on each call when x not provided</span>
+    print(x)
+show()  <span class="hljs-comment"># new random value</span>
+show()  <span class="hljs-comment"># another random value</span>
+</div></code></pre>
+<h3 id="default-arguments--function-pointers">Default Arguments + Function Pointers</h3>
+<ul>
+<li>Default arguments belong to the function declaration, NOT the function pointer.<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>)</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; a; }
+
+    <span class="hljs-keyword">void</span> (*ptr)(<span class="hljs-keyword">int</span>) = fun;
+
+    ptr();      <span class="hljs-comment">// ❌ ERROR: you must pass an argument</span>
+    ptr(<span class="hljs-number">5</span>);     <span class="hljs-comment">// ✔ OK</span>
+</div></code></pre>
+</li>
+<li>Reason: Default is inserted at call site, not inside the function pointer.</li>
+</ul>
+<h3 id="overloading-vs-default-arguments-ambiguity">Overloading vs Default Arguments Ambiguity</h3>
+<ul>
+<li>Default parameters can create ambiguous function calls.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y = <span class="hljs-number">20</span>)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>;
+    
+fun(<span class="hljs-number">10</span>);   <span class="hljs-comment">// ❌ ambiguous </span>
+<span class="hljs-comment">//Which one should be used?</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// Valid</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>, <span class="hljs-keyword">int</span> b = <span class="hljs-number">20</span>)</span></span>;
+<span class="hljs-comment">// Will throw error as the signature is same</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a = <span class="hljs-number">22</span>, <span class="hljs-keyword">int</span> b = <span class="hljs-number">2</span>)</span></span>;
+<span class="hljs-comment">// Will also throw error</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>;
+<span class="hljs-comment">// Will also throw an error</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, b)</span>
+</span></div></code></pre>
+<h3 id="virtual-functions-and-default-arguments">Virtual Functions and Default Arguments</h3>
+<ul>
+<li>
+<p>Default arguments in virtual functions are bound at compile time,
+but virtual dispatch (overriding) happens at run-time — dangerous combo!</p>
+</li>
+<li>
+<p>Example:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span> {</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>)</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Base: "</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>; }
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Derived</span> :</span> <span class="hljs-keyword">public</span> Base {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x = <span class="hljs-number">20</span>)</span> <span class="hljs-keyword">override</span> </span>{ <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Derived: "</span> &lt;&lt; x &lt;&lt; <span class="hljs-built_in">endl</span>; }
+};
+
+Derived d;
+Base* pb = &amp;d;
+d.show(); <span class="hljs-comment">// static type: Derived -&gt; default is 20; dynamic call: Derived::show -&gt; prints "Derived: 20"</span>
+<span class="hljs-comment">// Uses Derived's default: prints "Derived: 20"</span>
+
+pb-&gt;show(); <span class="hljs-comment">// static type: Base*  -&gt; default is 10; dynamic call: Derived::show -&gt; prints "Derived: 10"</span>
+<span class="hljs-comment">// Virtual dispatch to Derived::show, BUT default chosen as Base's: prints "Derived: 10"</span>
+
+Base* ptr = <span class="hljs-keyword">new</span> Derived();
+ptr-&gt;show();   <span class="hljs-comment">// // Derived: 10</span>
+
+ptr-&gt;show(<span class="hljs-number">20</span>);  <span class="hljs-comment">// Derived: 20</span>
+
+
+</div></code></pre>
+<ul>
+<li>Virtual call → Derived::show</li>
+<li>Default argument → taken from Base (static binding)</li>
+<li>This confuses many programmers!</li>
+</ul>
+<h2 id="references-vs-pointers">References VS Pointers</h2>
+<h3 id="pointers">Pointers</h3>
+<h4 id="characteristics">Characteristics:</h4>
+<ul>
+<li>Pointers store the memory address of a variable.</li>
+<li>Pointers can be null, meaning they may not point to any object.</li>
+<li>Pointers can be reassigned to point to different objects or changed.</li>
+<li>You use the * operator to declare a pointer and the &amp; operator to get the address of a variable.</li>
+</ul>
+<h4 id="common-mistakes">Common Mistakes:</h4>
+<h5 id="dereferencing-null-pointers">Dereferencing Null Pointers:</h5>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> *ptr = <span class="hljs-literal">nullptr</span>;
+*ptr = <span class="hljs-number">10</span>; <span class="hljs-comment">// Undefined behavior</span>
+</div></code></pre>
+<h5 id="memory-leaks">Memory Leaks:</h5>
+<ul>
+<li>Allocating memory with new and forgetting to delete it can lead to memory leaks.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> *arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];
+<span class="hljs-comment">// Forgetting to delete</span>
+</div></code></pre>
+<h5 id="dangling-pointers">Dangling Pointers:</h5>
+<ul>
+<li>When you delete a pointer but do not set it to nullptr, it becomes a dangling pointer.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> *ptr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>(<span class="hljs-number">5</span>);
+<span class="hljs-keyword">delete</span> ptr;
+<span class="hljs-comment">// ptr is now a dangling pointer</span>
+</div></code></pre>
+<h5 id="pointer-arithmetic">Pointer Arithmetic:</h5>
+<ul>
+<li>Incorrectly calculating indices or going out of bounds can lead to undefined behavior.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> arr[<span class="hljs-number">3</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};
+<span class="hljs-keyword">int</span> *p = arr;
+p += <span class="hljs-number">4</span>; <span class="hljs-comment">// Out of bounds access</span>
+</div></code></pre>
+<h3 id="references">References</h3>
+<h4 id="what-is-reference">What is Reference</h4>
+<ul>
+<li>A reference is an alias for an existing object—another name bound to the same memory. Once initialized, a reference must refer to something and cannot be reseated.</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">int</span>&amp; r = a;   <span class="hljs-comment">// r is a reference to </span>
+    ar = <span class="hljs-number">20</span>;     <span class="hljs-comment">// modifies 'a'</span>
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-string">"\n"</span>; <span class="hljs-comment">// 20Show more lines</span>
+</div></code></pre>
+<ul>
+<li>References are always initialized.</li>
+<li>References are typically implemented under the hood as pointers, but with safer syntax.</li>
+</ul>
+<h4 id="characteristics">Characteristics:</h4>
+<ul>
+<li>References act as an alias for another variable.</li>
+<li>References must be initialized when created and cannot be reassigned to refer to another variable.</li>
+<li>References cannot be null.</li>
+<li>Declared using the &amp; operator.</li>
+</ul>
+<h4 id="use-case">use Case</h4>
+<ul>
+<li>Pass-by-reference to modify arguments without copying.</li>
+<li>Avoid copying large objects.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">increment</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; n)</span> </span>{ 
+    n++; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{    
+    <span class="hljs-keyword">int</span> v = <span class="hljs-number">3</span>;    
+    increment(v); <span class="hljs-comment">// v becomes 4}Show more lines</span>
+}
+
+</div></code></pre>
+<h5 id="pass-by-reference-to-modify">Pass-by-reference to modify</h5>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; a, <span class="hljs-keyword">int</span>&amp; b)</span> </span>{ 
+    <span class="hljs-keyword">int</span> t = a; 
+    a = b; 
+    b = t; 
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> x=<span class="hljs-number">4</span>; 
+    <span class="hljs-keyword">int</span> y=<span class="hljs-number">5</span>; 
+    swap(x,y); 
+    <span class="hljs-comment">//y=4 , x=5 </span>
+}
+</div></code></pre>
+<h5 id="pass-by-const-reference-to-avoid-copies">Pass-by-const-reference to avoid copies</h5>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&amp; s)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">len</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> &amp; arr)</span></span>{
+    <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;
+    <span class="hljs-comment">//arr[i]='s';//Assigment of readonly location</span>
+    <span class="hljs-keyword">while</span>(arr[i]!=<span class="hljs-string">'\0'</span>){
+        i++;
+    }
+    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Len="</span>&lt;&lt;i&lt;&lt;<span class="hljs-built_in">endl</span>;
+}
+</div></code></pre>
+<h5 id="returning-reference-from-functions">Returning Reference from Functions</h5>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span>&amp; <span class="hljs-title">getMax</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;a, <span class="hljs-keyword">int</span> &amp;b)</span> </span>{ 
+    <span class="hljs-comment">// Return the larger of the two numbers</span>
+    <span class="hljs-keyword">return</span> (a &gt; b) ? a : b;  
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> x = <span class="hljs-number">10</span>, y = <span class="hljs-number">20</span>;
+    <span class="hljs-keyword">int</span> &amp;maxVal = getMax(x, y);<span class="hljs-comment">//maxVal--&gt;y</span>
+    <span class="hljs-comment">// Modify the value of the larger number</span>
+    maxVal = <span class="hljs-number">30</span>;  <span class="hljs-comment">//y=30</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"x = "</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">", y = "</span> &lt;&lt; y; <span class="hljs-comment">// x=10 , y=30</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h5 id="return-by-reference-be-careful-with-lifetimes">Return by reference (be careful with lifetimes!)</h5>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">// DANGER: Returning reference to local variable (dangling)</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span>&amp; <span class="hljs-title">bad</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> x = <span class="hljs-number">42</span>;
+    <span class="hljs-keyword">return</span> x;    <span class="hljs-comment">// undefined behavior</span>
+}
+
+<span class="hljs-keyword">int</span> &amp; ref=bad();
+ref=<span class="hljs-number">10</span>; <span class="hljs-comment">//Error RunTime:: Segmentation fault</span>
+</div></code></pre>
+<h5 id="modify-data-in-range-based-loops">Modify Data in Range Based Loops</h5>
+<pre class="hljs"><code><div>    <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; vect{ <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span> };
+
+    <span class="hljs-comment">// We can modify elements if we</span>
+    <span class="hljs-comment">// use reference</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>&amp; x : vect) {
+        x = x + <span class="hljs-number">5</span>;
+    }
+
+    <span class="hljs-comment">// Printing elements</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x : vect) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">" "</span>;
+    }
+</div></code></pre>
+<h4 id="common-mistakes">Common Mistakes:</h4>
+<h5 id="references-lvalue">References Lvalue</h5>
+<ol>
+<li>Lvalue References (T&amp;)</li>
+</ol>
+<ul>
+<li>Bind to lvalues (named, addressable objects).<pre class="hljs"><code><div>
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ca = <span class="hljs-number">2</span>;
+
+    <span class="hljs-keyword">int</span>&amp;  ref1 = a;  <span class="hljs-comment">// OK</span>
+    <span class="hljs-keyword">int</span>&amp;  ref2 = <span class="hljs-number">10</span>; <span class="hljs-comment">// ERROR:(can't bind non-const ref can't bind to rvalue (int)</span>
+    <span class="hljs-keyword">int</span>&amp;  ref3 = ca;  <span class="hljs-comment">// ERROR: can't bind non-const ref to const</span>
+  
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; ref4 = ca;        <span class="hljs-comment">// OK</span>
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; ref5 = <span class="hljs-number">10</span>;        <span class="hljs-comment">// OK: const ref can bind to rvalue</span>
+
+    <span class="hljs-keyword">int</span>&amp;&amp; rr1 = <span class="hljs-number">10</span>;            <span class="hljs-comment">// OK: rvalue refs bind to temporaries</span>
+    <span class="hljs-comment">// int&amp;&amp; rr2 = a;   // ERROR: rvalue ref can't bind to lvalue</span>
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp;&amp; rr3 = <span class="hljs-number">10</span>;      <span class="hljs-comment">// OK (rarely needed)</span>
+
+</div></code></pre>
+</li>
+</ul>
+<h5 id="uninitialized-references">Uninitialized References:</h5>
+<ul>
+<li>References must always be initialized; otherwise, it leads to undefined behavior.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> &amp;ref; <span class="hljs-comment">// Error: can’t be uninitialized</span>
+</div></code></pre>
+<h5 id="lifetime-issues">Lifetime Issues:</h5>
+<ul>
+<li>If a reference is tied to a local variable that goes out of scope, accessing that reference thereafter can lead to undefined behavior.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span>&amp; <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> localVar = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">return</span> localVar; <span class="hljs-comment">// Dangerous: localVar is destroyed at the end of the scope</span>
+}
+</div></code></pre>
+<h5 id="confusing-references-and-pointers">Confusing References and Pointers:</h5>
+<ul>
+<li>Developers may mistakenly use references when they meant to use pointers, especially when dealing with cases where the variable may not exist (null pointers).</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x)</span> </span>{ <span class="hljs-comment">// Must pass a valid int</span>
+    <span class="hljs-comment">// Logic here</span>
+}
+
+<span class="hljs-keyword">int</span> *p = <span class="hljs-literal">nullptr</span>;
+func(*p); <span class="hljs-comment">// Error: trying to dereference a nullptr</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Feature</th>
+<th style="text-align:center">Pointers</th>
+<th style="text-align:center">References</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Syntax</td>
+<td style="text-align:center">int *p</td>
+<td style="text-align:center">int &amp;r</td>
+</tr>
+<tr>
+<td style="text-align:center">Nullability</td>
+<td style="text-align:center">Can be null</td>
+<td style="text-align:center">Cannot be null</td>
+</tr>
+<tr>
+<td style="text-align:center">Reassignment</td>
+<td style="text-align:center">Can point to different objects</td>
+<td style="text-align:center">Cannot be changed after initialization</td>
+</tr>
+<tr>
+<td style="text-align:center">Syntax for Access</td>
+<td style="text-align:center">Use * to dereference</td>
+<td style="text-align:center">No dereference operator needed</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory Management</td>
+<td style="text-align:center">Requires explicit deletion if allocated</td>
+<td style="text-align:center">Automatically managed (no new/delete)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="overloading">Overloading</h2>
+<ul>
+<li>Same Action with different Input</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( <span class="hljs-keyword">int</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">int</span> y=<span class="hljs-number">10</span>)</span></span>{<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Int : "</span>&lt;&lt;x+y&lt;&lt;<span class="hljs-built_in">endl</span>;}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( <span class="hljs-keyword">float</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">float</span> y=<span class="hljs-number">10</span>)</span></span>{<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Float : "</span>&lt;&lt;x+y&lt;&lt;<span class="hljs-built_in">endl</span>;}
+add(<span class="hljs-number">10</span>,<span class="hljs-number">20</span>);<span class="hljs-comment">// Int : 30</span>
+add(<span class="hljs-number">10.5</span>,<span class="hljs-number">20.4</span>);<span class="hljs-comment">//Error:: call of overloaded ‘add(double, double)’ is ambiguous|</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( <span class="hljs-keyword">int</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">int</span> y=<span class="hljs-number">10</span>)</span></span>{<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Int : "</span>&lt;&lt;x+y&lt;&lt;<span class="hljs-built_in">endl</span>;}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( <span class="hljs-keyword">float</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">float</span> y=<span class="hljs-number">10</span>)</span></span>{<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Float : "</span>&lt;&lt;x+y&lt;&lt;<span class="hljs-built_in">endl</span>;}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">( <span class="hljs-keyword">double</span> x=<span class="hljs-number">10</span> , <span class="hljs-keyword">double</span> y=<span class="hljs-number">10</span>)</span></span>{<span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"double : "</span>&lt;&lt;x+y&lt;&lt;<span class="hljs-built_in">endl</span>;}
+
+add(<span class="hljs-number">10</span>,<span class="hljs-number">20</span>); <span class="hljs-comment">// Int : 30</span>
+add(<span class="hljs-number">10.5</span>,<span class="hljs-number">20.4</span>);<span class="hljs-comment">//double : 30.9</span>
+add(<span class="hljs-number">10.5f</span>,<span class="hljs-number">20.4</span>);<span class="hljs-comment">//add((float)10.5,20.4); //double : 30.9</span>
+add(<span class="hljs-number">10.5f</span>,<span class="hljs-number">20.4f</span>);<span class="hljs-comment">//add((float)10.5,(float)20.4);Float : 30.9</span>
+
+add(<span class="hljs-number">10</span>,<span class="hljs-number">20.5</span>); <span class="hljs-comment">//Error::call of overloaded‘add(int, double)’ is ambiguous</span>
+</div></code></pre>
+<h2 id="paradigm-c-vs-c">Paradigm C Vs C++</h2>
+<h3 id="c-procedural">C (Procedural)</h3>
+<ul>
+<li>What it means: You organize your program around functions that operate on data structures. Data and behavior are separate.</li>
+<li>Typical style: Top‑down design, function calls, explicit control flow.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">// sum_array.c</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>{
+    <span class="hljs-keyword">int</span> s = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) s += arr[i];
+    <span class="hljs-keyword">return</span> s;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">int</span> a[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>};
+    <span class="hljs-keyword">int</span> n = <span class="hljs-keyword">sizeof</span>(a) / <span class="hljs-keyword">sizeof</span>(a[<span class="hljs-number">0</span>]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Sum = %d\n"</span>, sum(a, n));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+</div></code></pre>
+<h2 id="c-multi%E2%80%91paradigm-procedural--oop--generic--raii">C++ (Multi‑paradigm: Procedural + OOP + Generic + RAII)</h2>
+<ul>
+<li>What it means: You can write procedural code, object‑oriented code (classes, inheritance, polymorphism), generic code (templates), and use resource management via RAII (constructors/destructors).</li>
+<li>Typical style: Abstractions via classes/objects and templates; data + behavior together.</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">// account.cpp</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span> {</span>
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> owner;
+    <span class="hljs-keyword">double</span> balance;
+<span class="hljs-keyword">public</span>:
+    Account(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> name, <span class="hljs-keyword">double</span> initial) : owner(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(name)), balance(initial) {}
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deposit</span><span class="hljs-params">(<span class="hljs-keyword">double</span> amount)</span> </span>{ balance += amount; }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span><span class="hljs-params">(<span class="hljs-keyword">double</span> amount)</span> </span>{ <span class="hljs-keyword">if</span> (amount &lt;= balance) balance -= amount; }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>{ <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; owner &lt;&lt; <span class="hljs-string">" balance = "</span> &lt;&lt; balance &lt;&lt; <span class="hljs-string">'\n'</span>; }
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    Account a{<span class="hljs-string">"Mina"</span>, <span class="hljs-number">1000.0</span>};
+    a.deposit(<span class="hljs-number">250.0</span>);
+    a.withdraw(<span class="hljs-number">100.0</span>);
+    a.<span class="hljs-built_in">print</span>(); <span class="hljs-comment">// Mina balance = 1150</span>
+}
+
+</div></code></pre>
+<h2 id="encpsulation">Encpsulation</h2>
+<h3 id="free-functions-c-style-pass-by-reference-if-you-want-to-modify-the-car">Free functions (C-style), pass by reference if you want to modify the car</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">car</span> {</span>
+    <span class="hljs-keyword">int</span> speed;
+}car; <span class="hljs-comment">// &lt;-- semicolon required</span>
+<span class="hljs-comment">// Free functions that MODIFY the passed car (pass by reference)</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">(car * c)</span> </span>{            <span class="hljs-comment">// use reference to modify the original</span>
+    c-&gt;speed -= <span class="hljs-number">10</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"moveBack: speed="</span> &lt;&lt; c.speed &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveForward</span><span class="hljs-params">(car * c)</span> </span>{
+    c-&gt;speed += <span class="hljs-number">10</span>;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"moveForward: speed="</span> &lt;&lt; c.speed &lt;&lt; <span class="hljs-string">"\n"</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    car c;          <span class="hljs-comment">// create object</span>
+    c.speed = <span class="hljs-number">10</span>;   <span class="hljs-comment">// set speed</span>
+    moveBack(&amp;c);        <span class="hljs-comment">// calls free function, modifies c</span>
+    moveForward(&amp;c);     <span class="hljs-comment">// modifies c again</span>
+    car c2;         <span class="hljs-comment">// another object</span>
+    c2.speed = <span class="hljs-number">20</span>;
+    c2.speed = <span class="hljs-number">30</span>;  <span class="hljs-comment">// overwrite (last assignment wins)</span>
+    moveBack(&amp;c2);       <span class="hljs-comment">// modifies c2</span>
+    moveForward(&amp;c2);    <span class="hljs-comment">// modifies c2</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="member-functions-c-style-call-with-cmoveback">Member functions (C++-style), call with c.moveBack()</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">car</span> {</span>
+    <span class="hljs-keyword">int</span> speed = <span class="hljs-number">0</span>;             <span class="hljs-comment">// default member initializer</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveBack</span><span class="hljs-params">()</span> </span>{          <span class="hljs-comment">// member function modifies *this</span>
+        speed -= <span class="hljs-number">10</span>;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"moveBack: speed="</span> &lt;&lt; speed &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveForward</span><span class="hljs-params">()</span> </span>{
+        speed += <span class="hljs-number">10</span>;
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"moveForward: speed="</span> &lt;&lt; speed &lt;&lt; <span class="hljs-string">"\n"</span>;
+    }
+}; <span class="hljs-comment">// semicolon after struct</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    car c;         <span class="hljs-comment">// create object</span>
+    c.speed = <span class="hljs-number">10</span>;
+    c.moveBack();  <span class="hljs-comment">//object Pass Implicit     // OK: member function</span>
+    c.moveForward();
+    car c2;        <span class="hljs-comment">// another object</span>
+    c2.speed = <span class="hljs-number">20</span>;
+    c2.speed = <span class="hljs-number">30</span>; <span class="hljs-comment">// overwrite value</span>
+    c.moveBack();
+    c2.moveBack();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<pre class="hljs"><code><div>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> {</span>
+    <span class="hljs-comment">// ...</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">Person <span class="hljs-title">function</span><span class="hljs-params">()</span>  </span>{ <span class="hljs-keyword">return</span> Person{ <span class="hljs-comment">/*...*/</span> }; } <span class="hljs-comment">// returns by value (copy)</span>
+};
+
+<span class="hljs-comment">// Caller receives a copy; change won’t affect Employee’s internal state</span>
+
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> {</span>
+    <span class="hljs-comment">// ...</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {</span>
+<span class="hljs-keyword">private</span>: 
+    <span class="hljs-function">Person <span class="hljs-title">function</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> Person{ <span class="hljs-comment">/*...*/</span> }; }
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">function2</span><span class="hljs-params">()</span> </span>{
+        Person p = function();
+        <span class="hljs-comment">// ...</span>
+        <span class="hljs-keyword">return</span> p.age;
+    }
+};
+
+
+
+</div></code></pre>
+
+</body>
+</html>

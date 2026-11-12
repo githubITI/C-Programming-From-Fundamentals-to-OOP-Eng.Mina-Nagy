@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Final Notes-UnderSee.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#basics-of-programming">Basics of Programming</a>
+<ul>
+<li><a href="#0-big-picture">0. Big Picture</a></li>
+<li><a href="#1-chapter-1--what-is-a-computing-system">1. Chapter 1 — What Is a Computing System?</a>
+<ul>
+<li><a href="#cpu">CPU</a></li>
+<li><a href="#memory-ram-and-rom">Memory: RAM and ROM</a></li>
+<li><a href="#disk">Disk</a></li>
+<li><a href="#io-devices">I/O Devices</a></li>
+</ul>
+</li>
+<li><a href="#2-chapter-2--types-of-computing-systems-general-purpose-vs-embedded-system">2. Chapter 2 — Types of Computing Systems (General purpose vs embedded System)</a></li>
+<li><a href="#chapter-3--the-boot-cycle-computer-pc-have-rom">Chapter 3 — The Boot Cycle (Computer Pc have ROM)</a>
+<ul>
+<li><a href="#chicken-and-egg-problem-why-rom-vs-bios--problem--solution">Chicken-and-Egg Problem (Why ROM?) vs BIOS — Problem &amp; Solution</a></li>
+<li><a href="#full-boot-cycle">Full Boot Cycle</a></li>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
+</ul>
+</li>
+<li><a href="#"></a></li>
+</ul>
+</li>
+</ul>
+<!-- <img src="https://www.sharetechnote.com/image/EmbeddedSystem_Example_08.png" width="200px"> -->
+<!-- <img src="https://www.sharetechnote.com/image/EmbeddedSystem_Example_02.png" width="200px"> -->
+<!-- <img src="https://www.sharetechnote.com/image/EmbeddedSystem_Example_01.png" width="200px"> -->
+<!-- <img src="" width="200px"> -->
+<!-- <img src="" width="200px"> -->
+<h3 id="basics-of-programming">Basics of Programming</h3>
+<h4 id="0-big-picture">0. Big Picture</h4>
+<p>This lesson answers one question: <strong>what really happens between the code I write and the machine that runs it?</strong> Every language, tool and error message you meet later sits on top of the answer.</p>
+<p><strong>What is it?</strong> The foundations every programmer needs: the computer itself, the software layers on top of it, and the ways code gets turned into something the CPU can run.</p>
+<p><strong>Why does it exist?</strong> Most beginners learn syntax first and are lost the first time something breaks outside their code: command not found, missing DLL, JRE not found, a program that works on Linux but not on Windows. These are not language problems. They are system problems.</p>
+<p><strong>What was there before?</strong> One program per machine, written in machine code, talking straight to the hardware. Change the hardware and you rewrite the program. Everything in this lesson (OS, C, Java, Python) is a layer that was added to stop that pain.</p>
+<p><strong>Who uses it?</strong> Everyone. Embedded engineers feel it in every line. Web developers feel it when a deployment fails.</p>
+<p><strong>🧠 Remember:</strong> every layer exists to hide something below it. Learn what each layer hides and why.</p>
+<p><strong>What students should know first</strong></p>
+<ul>
+<li>How to use a computer and a terminal at a basic level</li>
+<li>Nothing else. We start from zero.</li>
+</ul>
+<p><strong>What students will understand at the end</strong></p>
+<ul>
+<li>What the parts of a computer do and why they have those names</li>
+<li>What happens from the power button until an app starts</li>
+<li>Why we need an OS and how code talks to it</li>
+<li>Why C code is not &quot;write once, run anywhere&quot; and Java is</li>
+<li>The real difference between compiled, interpreted and JIT</li>
+<li>Why &quot;Python is interpreted&quot; is an incomplete sentence</li>
+</ul>
+<p><strong>Learning roadmap</strong></p>
+<pre class="hljs"><code><div>Basics of Programming
+ │
+ ├── Part A — The Machine
+ │     ├── Chapter 1 — Computing system (CPU, I/O, RAM, ROM )(Hardware Foundations)
+ │     ├── Chapter 2 — Types of Computing Systems (General purpose vs embedded System)
+ │     └── Chapter 3 — The Boot Cycle
+ │         (Power → BIOS → Bootloader → Kernel → systemd → Apps)
+ │
+ ├── Part B — Software Layers
+ │     ├── Chapter 4 —  Firmware / bare-metal / OS app 
+ │     ├── Chapter 5 — Why an Operating System Exists (Isolation, abstraction, system calls)
+ │     ├── Chapter 6 — How Software Talks to the OS
+ │     │     Interfaces (API, GUI, CLI) and web APIs
+ │     │     System Calls, APIs, GUI, CLI 
+ │     └── Chapter 7 — APIs on the Network (Web Services)
+ │         REST, GraphQL, SOAP, gRPC, Pub/Sub, Webhooks
+ │
+ ├── Part C — Languages
+ │     ├── Chapter 8 — From Machine Code to C (Machine code, assembly, C)
+ │     ├── Portability and the toolchain
+ │     └── Java, JVM, bytecode
+ │
+ └── Part D — Execution Models
+       ├── Compiler vs interpreter vs JIT
+       ├── Linking, JDK vs JRE
+       └── Python and its implementations
+</div></code></pre>
+<p><strong>The whole lesson in one picture</strong></p>
+<pre class="hljs"><code><div> Your code (C / Java / Python)
+        │
+        ▼
+ ┌───────────────────────┐
+ │ Translator            │  compiler / interpreter / JIT
+ ├───────────────────────┤
+ │ Libraries + runtime   │  libc, JVM, Python VM
+ ├───────────────────────┤
+ │ System calls (API)    │  the door into the OS
+ ├───────────────────────┤
+ │ Operating System      │  kernel, drivers
+ ├───────────────────────┤
+ │ Firmware / BIOS       │  first code that runs
+ ├───────────────────────┤
+ │ Hardware              │  CPU, RAM, ROM, I/O
+ └───────────────────────┘
+We walk this picture from the bottom up, then from the top down.
+</div></code></pre>
+<h4 id="1-chapter-1--what-is-a-computing-system">1. Chapter 1 — What Is a Computing System?</h4>
+<div dir="rtl">
+<ul>
+<li>الـ Computing System هو نظام يستقبل Input، يعالج البيانات، يخزنها عند الحاجة، ثم ينتج Output.<br></li>
+</ul>
+</div>
+<pre class="hljs"><code><div> Input ─────► Computing System (Processing) ─────► Output
+</div></code></pre>
+<ul>
+<li>A computing system is a machine that takes input, processes it by running instructions, keeps data somewhere, and produces output. It has three groups of parts: CPU, memory, and I/O.</li>
+</ul>
+<p><strong>Real-life analogy: a kitchen</strong></p>
+<table>
+<thead>
+<tr>
+<th>Real world</th>
+<th>Technical world</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chef</td>
+<td>CPU: does the work, one instruction at a time</td>
+</tr>
+<tr>
+<td>Counter top</td>
+<td>RAM: the space where the chef works right now</td>
+</tr>
+<tr>
+<td>Printed recipe book glued to the wall</td>
+<td>ROM: fixed instructions that are always there</td>
+</tr>
+<tr>
+<td>Pantry in the back room</td>
+<td>Hard disk / SSD: big storage, slow to reach</td>
+</tr>
+<tr>
+<td>Door, waiter, serving window</td>
+<td>I/O: how things enter and leave</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>The chef cannot cook from a shelf in the pantry. 
+Ingredients must come to the counter first. 
+Keep this in mind, it explains the disk later.
+                 ┌────────────────┐
+                 │      CPU       │
+                 │  registers     │
+                 │  ALU, control  │
+                 └────────┬───────┘
+                          │  address / data / control bus
+      ┌───────────────────┴─────────────────────┐
+      │                                         │
+  ┌───┴───────────────────────────┐             │
+  │           Memory              │             │
+  │    ┌─────────┴───────┐        │             │
+  │ ┌──┴──────┐     ┌────┴──────┐ │      ┌──────┴─────────┐
+  │ │  RAM    │     │ ROM/Flash │ │      │   I/O devices  │
+  │ │ volatile│     │ permanent │ │      │ Camera ,screen,│
+  │ │ R + W   │     │ firmware  │ │      │ keyboard, disk,│
+  │ └─────────┘     └───────────┘ │      │ network, GPIO  │
+  └───────────────────────────────┘      └────────────────┘
+</div></code></pre>
+<p><strong>Computing System Vs Human Body</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Computer Component</th>
+<th style="text-align:center">Role/Function</th>
+<th style="text-align:center">Human Body Analogy</th>
+<th style="text-align:center">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CPU (Central Processing Unit)</td>
+<td style="text-align:center">Brain / Control center</td>
+<td style="text-align:center">Brain</td>
+<td style="text-align:center">Processes instructions, makes decisions, controls everything.</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory (RAM)</td>
+<td style="text-align:center">Short-term memory / Working memory</td>
+<td style="text-align:center">Short-term memory</td>
+<td style="text-align:center">Temporarily holds information needed right now.</td>
+</tr>
+<tr>
+<td style="text-align:center">Storage (Hard Drive, SSD)</td>
+<td style="text-align:center">Long-term memory / Storage</td>
+<td style="text-align:center">Long-term memory (brain storage)</td>
+<td style="text-align:center">Stores data and programs for long-term use.</td>
+</tr>
+<tr>
+<td style="text-align:center">Input Devices (Keyboard, Mouse)</td>
+<td style="text-align:center">Sensory organs (eyes, ears, skin)</td>
+<td style="text-align:center">Eyes, ears, hands</td>
+<td style="text-align:center">Takes information from outside world and sends to CPU.</td>
+</tr>
+<tr>
+<td style="text-align:center">Output Devices (Monitor, Printer, Speakers)</td>
+<td style="text-align:center">Speech, actions, expressions</td>
+<td style="text-align:center">Mouth, hands, body movements</td>
+<td style="text-align:center">Sends processed information out to the world.</td>
+</tr>
+<tr>
+<td style="text-align:center">Bus (Data pathways)</td>
+<td style="text-align:center">Nervous system / Nerves</td>
+<td style="text-align:center">Nerves</td>
+<td style="text-align:center">Carries signals/data between components.</td>
+</tr>
+<tr>
+<td style="text-align:center">Power Supply</td>
+<td style="text-align:center">Heart / Circulatory system</td>
+<td style="text-align:center">Heart</td>
+<td style="text-align:center">Provides energy to the whole system.</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>┌─────────────────────────────────────────────────────────────────────┐
+│                    HUMAN BODY  VS  COMPUTER                         │
+│                     (Side-by-Side Diagram)                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+        ┌──────────────────┐              ┌──────────────────┐
+        │   HUMAN BODY     │              │    COMPUTER      │
+        │   (Silhouette)   │              │  (Desktop Tower) │
+        └──────────────────┘              └──────────────────┘
+
+   🧠  Brain  ◄──────────────────────────►  CPU
+       (Control center)                      (Central Processing Unit)
+
+   💭  Short-term memory ◄───────────────►  RAM
+       (Remembering a phone number)          (Working memory)
+
+   📚  Long-term memory ◄────────────────►  Hard Drive / SSD
+       (Childhood memories)                  (Storage)
+
+   👁️👂✋ Eyes, Ears, Skin ◄─────────────►  Camera,Microphone,Keyboard, Mouse
+       (Sensory organs)                      (Input devices)
+
+   🗣️✋ Mouth, Hands ◄───────────────────►  Monitor, Speakers, Printer
+       (Speech &amp; actions)                    (Output devices)
+
+   ⚡ Nerves ◄───────────────────────────►  Bus
+       (Signal pathways)                     (Data pathways)
+
+   ❤️ Heart ◄────────────────────────────►  Power Supply
+       (Pumps blood/energy)                  (Provides electricity)
+</div></code></pre>
+<p><strong>Notes</strong> : Every program you will ever write is just a sequence of instructions that the CPU executes, using RAM as its workspace, reading/writing I/O devices, and persisting data to Disk.</p>
+<h5 id="cpu">CPU</h5>
+<ul>
+<li>The CPU (Central Processing Unit) is the component that executes instructions.</li>
+<li>The CPU repeats one loop forever: fetch an instruction from memory, decode it, execute it. It has a few tiny, very fast storage slots called registers. Everything the CPU does happens on registers.</li>
+<li>The Fetch–Decode–Execute cycle (runs billions of times per second):</li>
+</ul>
+<pre class="hljs"><code><div>   ┌──────────┐
+   │  Fetch   │──► get next instruction from memory(Get instruction from memory)
+   └────┬─────┘
+        ▼
+   ┌──────────┐
+   │  Decode  │──► what does this instruction mean?(Figure out what it means)
+   └────┬─────┘
+        ▼
+   ┌──────────┐
+   │ Execute  │──► do it (add, move, jump, read, write)
+   └────┬─────┘
+        └──────── (repeat, forever, ~3 GHz = 3 billion times/sec)
+</div></code></pre>
+<h5 id="memory-ram-and-rom">Memory: RAM and ROM</h5>
+<ul>
+<li>🧠 Remember: RAM = temporary workspace. ROM = permanent boot instructions.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>RAM</th>
+<th>ROM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full name</td>
+<td>Random Access Memory</td>
+<td>Read-Only Memory</td>
+</tr>
+<tr>
+<td>Read / write</td>
+<td>Both, at full speed</td>
+<td>Read at full speed. Writing is rare or special</td>
+</tr>
+<tr>
+<td>After power off</td>
+<td>Contents are lost (volatile)</td>
+<td>Contents stay (non-volatile)</td>
+</tr>
+<tr>
+<td>Holds</td>
+<td>Running programs and their data</td>
+<td>Firmware: the first code the machine runs</td>
+</tr>
+<tr>
+<td>Size in a PC</td>
+<td>Gigabytes</td>
+<td>Megabytes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>important Notes</strong></p>
+<ul>
+<li><strong>Q: Why is RAM called &quot;Random Access&quot; Memory, and what does &quot;random&quot; actually mean in this context?</strong>
+<ul>
+<li>&quot;Random Access&quot;. The word random does not mean unpredictable. <strong>It means you can jump to any address directly and it takes the same time</strong>. Compare it to a tape: to reach song 10 you must wind through songs 1 to 9. That is sequential access. RAM has no winding.</li>
+</ul>
+</li>
+<li><strong>How can we call Flash memory &quot;ROM&quot; (Read Only Memory) while we can easily write on it...?!</strong>
+<ul>
+<li>The &quot;Read-Only&quot; designation is relative to the Processor (CPU) at runtime. Unlike RAM, which the processor can randomly access and write to directly via its system buses (Address, Data, Control), the processor cannot directly perform standard write/erase cycles to Flash memory without specialized protocols, controllers, or drivers.</li>
+</ul>
+</li>
+</ul>
+<h5 id="disk">Disk</h5>
+<ul>
+<li>
+<p>In everyday talk people say &quot;my laptop has 512 GB of memory&quot; and mean the disk. In computer architecture that is wrong.</p>
+</li>
+<li>
+<p>Memory (RAM, ROM) sits on the memory bus. The CPU can read any byte by address, directly.</p>
+</li>
+<li>
+<p><strong>The hard disk / SSD is an I/O device.</strong> The CPU cannot read byte 5000 of a file by address. It asks a controller (through a driver) to move blocks of data into RAM first. We call it secondary storage.</p>
+<pre class="hljs"><code><div>    CPU can execute this directly:      CPU can NOT execute this directly:
+
+    RAM  ◄──── CPU                     Disk ──► controller ──► RAM ──► CPU
+    ROM  ◄──── CPU                          (I/O, blocks, slow) 
+─────────────────────────────────────────────────────────────────────────────────────
+            RAM                        DISK / SSD
+    (Primary Memory)                (Secondary Storage)
+    ─────────────────           ────────────────────
+    • Volatile                  • Persistent
+    • Fast (GBs/sec)            • Slower (100s MB/sec)
+    • Small (8–64 GB)           • Huge (500GB–8TB)
+    • Holds RUNNING programs    • Holds FILES at rest
+    • Accessed by CPU           • Accessed via I/O controllers
+</div></code></pre>
+</li>
+<li>
+<p><strong>Why is the disk &quot;I/O&quot;? (The hard disk is NOT memory)</strong></p>
+<ul>
+<li>
+<p>Because the CPU does not directly manipulate it like RAM. The CPU talks to a disk controller through I/O instructions; data is transferred into RAM first, then the CPU reads it from RAM.</p>
+<pre class="hljs"><code><div>CPU ──(I/O request)──► Disk Controller ──► Disk
+▲                                            │
+└──────(DMA transfer to RAM)◄────────────────┘
+</div></code></pre>
+</li>
+<li>
+<p>&quot;Hard disk is not memory&quot; — correct in the strict sense: it's secondary storage, an I/O device. In casual speech people say &quot;memory&quot; loosely; in exams and interviews, be precise.</p>
+</li>
+<li>
+<p>This is why starting a program means loading it from disk into RAM. This is also why RAM size changes how many programs run at once, and disk size changes how much you can keep.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Speed: why we need all these kinds</strong></p>
+<ul>
+<li>Fast storage is small and expensive. Big storage is slow and cheap. Computers use a mix, and programs move data upward before using it.
+<table>
+<thead>
+<tr>
+<th>Storage</th>
+<th>Typical access time</th>
+<th>Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registers</td>
+<td>under 1 ns</td>
+<td>bytes</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>cache	a few ns</td>
+<td>MB</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>around 50 to 100 ns</td>
+<td>GB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>around 100 µs</td>
+<td>hundreds of GB</td>
+</tr>
+<tr>
+<td>Hard disk</td>
+<td>(spinning)</td>
+<td>around 10 ms	TB</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>🙋 <strong>Question: the SSD is fast, why is it still not memory?</strong></p>
+<ul>
+<li>speed is not the test. The test is how the CPU reaches it. If the CPU needs a controller and a driver to get the data, it is I/O.</li>
+</ul>
+</li>
+<li>
+<p><strong>🔥 Senior Insight:</strong> many devices (UART, GPIO, timers) are reached through memory-mapped I/O. A register of the device appears at a memory address, so a normal read or write talks to hardware. This is exactly how embedded C controls a pin. Large transfers use DMA so the CPU does not copy bytes one by one.</p>
+</li>
+</ul>
+<h5 id="io-devices">I/O Devices</h5>
+<ul>
+<li>Everything that isn't CPU/RAM is I/O:</li>
+<li>Input: keyboard, mouse, camera, sensors, network card</li>
+<li>Output: screen, speaker, printer</li>
+<li>Both(Input &amp; Output): disk, network, USB</li>
+<li>All I/O ultimately goes through the OS — your program doesn't touch hardware directly (that's the whole point of Chapter 5).</li>
+</ul>
+<h4 id="2-chapter-2--types-of-computing-systems-general-purpose-vs-embedded-system">2. Chapter 2 — Types of Computing Systems (General purpose vs embedded System)</h4>
+<ul>
+<li>
+<p>There are two big families. The difference is purpose, not size.</p>
+<ul>
+<li>
+<p><strong>General purpose:</strong></p>
+<ul>
+<li>built to run any program the user installs. Laptop, desktop, server, and in practice a phone.</li>
+<li>can do anything but slowly/expensively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Embedded:</strong></p>
+<ul>
+<li>built into a product to do one fixed job. Washing machine controller, car ECU, smart meter, router, thermostat, sensor node.</li>
+<li>Embedded does one thing extremely well, cheaply, and reliably.</li>
+</ul>
+<pre class="hljs"><code><div>                        ┌─────────────────────────────┐
+                        │      COMPUTING SYSTEMS      │
+                        └──────────────┬──────────────┘
+                ┌──────────────────────┴──────────────────────┐
+                ▼                                             ▼
+    ┌────────────────────────┐                   ┌────────────────────────┐
+    │  General Purpose       │                   │   Embedded System      │
+    │  ─────────────────     │                   │  ─────────────────     │
+    │  PC, laptop, server    │                   │  Microwave, ABS, drone │
+    │  Full OS               │                   │  RTOS / Bare-metal     │
+    │  Runs many apps        │                   │  Runs ONE app          │
+    └────────────────────────┘                   └────────────────────────┘
+────────────────────────────────────────────────────────────────────────
+        General purpose         │             Embedded
+────────────────────────────────────────────────────────────────────────
+Install Chrome, games, IDE      │     Product ships with one program
+User decides what it does       │     Manufacturer decides, user never sees it
+        │                       │             │
+Big OS (Windows, Linux, macOS)  │     Bare-metal, RTOS, or small Linux
+────────────────────────────────────────────────────────────────────────
+</div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>How to classify one</strong></p>
+<pre class="hljs"><code><div>Can the end user install arbitrary programs?
+│
+├── Yes → General purpose
+│
+└── No
+    │
+    └── Does it do one fixed job inside a product?
+        ├── Yes → Embedded
+        └── No  → Appliance / special server (check again)
+</div></code></pre>
+</li>
+<li>
+<p><strong>🔥 Senior Insight:</strong> do not define embedded by &quot;has no OS&quot;. A home router runs Linux and is still embedded, because the user cannot install programs on it. A Raspberry Pi running Linux is a general purpose board used as an embedded system. Ask: who decides what runs, and is the job fixed?</p>
+</li>
+<li>
+<p><strong>&quot;Why can't a car's brake controller run Windows?&quot;</strong></p>
+<ul>
+<li>Because Windows is general-purpose: it's huge, has a scheduler that can pause your code, and is not deterministic (can't guarantee a response within X microseconds). Brake systems need real-time guarantees → RTOS or bare-metal.</li>
+</ul>
+</li>
+<li>
+<p><strong>&quot;Is a smartphone embedded?&quot;</strong></p>
+<ul>
+<li>Good answer: it is general purpose for the user (apps), and it also contains many embedded systems inside it (modem, camera controller, touch controller).</li>
+</ul>
+</li>
+<li>
+<p><strong>Why this matters for the rest of the lesson</strong></p>
+<ul>
+<li>The next chapters change depending on which side you are on. Embedded targets often run firmware or bare-metal code with no OS. General purpose targets run OS apps. That one difference decides how you write, build and debug.</li>
+</ul>
+</li>
+</ul>
+<h4 id="chapter-3--the-boot-cycle-computer-pc-have-rom">Chapter 3 — The Boot Cycle (Computer Pc have ROM)</h4>
+<h5 id="chicken-and-egg-problem-why-rom-vs-bios--problem--solution">Chicken-and-Egg Problem (Why ROM?) vs BIOS — Problem &amp; Solution</h5>
+<p><strong>PROBLEM:</strong></p>
+<ul>
+<li>CPU needs instructions → instructions on disk → disk needs software → software on disk 🔁</li>
+<li>To load the OS from disk, you need software. But that software lives on the disk you can't read yet.</li>
+</ul>
+<p><strong>SOLUTION:</strong></p>
+<ul>
+<li>CPU reset vector → ROM (BIOS) → init RAM → read raw disk → load GRUB → load kernel → systemd → apps</li>
+</ul>
+<p><strong>WHY ROM:</strong></p>
+<ul>
+<li>Non-volatile + memory-mapped + zero-software-readable + fixed address</li>
+</ul>
+<p><strong>🔄 The Problem → Solution Flow</strong></p>
+<pre class="hljs"><code><div>┌──────────────────────────────────────────────────────────────┐
+│                    THE PROBLEM                               │
+│                                                              │
+│   CPU ──needs──► Instructions ──are on──► Disk               │
+│    ▲                                          │              │
+│    │                                          │              │
+│    └────── but reading disk needs ────────────┘              │
+│            software that's ON the disk                       │
+│                                                              │
+│                    🔁 DEADLOCK                               │
+└──────────────────────────┬───────────────────────────────────┘
+                           │
+                           │  SOLUTION: put the FIRST
+                           │  instructions somewhere the
+                           │  CPU can read with NO software
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    THE SOLUTION                              │
+│                                                              │
+│   CPU ──reset vector──► ROM (BIOS/UEFI)                      │
+│                           │                                  │
+│                           ├── POST: init RAM, test hardware  │
+│                           ├── Read disk (raw sectors)        │
+│                           └── Load bootloader → jump to it   │
+│                                                              │
+│   ✅ Loop broken. Chain continues: GRUB → Kernel → systemd   │
+└──────────────────────────────────────────────────────────────┘
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Why can't the CPU load the OS directly?</td>
+<td>It needs a driver + filesystem to read disk, which are themselves software on the disk → deadlock</td>
+</tr>
+<tr>
+<td>Why ROM and not RAM?</td>
+<td>RAM is volatile and empty at power-on; ROM is non-volatile and readable with no software</td>
+</tr>
+<tr>
+<td>What is the reset vector?</td>
+<td>The fixed address the CPU jumps to at power-on — it points into ROM</td>
+</tr>
+<tr>
+<td>Is BIOS an OS?</td>
+<td>No — it's firmware. It initializes hardware and loads the bootloader, then it's done</td>
+</tr>
+<tr>
+<td>What breaks the chicken-and-egg loop?</td>
+<td>The CPU's hardwired reset vector + the ROM contents (BIOS/UEFI)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="full-boot-cycle">Full Boot Cycle</h5>
+<pre class="hljs"><code><div>Power → ROM(BIOS/UEFI) → POST → Bootloader(GRUB) → Kernel → initramfs → systemd → Apps
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        COMPLETE BOOT CYCLE                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+  [POWER ON]
+      │
+      ▼
+┌─────────────┐     ┌──────────────────────────────────────────────┐
+│   PSU       │────►│ PWR_OK signal → CPU released from reset      │
+└─────────────┘     └──────────────────┬───────────────────────────┘
+                                       ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  ROM (BIOS/UEFI) — FIRST INSTRUCTIONS                            │
+│  ├── POST: test CPU, RAM, devices                                │
+│  ├── Initialize RAM controller                                   │
+│  ├── Detect boot devices                                         │
+│  └── Find bootloader on boot device                              │
+└──────────────────────────────┬───────────────────────────────────┘
+                               ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  BOOTLOADER (GRUB) — on disk                                     │
+│  ├── Show boot menu                                              │
+│  ├── Load kernel (vmlinuz) into RAM                              │
+│  ├── Load initramfs into RAM                                     │
+│  └── Pass kernel parameters, jump to kernel                      │
+└──────────────────────────────┬───────────────────────────────────┘
+                               ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  KERNEL — now running in RAM                                     │
+│  ├── Decompress, initialize memory management                    │
+│  ├── Detect CPU cores, load drivers                              │
+│  ├── Run initramfs (mount real root fs)                          │
+│  ├── Switch root to real filesystem                              │
+│  └── Execute /sbin/init (PID 1)                                  │
+└──────────────────────────────┬───────────────────────────────────┘
+                               ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  systemd (PID 1) — user space                                    │
+│  ├── Mount remaining filesystems                                 │
+│  ├── Start services in dependency order                          │
+│  ├── Reach multi-user.target / graphical.target                  │
+│  └── Start display manager                                       │
+└──────────────────────────────┬───────────────────────────────────┘
+                               ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  STARTUP APPS                                                    │
+│  ├── Login screen                                                │
+│  ├── Desktop environment                                         │
+│  └── User applications                                           │
+└──────────────────────────────┬───────────────────────────────────┘
+                               ▼
+                        [SYSTEM READY]
+
+
+</div></code></pre>
+<h5 id="common-mistakes">Common Mistakes</h5>
+<ul>
+<li>
+<p><strong>❌ Mistake 1: &quot;BIOS loads the operating system&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ BIOS loads Windows/Linux directly.
+    ✅ BIOS loads the BOOTLOADER, which loads the kernel.
+</div></code></pre>
+<ul>
+<li>Why it matters: If you think BIOS loads the OS, you can't diagnose &quot;GRUB not found&quot; vs &quot;kernel panic&quot; — they're different stages.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌ Mistake 2: &quot;The kernel is the whole OS&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ The OS = the kernel.
+    ✅ The OS = kernel + system libraries + systemd + user-space tools (shell, utilities).
+</div></code></pre>
+<ul>
+<li>Why: The kernel is the core, but ls, bash, and systemd are all user-space programs outside the kernel.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌ Mistake 3: &quot;RAM is used from the very first instruction&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ The CPU loads instructions into RAM immediately at power-on.
+    ✅ The first instructions execute from ROM; RAM is initialized by BIOS, then used.
+</div></code></pre>
+<ul>
+<li>Why: This is the chicken-and-egg problem — RAM controller must be configured before RAM can be used.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌ Mistake 4: &quot;GRUB is part of the kernel&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ GRUB is inside the kernel.
+    ✅ GRUB is a separate program on disk that LOADS the kernel.
+</div></code></pre>
+<ul>
+<li>Why: GRUB has its own code, its own config, and runs before the kernel exists.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌ Mistake 5: &quot;systemd starts first&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ systemd is the first thing that runs.
+    ✅ BIOS → GRUB → kernel → THEN systemd (PID 1).
+</div></code></pre>
+<ul>
+<li>Why: systemd is the first user-space process, but it's the fifth major stage in the boot chain.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌Mistake 6: &quot;If POST fails, the OS is corrupted&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ POST failure = OS problem.
+    ✅ POST failure = hardware problem (RAM, CPU, GPU).
+</div></code></pre>
+<ul>
+<li>Why: POST runs before any OS code. It tests hardware only.
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>❌ Mistake 7: &quot;UEFI is just a newer BIOS&quot;</strong></p>
+<pre class="hljs"><code><div>    ❌ UEFI is BIOS version 2.0.
+    ✅ UEFI is a fundamentally different firmware architecture (EFI partition, Secure Boot, networking, GUI).
+</div></code></pre>
+<ul>
+<li>Why: This matters for partitioning (GPT vs MBR), bootloader design, and security.
+<br></li>
+</ul>
+</li>
+</ul>
+<h4 id=""></h4>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TB
+
+    subgraph F["1️⃣ Firmware"]
+        direction TB
+        F1["Firmware<br/>Device Control / Boot / Configuration"]
+        F2["Hardware<br/>CPU • Memory • Peripherals"]
+        F1 --> F2
+    end
+
+    subgraph B["2️⃣ Bare-Metal Application"]
+        direction TB
+        B1["Application<br/>Your C/C++ Code"]
+        B2["HAL / Drivers<br/>(Optional)"]
+        B3["Hardware<br/>MCU • RAM • GPIO • Timers"]
+        B1 --> B2 --> B3
+    end
+
+    subgraph R["3️⃣ RTOS"]
+        direction TB
+        R1["Application Tasks<br/>Task 1 • Task 2 • Task 3"]
+        R2["RTOS<br/>Scheduler • IPC • Timers"]
+        R3["Drivers / HAL"]
+        R4["Hardware<br/>MCU • RAM • Peripherals"]
+        R1 --> R2 --> R3 --> R4
+    end
+
+    subgraph E["4️⃣ Embedded Linux"]
+        direction TB
+        E1["Embedded Applications<br/>MQTT • Web Server • Services"]
+        E2["Libraries / APIs"]
+        E3["Linux Kernel<br/>Processes • Memory • Network • FS"]
+        E4["Device Drivers"]
+        E5["Hardware<br/>CPU • RAM • Storage • Peripherals"]
+        E1 --> E2 --> E3 --> E4 --> E5
+    end
+
+    subgraph O["5️⃣ OS Application"]
+        direction TB
+        O1["Application<br/>Browser • VS Code • Python App"]
+        O2["Libraries / OS APIs"]
+        O3["Operating System<br/>Linux • Windows • macOS"]
+        O4["Drivers"]
+        O5["Hardware<br/>CPU • RAM • Storage • I/O"]
+        O1 --> O2 --> O3 --> O4 --> O5
+    end
+</div></code></pre>
+
+</body>
+</html>

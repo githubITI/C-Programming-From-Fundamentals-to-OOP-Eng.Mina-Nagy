@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1-Notes2026-Why Multiple Languages Exist.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<ul>
+<li><a href="#why-multiple-languages-exist">Why Multiple Languages Exist:</a>
+<ul>
+<li><a href="#static-vs-dynamic-and-weak-vs-strong">Static vs dynamic and weak vs strong</a>
+<ul>
+<li><a href="#statically-typed-language-like-rust-c-c">Statically Typed Language Like {Rust, C, C++}</a></li>
+<li><a href="#dynamically-typed-language-like-php-python-javascript">Dynamically Typed Language Like {PHP, Python, JavaScript}</a></li>
+<li><a href="#strong-language">Strong Language:</a></li>
+<li><a href="#loose-typing-or-weak-typing-language">Loose Typing (or weak typing) Language:</a></li>
+</ul>
+</li>
+<li><a href="#programming-paradigms">Programming Paradigms</a></li>
+<li><a href="#application-domains">Application Domains</a></li>
+<li><a href="#design-trade-offs">Design Trade-offs</a></li>
+<li><a href="#design-goals">Design Goals</a></li>
+</ul>
+</li>
+<li><a href="#programming-paradigms-1">Programming Paradigms</a>
+<ul>
+<li><a href="#notes-on-html-and-template-engine">Notes on HTML and Template Engine</a>
+<ul>
+<li><a href="#is-html-a-programming-language">Is HTML a Programming Language?</a></li>
+<li><a href="#why-html-is-not-a-programming-language">Why HTML is Not a Programming Language</a></li>
+<li><a href="#what-is-a-template-engine">What Is a Template Engine?</a></li>
+<li><a href="#template-rendering-path-backend-to-browser">Template Rendering Path (Backend to Browser)</a></li>
+<li><a href="#html-vs-template-engine-markdown-table">HTML vs Template Engine (Markdown Table)</a></li>
+</ul>
+</li>
+<li><a href="#functional-paradigm-characteristics">Functional Paradigm Characteristics</a></li>
+<li><a href="#programming-paradigms-simple-examples">Programming Paradigms: Simple Examples</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="why-multiple-languages-exist">Why Multiple Languages Exist:</h3>
+<ul>
+<li>No one-size-fits-all - Different problems need different tools.</li>
+<li>Evolution - New challenges require new solutions</li>
+<li>Specialization - Domain-specific optimizations.</li>
+<li>Human factors - Different thinking styles and preferences.</li>
+</ul>
+<h4 id="static-vs-dynamic-and-weak-vs-strong">Static vs dynamic and weak vs strong</h4>
+<ul>
+<li>static/dynamic axis describes when type checking occurs,</li>
+<li>strong/weak axis describes how strictly types are enforced and converted.
+<img src="https://media2.dev.to/dynamic/image/width=1280,height=720,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fmiro.medium.com%2Fmax%2F1400%2F1%2ABddwVWW6hFU0miT9DCbUWQ.png" width="300"/> <img src="https://cdn2.hexlet.io/derivations/image/original/eyJpZCI6IjE3Y2MyZTAxNGY4MzQyNDZlNDk5OGZkMGFiNjRmNGIyLnBuZyIsInN0b3JhZ2UiOiJjYWNoZSJ9?signature=720990b205472793cabb9c956488cb5685559eeef0e31187539ef03f4e5ee5d4" width="300"/></li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:977/1*zYjvfx3rZSSlghuWkTp-3A.png" width="300"/> <img src="https://miro.medium.com/v2/resize:fit:977/1*xkRVdkV0myS3g19Jsi44mw.png" width="300"/></p>
+<h5 id="statically-typed-language-like-rust-c-c">Statically Typed Language Like {Rust, C, C++}</h5>
+<pre><code>- Variables Types Are Static, Once You Declare It You Cannot Change.
+- Declare Data Type .
+- Type Of A Variable Is Known At Compile Time &quot;Do Type Checking At Compile-Time&quot;
+- Have Better Performance At Run-Time Due To Not Needing To Check Types Dynamically
+- Error Detected Earlier
+-  C, Java ,Scala ,TypeScript......	
+- Example 
+``` c++ 
+    //C++ 
+    int x=1;
+    x=&quot;mina&quot;; //Compiler Error 
+```
+</code></pre>
+<h5 id="dynamically-typed-language-like-php-python-javascript">Dynamically Typed Language Like {PHP, Python, JavaScript}</h5>
+<pre><code>- Variables Types Are Dynamic, You Can Always Change It
+- Not Declare Data Type 
+- &quot;Type Checking At Execution-Time&quot;
+- Error Can Be Detected After Execution
+- python,php,js ,.........
+- Example 
+``` python 
+    #Python 
+    x=1 
+    print(type(x)) #cls&lt;int&gt;
+    x=&quot;mina&quot;
+    print(type(x)) #cls&lt;str&gt;
+```
+</code></pre>
+<h5 id="strong-language">Strong Language:</h5>
+<ul>
+<li>can't Automatic Casting</li>
+<li>more rigid when it comes to type conversions as they ensure that operations are performed only on compatible data types.</li>
+<li>By catching type-related errors early strongly typed languages minimize runtime errors and make debugging easier.</li>
+<li>Types are strictly checked, and conversions between incompatible types are either not allowed or require explicit actions.</li>
+<li>Example:</li>
+</ul>
+<pre class="hljs"><code><div>print(<span class="hljs-string">"str"</span>+<span class="hljs-number">4</span>) <span class="hljs-comment">#TypeError: must be str, not int</span>
+</div></code></pre>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">int</span> num = <span class="hljs-number">5</span>;
+	String text = <span class="hljs-string">"hello"</span>;
+	String result = num + text;  <span class="hljs-comment">// Compile-time error: incompatible types</span>
+</div></code></pre>
+<h5 id="loose-typing-or-weak-typing-language">Loose Typing (or weak typing) Language:</h5>
+<ul>
+<li>The language allows implicit type conversions.</li>
+<li>You can perform operations with different types without needing explicit casts or conversions.</li>
+<li>Example<pre class="hljs"><code><div><span class="hljs-comment">//JS </span>
+<span class="hljs-comment">//Ex1</span>
+ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"20"</span>+<span class="hljs-number">20</span>) <span class="hljs-comment">// 2020</span>
+<span class="hljs-comment">//Ex2</span>
+<span class="hljs-keyword">if</span>( <span class="hljs-number">5</span> == <span class="hljs-string">"5"</span> ){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"true"</span>)
+}
+<span class="hljs-keyword">else</span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"flase"</span>)
+}
+<span class="hljs-comment">//Ex3</span>
+<span class="hljs-keyword">if</span>( <span class="hljs-number">5</span> === <span class="hljs-string">"5"</span> ){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"true"</span>)
+}
+<span class="hljs-keyword">else</span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"flase"</span>)
+}
+<span class="hljs-comment">// == in JS --&gt; Compare Value  , === in js --&gt; Compare Value , DataType</span>
+</div></code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Statically Typed Languages</th>
+<th>Dynamically Typed Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- Type checking is completed at compile time</td>
+<td>- Type checking is completed during runtime</td>
+</tr>
+<tr>
+<td>- Explicit type declarations are usually required</td>
+<td>- Explicit declarations are not required</td>
+</tr>
+<tr>
+<td>- Errors are detected earlier(during compilation.)</td>
+<td>- Type errors are detected later during execution</td>
+</tr>
+<tr>
+<td>- Variable assignments are static and cannot be changed</td>
+<td>- Variable assignments are dynamic and can be altered</td>
+</tr>
+<tr>
+<td>- Produces more optimized code</td>
+<td>- Produces less optimized code, runtime errors are possible</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Typing Category</th>
+<th>Description</th>
+<th>Error Detection</th>
+<th>Flexibility</th>
+<th>Common Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static</td>
+<td>Types known &amp; checked at compile time</td>
+<td>Early (compile-time)</td>
+<td>Lower flexibility</td>
+<td>C, C++, Java</td>
+</tr>
+<tr>
+<td>Dynamic</td>
+<td>Types checked at runtime</td>
+<td>Late (run-time)</td>
+<td>Higher flexibility</td>
+<td>Python, JS, Ruby</td>
+</tr>
+<tr>
+<td>Strong</td>
+<td>Strict: Few implicit conversions; invalid ops rejected</td>
+<td>Type errors flagged</td>
+<td>Lower type coercion</td>
+<td>Python, Java</td>
+</tr>
+<tr>
+<td>Weak</td>
+<td>Permissive: Many implicit conversions/coercions allowed</td>
+<td>Subtle errors possible</td>
+<td>Higher coercion</td>
+<td>C, JavaScript</td>
+</tr>
+</tbody>
+</table>
+<h4 id="programming-paradigms">Programming Paradigms</h4>
+<ul>
+<li>Imperative [Step-by-step instructions] (C, Python, Java)</li>
+<li>Object-Oriented [class &amp; Object ] : (Java, C++, C#)</li>
+<li>Functional [Pure functions] : (Haskell, Scala, Elixir)</li>
+<li>Declarative [What, not how] : (SQL, HTML, Prolog)</li>
+<li>Procedural (C, Pascal, Fortran)</li>
+</ul>
+<h4 id="application-domains">Application Domains</h4>
+<ul>
+<li>Web Development (JS, PHP, Ruby)</li>
+<li>System Programming (C, C++, Rust)</li>
+<li>Data Science (Python, R, Julia)</li>
+<li>Mobile (Swift, Kotlin, Dart)</li>
+<li>AI/ML (Python, Julia)</li>
+<li>Games (C++,C#)</li>
+<li>Enterprise: Java, C#</li>
+</ul>
+<h4 id="design-trade-offs">Design Trade-offs</h4>
+<ul>
+<li>Performance vs Ease of Use</li>
+<li>Safety vs Control</li>
+<li>Speed vs Portability</li>
+<li>Concurrency Models</li>
+<li>Memory Management</li>
+</ul>
+<h4 id="design-goals">Design Goals</h4>
+<ul>
+<li>Performance: C, C++</li>
+<li>Productivity: Python, Ruby</li>
+<li>Safety: Rust, Haskell</li>
+<li>Concurrency: Go, Erlang</li>
+</ul>
+<pre class="hljs"><code><div>
+1950s-60s       1970s-80s       1990s          2000s           2010s-Present
+┌─────────────┐ ┌─────────────┐ ┌────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Fortran     │ │ C           │ │ Python     │ │ C#          │ │ Rust        │
+│ COBOL       │ │ C++         │ │ Java       │ │ Scala       │ │ Go          │
+│ Lisp        │ │ Pascal      │ │ JavaScript │ │ Swift       │ │ Kotlin      │
+│ BASIC       │ │ Ada         │ │ Ruby       │ │             │ │ TypeScript  │
+└─────────────┘ └─────────────┘ └────────────┘ └─────────────┘ └─────────────┘
+Scientific      Systems &amp;       Web &amp;         Enterprise &amp;    Safety &amp;
+Business        Structured      Productivity  Mobile         Concurrency
+Computing       Programming     Languages     Development    Focus
+
+
+Programming Languages Diversity
+│
+├── PARADIGMS
+│   ├── Imperative (HOW) → C, Python [step-by-step instructions]
+│   ├── OOP (Objects) → Java, C++ [modeling real-world entities with objects]
+│   ├── Functional (Math) → Haskell, Scala [pure functions, immutability]
+│   ├── Declarative (WHAT) → SQL, HTML [ specify what, not how]
+│   └── Procedural (Steps) → C, Fortran [reusable procedures/functions]
+│
+├── DESIGN GOALS
+│   ├── Performance → C, C++, Rust
+│   ├── Safety → Rust, Haskell
+│   ├── Productivity → Python, JavaScript
+│   ├── Concurrency → Go, Erlang
+│   └── Portability → Java, Python
+│
+├── APPLICATION DOMAINS
+│   ├── Web → JavaScript, Python, Ruby
+│   ├── Systems → C, C++, Rust
+│   ├── Mobile → Swift, Kotlin, Dart
+│   ├── AI/ML → Python, Julia
+│   ├── Data → Python, R, MATLAB
+│   └── Games → C++, C#
+│
+└── EVOLUTION DRIVERS
+    ├── New paradigms
+    ├── Performance needs
+    ├── Safety requirements
+    ├── New technologies
+    └── Developer experience
+</div></code></pre>
+<h3 id="programming-paradigms">Programming Paradigms</h3>
+<img src="https://cdn2.hexlet.io/derivations/image/original/eyJpZCI6ImM2ZDJlZjZhOTA0MWNhZmU4ZWI0YjY1ZGFkYzFhZmFhLnBuZyIsInN0b3JhZ2UiOiJjYWNoZSJ9?signature=672e29a62671fa30cba81708bc7dff08fdd3074ffbf52b3a4e853ff63d002637" width="500">
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Imperative Programming</th>
+<th>Declarative Programming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Focus</td>
+<td>How tasks are done, step-by-step</td>
+<td>What the outcome should be</td>
+</tr>
+<tr>
+<td>Control Flow</td>
+<td>Explicit</td>
+<td>Implicit</td>
+</tr>
+<tr>
+<td>State Management</td>
+<td>Manual</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td>Detailed instructions</td>
+<td>High-level expressions</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>C, Java, Python</td>
+<td>SQL, HTML, Prolog</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>Performance-critical, system control</td>
+<td>High-level logic, configuration</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Imperative (JavaScript)</strong></th>
+<th><strong>Declarative (HTML)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Focus</strong></td>
+<td>How to achieve something (steps/logic)</td>
+<td>What you want (structure/content)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td><code>document.getElementById('header').innerHTML='text';</code></td>
+<td><code>&lt;h1&gt;Welcome&lt;/h1&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Control Flow</strong></td>
+<td>You define the steps, loops, and conditionals</td>
+<td>No explicit control flow (no loops, conditionals)</td>
+</tr>
+<tr>
+<td><strong>Abstraction Level</strong></td>
+<td>Low abstraction (you define behavior and sequence)</td>
+<td>High abstraction (you describe structure/content)</td>
+</tr>
+<tr>
+<td><strong>Flexibility</strong></td>
+<td>Very flexible (you control logic and interactions)</td>
+<td>Less flexible (structure only, not behavior)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Imperative Programming</strong></th>
+<th><strong>Declarative Programming</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Focus</strong></td>
+<td>How to achieve results</td>
+<td>What the results should be</td>
+</tr>
+<tr>
+<td><strong>Control Flow</strong></td>
+<td>Explicitly defined (loops, conditions, sequences)</td>
+<td>Abstracted away; specify outcome, not steps</td>
+</tr>
+<tr>
+<td><strong>State Management</strong></td>
+<td>Mutable state</td>
+<td>Often emphasizes immutability</td>
+</tr>
+<tr>
+<td><strong>Complexity</strong></td>
+<td>Can become complex as program grows</td>
+<td>Simpler and more concise</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>More control → potentially optimized code</td>
+<td>Depends on underlying engine or implementation</td>
+</tr>
+<tr>
+<td><strong>Typical Use Cases</strong></td>
+<td>- System programming (OS, drivers) <br> - Game development <br> - Complex state management</td>
+<td>- SQL database queries <br> - Web development (HTML, CSS) <br> - Configuration (Terraform, Ansible)</td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>int[] numbers = {1, 2, 3, 4, 5};<br>int totalSum = 0;<br>for (int number : numbers) {<br>    totalSum += number;<br>}</td>
+<td>//Python<br>numbers = [1, 2, 3, 4, 5]<br>def add(x, y):<br>     return x + y<br>total_sum = reduce(add, numbers) //15<br><br>//Java<br>//Functional Approach :-<br>int totalSum = Arrays.stream(numbers).sum();</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes-on-html-and-template-engine">Notes on HTML and Template Engine</h4>
+<ul>
+<li>HTML is NOT a programming language.</li>
+<li>HTML is a markup language used to declare structure.</li>
+<li>A template engine adds logic (variables + loops + conditions) to HTML, making it dynamic.</li>
+</ul>
+<h5 id="is-html-a-programming-language">Is HTML a Programming Language?</h5>
+<ul>
+<li>❌ No. HTML is not a programming language.</li>
+<li>HTML is a markup language used to define the structure of a webpage. It does not have:
+<ul>
+<li>Variables</li>
+<li>Logic</li>
+<li>Loops</li>
+<li>Functions</li>
+<li>Conditionals</li>
+<li>Algorithms</li>
+</ul>
+</li>
+<li>So it cannot perform computations or control program flow.
+Browser &lt;----Server(Template Engine -----Template(HTML+Loop))&lt;===&gt;DB</li>
+</ul>
+<h5 id="why-html-is-not-a-programming-language">Why HTML is Not a Programming Language</h5>
+<ul>
+<li>Because HTML only describes content, it does NOT:
+<ul>
+<li>make decisions</li>
+<li>perform operations</li>
+<li>run loops</li>
+<li>store/manipulate data</li>
+<li>execute logic</li>
+</ul>
+</li>
+<li>It is declarative, not imperative.</li>
+<li><code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></li>
+<li>This simply describes what to display. It doesn’t execute anything</li>
+</ul>
+<h5 id="what-is-a-template-engine">What Is a Template Engine?</h5>
+<ul>
+<li>
+<p>A template engine is a tool that combines HTML + logic (variables, loops, conditions) to generate dynamic pages.
+Examples:</p>
+<ul>
+<li>EJS</li>
+<li>Handlebars</li>
+<li>Pug</li>
+<li>Jinja2 (Python)</li>
+<li>Thymeleaf (Java)</li>
+</ul>
+</li>
+<li>
+<p>Template engines can insert data, loop, condition, and execute basic logic.</p>
+</li>
+<li>
+<p>Example (EJS Template):</p>
+<pre class="hljs"><code><div>&lt;h1&gt;Hello &lt;%= user.name %&gt;&lt;<span class="hljs-regexp">/h1&gt;
+
+&lt;% if (isAdmin) { %&gt;
+    &lt;button&gt;Delete User&lt;/</span>button&gt;
+&lt;% } %&gt;
+</div></code></pre>
+</li>
+<li>
+<p>Example (Jinja2 Template):</p>
+<pre class="hljs"><code><div>    &lt;ul&gt;
+    {% <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> numbers %}
+        {% <span class="hljs-keyword">if</span> num % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> %}
+            &lt;li&gt;{{ num }} <span class="hljs-keyword">is</span> Even&lt;/li&gt;
+        {% <span class="hljs-keyword">else</span> %}
+            &lt;li&gt;{{ num }} <span class="hljs-keyword">is</span> Odd&lt;/li&gt;
+        {% endif %}
+    {% endfor %}
+    &lt;/ul&gt;
+</div></code></pre>
+</li>
+<li>
+<p>This contains logic, which HTML alone cannot do.</p>
+</li>
+</ul>
+<h5 id="template-rendering-path-backend-to-browser">Template Rendering Path (Backend to Browser)</h5>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    Code[Backend Logic] --> Data[Data Dictionary / JSON]
+    Data --> Engine[Template Engine]
+    Template[Template File] --> Engine
+    Engine --> HTML[Rendered HTML]
+    HTML --> Browser[Browser Displays Content]
+</div></code></pre>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Client
+    participant Server
+    participant TemplateEngine
+
+    Client->>Server: Request /home
+    Server->>TemplateEngine: Load template + data
+    TemplateEngine-->>Server: Rendered HTML
+    Server-->>Client: Send final HTML
+</div></code></pre>
+<h5 id="html-vs-template-engine-markdown-table">HTML vs Template Engine (Markdown Table)</h5>
+<table>
+<thead>
+<tr>
+<th>Feature / Aspect</th>
+<th><strong>HTML</strong></th>
+<th><strong>Template Engine</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td>Markup Language</td>
+<td>HTML + Logic Generator</td>
+</tr>
+<tr>
+<td><strong>Programming Language?</strong></td>
+<td>❌ No</td>
+<td>❌ Not exactly, but contains <strong>programming features</strong></td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Describe structure &amp; content</td>
+<td>Generate dynamic HTML using data + logic</td>
+</tr>
+<tr>
+<td><strong>Supports Variables</strong></td>
+<td>❌ No</td>
+<td>✔ Yes</td>
+</tr>
+<tr>
+<td><strong>Supports Loops</strong></td>
+<td>❌ No</td>
+<td>✔ Yes (e.g., <code>for</code>, <code>each</code>)</td>
+</tr>
+<tr>
+<td><strong>Supports Conditions</strong></td>
+<td>❌ No</td>
+<td>✔ Yes (e.g., <code>if</code>, <code>else</code>)</td>
+</tr>
+<tr>
+<td><strong>Dynamic Pages</strong></td>
+<td>❌ Cannot generate dynamically</td>
+<td>✔ Can generate dynamic content</td>
+</tr>
+<tr>
+<td><strong>Examples</strong></td>
+<td><code>&lt;h1&gt;Hello&lt;/h1&gt;</code></td>
+<td><code>&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Who Uses It?</strong></td>
+<td>Browsers</td>
+<td>Backend frameworks (Node.js, Python, PHP, Java)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="functional-paradigm-characteristics">Functional Paradigm Characteristics</h4>
+<ul>
+<li>
+<p><strong>Declarative Style:</strong> Focuses on what to compute rather than how to compute it, aligned with declarative programming principles.</p>
+</li>
+<li>
+<p><strong>Pure Functions:</strong> Functions produce the same output given the same input without side effects, making programs easier to predict and test.</p>
+</li>
+<li>
+<p><strong>Immutability:</strong> Data is immutable; instead of modifying data, new data structures are created.</p>
+</li>
+<li>
+<p><strong>First-Class and Higher-Order Functions:</strong> Functions are treated as first-class citizens, passed as arguments, returned from other functions, and composed.</p>
+</li>
+<li>
+<p><strong>Function Composition:</strong> Complex behaviors built by combining simpler functions.</p>
+</li>
+<li>
+<p><strong>Recursion over Loops:</strong> Uses recursion for repetition instead of imperative loops.</p>
+</li>
+<li>
+<p><strong>Avoids Side Effects:</strong> Keeps functions free of changing program state or interacting directly with I/O during computation.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Procedural Programming (POP)</th>
+<th>Object-Oriented Programming (OOP)</th>
+<th>Functional Programming (FP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core Concept</td>
+<td>- &quot;Program as a sequence of INSTRUCTIONS&quot;<br>- Focus on procedures/functions that operate on data<br>- Breaks program tasks into procedures or functions.</td>
+<td>- &quot;Everything is an OBJECT with BEHAVIOR&quot;<br>- Model the world as interacting objects (Model real-world entities)<br>- Organizes code around objects encapsulating data and behavior</td>
+<td>- &quot;Everything is a FUNCTION transforming DATA&quot;<br>- Organizes code using pure functions and immutable data</td>
+</tr>
+<tr>
+<td>Principles</td>
+<td>- Sequential execution of instructions<br>- Functions operate on shared data<br>- Top-down approach<br>- Data and functions are separate<br>- Emphasis on procedure calls</td>
+<td>- Encapsulation (data + methods)<br>- Inheritance (code reuse)<br>- Polymorphism (flexible behavior)<br>- Abstraction (hide complexity)<br>- Objects communicate via messages</td>
+<td>- Immutable data (no state changes)<br>- Pure functions (no side effects)<br>- First-class functions<br>- Higher-order functions<br>- Declarative style</td>
+</tr>
+<tr>
+<td>Focus</td>
+<td>Functions and step-by-step instructions</td>
+<td>Objects representing real-world entities with attributes and methods</td>
+<td>Pure functions that transform data without side effects</td>
+</tr>
+<tr>
+<td>State and Data Handling</td>
+<td>Uses mutable state, global/local variables passed to functions</td>
+<td>Encapsulates state within objects, state changes via methods</td>
+<td>Immutability; avoids changing state, uses data transformations</td>
+</tr>
+<tr>
+<td>Modularity</td>
+<td>Functions or procedures</td>
+<td>Classes and objects</td>
+<td>Function composition and higher-order functions</td>
+</tr>
+<tr>
+<td>Execution Flow</td>
+<td>Explicit control flow with loops and conditionals</td>
+<td>Methods call to change state and invoke behavior</td>
+<td>Declarative composition, recursion replaces loops</td>
+</tr>
+<tr>
+<td>Side Effects</td>
+<td>Allowed, procedures can modify variables</td>
+<td>Allowed, objects can maintain and modify internal state</td>
+<td>Avoided, functions are pure</td>
+</tr>
+<tr>
+<td>Strength</td>
+<td></td>
+<td>In-place modification - Efficient memory usage<br>Direct state access - Fast updates<br>Cache-friendly - Object locality</td>
+<td>Parallel processing - No shared state = easy parallelism<br>Lazy evaluation - Compute only what's needed<br>Memoization - Cache function results</td>
+</tr>
+<tr>
+<td>Choose When</td>
+<td>✅ Performance-critical systems<br>✅ Hardware interaction/low-level programming<br>✅ Simple algorithms with clear steps<br>✅ Embedded systems with limited resources<br>Examples: Scripts, Operating systems, device drivers, scientific computing</td>
+<td>✅ Modeling real-world entities with clear hierarchies<br>✅ Complex systems with changing state<br>✅ Team familiar with imperative thinking<br>✅ GUI applications, game development<br>Examples: Enterprise software, video games, CAD systems</td>
+<td>✅ Concurrent/parallel processing needs<br>✅ Data transformation pipelines<br>✅ Mathematical computations<br>✅ High reliability requirements<br>Examples: Financial systems, compilers, AI, data analysis</td>
+</tr>
+</tbody>
+</table>
+<h4 id="programming-paradigms-simple-examples">Programming Paradigms: Simple Examples</h4>
+<ul>
+<li>Let me show you the same problem (calculating total price with discount) implemented in different paradigms:</li>
+</ul>
+<p><strong>1. Linear Programming</strong></p>
+<ul>
+<li>Code executes line-by-line, top to bottom. No functions, no structure—just sequential instructions.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># Everything in sequence</span>
+price1 = <span class="hljs-number">100</span>
+price2 = <span class="hljs-number">50</span>
+price3 = <span class="hljs-number">75</span>
+
+total = price1 + price2 + price3
+print(<span class="hljs-string">"Subtotal:"</span>, total)
+
+discount_rate = <span class="hljs-number">0.1</span>
+discount = total * discount_rate
+final_price = total - discount
+
+print(<span class="hljs-string">"Discount:"</span>, discount)
+print(<span class="hljs-string">"Final Price:"</span>, final_price)
+</div></code></pre>
+<ul>
+<li><strong>Characteristics:</strong> Simple but repetitive. Hard to reuse or maintain.</li>
+</ul>
+<hr>
+<p><strong>2. Procedural Programming</strong></p>
+<ul>
+<li>Organizes code into reusable procedures/functions. Still sequential flow but modular.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_total</span><span class="hljs-params">(prices)</span>:</span>
+    total = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> price <span class="hljs-keyword">in</span> prices:
+        total += price
+    <span class="hljs-keyword">return</span> total
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply_discount</span><span class="hljs-params">(amount, rate)</span>:</span>
+    discount = amount * rate
+    <span class="hljs-keyword">return</span> amount - discount
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print_receipt</span><span class="hljs-params">(subtotal, discount_rate, final)</span>:</span>
+    print(<span class="hljs-string">"Subtotal:"</span>, subtotal)
+    print(<span class="hljs-string">"Discount:"</span>, subtotal * discount_rate)
+    print(<span class="hljs-string">"Final Price:"</span>, final)
+
+<span class="hljs-comment"># Main program flow</span>
+prices = [<span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>]
+subtotal = calculate_total(prices)
+final_price = apply_discount(subtotal, <span class="hljs-number">0.1</span>)
+print_receipt(subtotal, <span class="hljs-number">0.1</span>, final_price)
+</div></code></pre>
+<ul>
+<li><strong>Characteristics:</strong> Functions for reusability. Data and functions are separate. Clear step-by-step logic.</li>
+</ul>
+<hr>
+<ol start="3">
+<li><strong>Object-Oriented Programming (OOP)</strong></li>
+</ol>
+<ul>
+<li>Bundles data and behavior into objects. Models real-world entities.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShoppingCart</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self.items = []
+        self.discount_rate = <span class="hljs-number">0</span>
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_item</span><span class="hljs-params">(self, price)</span>:</span>
+        self.items.append(price)
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_discount</span><span class="hljs-params">(self, rate)</span>:</span>
+        self.discount_rate = rate
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_subtotal</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> sum(self.items)
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_final_price</span><span class="hljs-params">(self)</span>:</span>
+        subtotal = self.get_subtotal()
+        discount = subtotal * self.discount_rate
+        <span class="hljs-keyword">return</span> subtotal - discount
+    
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print_receipt</span><span class="hljs-params">(self)</span>:</span>
+        subtotal = self.get_subtotal()
+        print(<span class="hljs-string">"Subtotal:"</span>, subtotal)
+        print(<span class="hljs-string">"Discount:"</span>, subtotal * self.discount_rate)
+        print(<span class="hljs-string">"Final Price:"</span>, self.get_final_price())
+
+<span class="hljs-comment"># Using the object</span>
+cart = ShoppingCart()
+cart.add_item(<span class="hljs-number">100</span>)
+cart.add_item(<span class="hljs-number">50</span>)
+cart.add_item(<span class="hljs-number">75</span>)
+cart.set_discount(<span class="hljs-number">0.1</span>)
+cart.print_receipt()
+</div></code></pre>
+<ul>
+<li><strong>Characteristics:</strong> Data and methods together. Encapsulation. Models things as objects with properties and behaviors.</li>
+</ul>
+<hr>
+<p><strong>4. Functional Programming</strong>
+Treats computation as evaluation of mathematical functions. Avoids changing state.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce
+
+<span class="hljs-comment"># Pure functions (no side effects)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_total</span><span class="hljs-params">(prices)</span>:</span>
+    <span class="hljs-keyword">return</span> reduce(<span class="hljs-keyword">lambda</span> acc, price: acc + price, prices, <span class="hljs-number">0</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply_discount</span><span class="hljs-params">(amount, rate)</span>:</span>
+    <span class="hljs-keyword">return</span> amount * (<span class="hljs-number">1</span> - rate)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_receipt</span><span class="hljs-params">(prices, discount_rate)</span>:</span>
+    subtotal = calculate_total(prices)
+    final_price = apply_discount(subtotal, discount_rate)
+    
+    <span class="hljs-keyword">return</span> {
+        <span class="hljs-string">'subtotal'</span>: subtotal,
+        <span class="hljs-string">'discount'</span>: subtotal * discount_rate,
+        <span class="hljs-string">'final_price'</span>: final_price
+    }
+
+<span class="hljs-comment"># Composition of functions</span>
+prices = [<span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">75</span>]
+receipt = create_receipt(prices, <span class="hljs-number">0.1</span>)
+
+<span class="hljs-comment"># Immutable data output</span>
+print(<span class="hljs-string">"Subtotal:"</span>, receipt[<span class="hljs-string">'subtotal'</span>])
+print(<span class="hljs-string">"Discount:"</span>, receipt[<span class="hljs-string">'discount'</span>])
+print(<span class="hljs-string">"Final Price:"</span>, receipt[<span class="hljs-string">'final_price'</span>])
+</div></code></pre>
+<ul>
+<li><strong>Characteristics:</strong> Pure functions (same input = same output). Immutable data. Function composition. No side effects.</li>
+</ul>
+<p><strong>Key Differences Summary</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Paradigm</th>
+<th style="text-align:center">Focus</th>
+<th style="text-align:center">Data &amp; Logic</th>
+<th style="text-align:center">Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Linear</td>
+<td style="text-align:center">Sequential steps</td>
+<td style="text-align:center">Mixed together</td>
+<td style="text-align:center">Simple scripts</td>
+</tr>
+<tr>
+<td style="text-align:center">Procedural</td>
+<td style="text-align:center">Reusable functions</td>
+<td style="text-align:center">Separate</td>
+<td style="text-align:center">Algorithms, scripts</td>
+</tr>
+<tr>
+<td style="text-align:center">OOP</td>
+<td style="text-align:center">Objects &amp; classes</td>
+<td style="text-align:center">Bundled together</td>
+<td style="text-align:center">Large systems, modeling entities</td>
+</tr>
+<tr>
+<td style="text-align:center">Functional</td>
+<td style="text-align:center">Pure functions</td>
+<td style="text-align:center">Immutable</td>
+<td style="text-align:center">Data processing, concurrency</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Modern languages (Python, JavaScript, Rust) support multiple paradigms—you can mix approaches based on what fits the problem best!</li>
+</ul>
+
+</body>
+</html>
